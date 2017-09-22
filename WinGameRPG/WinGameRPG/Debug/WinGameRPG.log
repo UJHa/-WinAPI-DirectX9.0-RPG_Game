@@ -1,0 +1,4 @@
+﻿  main.cpp
+c:\users\atents\documents\visual studio 2017\projects\wingamerpg\wingamerpg\gamesystem.h(3): warning C4091: '': 변수를 선언하지 않으면 'HINSTANCE__ *' 왼쪽은 무시됩니다.
+  WinGameRPG.vcxproj -> C:\Users\atents\documents\visual studio 2017\Projects\WinGameRPG\Debug\WinGameRPG.exe
+  WinGameRPG.vcxproj -> C:\Users\atents\documents\visual studio 2017\Projects\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)
