@@ -55,6 +55,5 @@ c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\dire
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53376): note: 'D3D10_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS'의 이전 정의를 참조하십시오.
 c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\directx\sdk\include\d3d10.h(609): warning C4005: 'D3D10_ERROR_FILE_NOT_FOUND': 매크로 재정의
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\shared\winerror.h(53385): note: 'D3D10_ERROR_FILE_NOT_FOUND'의 이전 정의를 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gamesystem.h(4): warning C4091: '': 변수를 선언하지 않으면 'HINSTANCE__ *' 왼쪽은 무시됩니다.
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)

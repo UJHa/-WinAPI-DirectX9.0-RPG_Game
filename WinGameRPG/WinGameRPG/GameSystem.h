@@ -1,13 +1,13 @@
 #pragma once
 #include <Windows.h>
 #include<D3DX11.h>
-HINSTANCE;
 class GameSystem
 {
 private:
 	static GameSystem* _instance;
 	GameSystem();
 public:
+	~GameSystem();
 	static GameSystem* GetInstance();
 	
 	bool InitSystem(HINSTANCE hInstance, int nCmdShow);
@@ -18,4 +18,7 @@ private:
 	ID3D11DeviceContext* _d3dDeviceContext;
 	UINT _4xMsaaQuality;
 	bool _isEnable4xMsaa;
+	HWND _hMainWnd;
+	IDXGISwapChain* _swapChain;
+	ID3D11RenderTargetView* _renderTargetView;
 };
