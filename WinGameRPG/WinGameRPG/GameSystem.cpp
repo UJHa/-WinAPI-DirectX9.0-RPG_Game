@@ -34,6 +34,12 @@ GameSystem::~GameSystem()
 
 	_renderTargetView->Release();
 	_renderTargetView = 0;
+
+	_depthStencilBuffer->Release();
+	_depthStencilBuffer = 0;
+
+	_depthStencilView->Release();
+	_depthStencilView = 0;
 }
 GameSystem* GameSystem::GetInstance()
 {
@@ -63,7 +69,7 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	_hMainWnd = CreateWindow(L"Base", L"2D_RPG_TileMap", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, 0, 0, hInstance, 0);
 	//윈도우 출력
 	ShowWindow(_hMainWnd, nCmdShow);
-
+	//윈도우 업데이트
 	UpdateWindow(_hMainWnd);
 	if (false == InitDirect3D())
 	{
@@ -84,7 +90,19 @@ int GameSystem::Update()
 		}
 		else
 		{
-			//게임처리
+			//게임업데이트
+
+			float color[4];
+			color[0] = 0.0f;	//R
+			color[1] = 0.2f;	//G
+			color[2] = 0.3f;	//B
+			color[3] = 1.0f;	//Alpha
+
+			_d3dDeviceContext->ClearRenderTargetView(_renderTargetView,color);
+			_d3dDeviceContext->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+
+			//게임 관련 드로우
+			_swapChain->Present(0, 0);
 		}
 	}
 	return (int)msg.wParam;
@@ -99,6 +117,7 @@ bool GameSystem::InitDirect3D()
 		MessageBox(0, L"4xMSAA 에러입니다.", L"ErrorMessage", 0);
 		return false;
 	}
+	//클라이언트 화면 크기의 특징 서술
 	DXGI_SWAP_CHAIN_DESC swapChain;
 	swapChain.BufferDesc.Width = 1280;
 	swapChain.BufferDesc.Height = 800;
@@ -124,6 +143,7 @@ bool GameSystem::InitDirect3D()
 	swapChain.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 	swapChain.Flags = 0;
 
+	// IDXGISwapChain 인스턴스 생성(하기 위해서 _dxgiFactory를 가져옴)
 	IDXGIDevice* dxgiDevice = 0;
 	hr = _d3dDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
 	if (FAILED(hr))
@@ -152,7 +172,7 @@ bool GameSystem::InitDirect3D()
 		MessageBox(0, L"dxgiFactory 에러입니다.", L"ErrorMessage", 0);
 		return false;
 	}
-
+	//메모리 해제
 	dxgiDevice->Release();
 	dxgiDevice = 0;
 
@@ -162,6 +182,7 @@ bool GameSystem::InitDirect3D()
 	dxgiFactory->Release();
 	dxgiFactory = 0;
 
+	//SwapChain 후면 버퍼 대한 랜더 대상 뷰 생성
 	ID3D11Texture2D* backBuffer;
 	hr = _swapChain->GetBuffer(
 		0,	//백버퍼 인덱스
@@ -180,6 +201,7 @@ bool GameSystem::InitDirect3D()
 	}
 	backBuffer->Release();
 	backBuffer = 0;
+	//깊이 스텐실 버퍼와 그에 연결되는 깊이 스텐실 뷰 생성
 	D3D11_TEXTURE2D_DESC depthStencilDesc;
 	depthStencilDesc.Width = 1280;
 	depthStencilDesc.Height = 800;
@@ -187,6 +209,44 @@ bool GameSystem::InitDirect3D()
 	depthStencilDesc.ArraySize = 1;
 	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
 
+	if (_isEnable4xMsaa)
+	{
+		depthStencilDesc.SampleDesc.Count = 4;
+		depthStencilDesc.SampleDesc.Quality = _4xMsaaQuality;
+	}
+	else
+	{
+		depthStencilDesc.SampleDesc.Count = 1;
+		depthStencilDesc.SampleDesc.Quality = 0;
+	}
+	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	depthStencilDesc.CPUAccessFlags = 0;
+	depthStencilDesc.MiscFlags = 0;
+	hr = _d3dDevice->CreateTexture2D(&depthStencilDesc, 0, &_depthStencilBuffer);
+	if (FAILED(hr))
+	{
+		MessageBox(0, L"_depthStencilBuffer 에러입니다.", L"ErrorMessage", 0);
+		return false;
+	}
 
+	hr = _d3dDevice->CreateDepthStencilView(_depthStencilBuffer, 0, &_depthStencilView);
+	if (FAILED(hr))
+	{
+		MessageBox(0, L"_depthStencilView 에러입니다.", L"ErrorMessage", 0);
+		return false;
+	}
+	// 렌더 대상 뷰와 깊이 스텐실 뷰를 Direct3D가 사용할 수 있도록 렌더링 파이프리인의 출력 병합기에 묶는다.
+	_d3dDeviceContext->OMSetRenderTargets(1, &_renderTargetView, _depthStencilView);
+
+	// 뷰포트 설정
+	_screenViewport.TopLeftX = 0;
+	_screenViewport.TopLeftY = 0;
+	_screenViewport.Width = 1280.0f;
+	_screenViewport.Height = 800.0f;
+	_screenViewport.MinDepth = 0.0f;
+	_screenViewport.MaxDepth = 1.0f;
+
+	_d3dDeviceContext->RSSetViewports(1, &_screenViewport);
 	return true;
 }
