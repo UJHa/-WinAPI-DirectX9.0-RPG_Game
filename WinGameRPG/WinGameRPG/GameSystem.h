@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include<D3DX11.h>
+struct GameTimer;
 class GameSystem
 {
 private:
@@ -25,4 +26,6 @@ private:
 	ID3D11DepthStencilView* _depthStencilView;
 
 	D3D11_VIEWPORT _screenViewport;
+private:
+	GameTimer* _gameTimer;
 };

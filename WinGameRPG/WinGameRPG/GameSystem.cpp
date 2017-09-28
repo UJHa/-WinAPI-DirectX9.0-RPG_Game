@@ -1,5 +1,7 @@
 #include "GameSystem.h"
 #include <Windows.h>
+#include "GameTimer.h"
+#include<string>
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
 	{
@@ -81,6 +83,11 @@ int GameSystem::Update()
 {
 	MSG msg = { 0 };
 	int ref = 1;
+	GameTimer* _gameTimer = new GameTimer();
+	_gameTimer->Reset();
+	float frameTime = 1.0f / 60.f;	//60프레임
+	float frameDuration = 0;
+	float colorRed = 0.0f;
 	while (WM_QUIT != msg.message)
 	{
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
@@ -91,18 +98,37 @@ int GameSystem::Update()
 		else
 		{
 			//게임업데이트
+			_gameTimer->Update();
+			float deltaTime = _gameTimer->GetDeltaTime();
+			frameDuration += deltaTime;
+			if (frameTime <= frameDuration)
+			{
+				wchar_t timeCheck[256];
+				swprintf(timeCheck, L"frameDuration %f\n", frameDuration);
+				OutputDebugString(timeCheck);
 
-			float color[4];
-			color[0] = 0.0f;	//R
-			color[1] = 0.2f;	//G
-			color[2] = 0.3f;	//B
-			color[3] = 1.0f;	//Alpha
+				frameDuration = 0.0f;
 
-			_d3dDeviceContext->ClearRenderTargetView(_renderTargetView,color);
-			_d3dDeviceContext->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+				colorRed += 0.1f;
+				if(colorRed>1.0f)
+					colorRed -= 1.0f;
+				float color[4];
+				color[0] = colorRed;	//R
+				color[1] = 0.2f;	//G
+				color[2] = 0.3f;	//B
+				color[3] = 1.0f;	//Alpha
+
+				_d3dDeviceContext->ClearRenderTargetView(_renderTargetView, color);
+				_d3dDeviceContext->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+
+				_swapChain->Present(0, 0);
+			}
+
+			/*wchar_t timeCheck[256];
+			swprintf(timeCheck,L"deltaTime %f\n",deltaTime);
+			OutputDebugString(timeCheck);*/
 
 			//게임 관련 드로우
-			_swapChain->Present(0, 0);
 		}
 	}
 	return (int)msg.wParam;
