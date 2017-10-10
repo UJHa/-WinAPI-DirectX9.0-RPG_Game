@@ -21,17 +21,13 @@ public:
 private:
 	UINT _4xMsaaQuality;
 	HWND _hMainWnd;
-	//ID3D11Device* _d3dDevice;
-	//ID3D11DeviceContext* _d3dDeviceContext;
-	//bool _isEnable4xMsaa;
-	//IDXGISwapChain* _swapChain;
-	//ID3D11RenderTargetView* _renderTargetView;
-	//ID3D11Texture2D* _depthStencilBuffer;
-	//ID3D11DepthStencilView* _depthStencilView;
-
-	//D3D11_VIEWPORT _screenViewport;
 	LPDIRECT3DDEVICE9 _device3d;
 	LPD3DXSPRITE _sprite;
+	LPDIRECT3DTEXTURE9 _texture;
+	RECT _srcTextureRect;
+	D3DCOLOR _textureColor;
+	D3DXIMAGE_INFO _textureInfo;
+
 	bool _isFullScreen;
 private:
 	GameTimer* _gameTimer;

@@ -160,7 +160,17 @@ int GameSystem::Update()
 				_device3d->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 100, 0), 0.0f, 0);
 				_device3d->BeginScene();
 
-				_sprite->Begin(0);
+				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
+
+				//스프라이트 출력 전 모양 조정(위치,크기,회전)
+				D3DXVECTOR2 spriteCenter = D3DXVECTOR2((float)_textureInfo.Width / 2.0f, (float)_textureInfo.Height / 2.0f);
+				D3DXVECTOR2 translate = D3DXVECTOR2(1280.0f / 2.0f - (float)_textureInfo.Width / 2.0f, 800.0f / 2.0f - (float)_textureInfo.Height / 2.0f);
+				D3DXVECTOR2 scaling = D3DXVECTOR2(1.0f, 1.0f);
+				D3DXMATRIX matrix;
+				D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, &scaling, &spriteCenter, 0.0f, &translate);
+				_sprite->SetTransform(&matrix);
+
+				_sprite->Draw(_texture, &_srcTextureRect, NULL, NULL, _textureColor);
 
 				_sprite->End();
 
@@ -179,146 +189,6 @@ int GameSystem::Update()
 }
 bool GameSystem::InitDirect3D()
 {
-	/*
-	D3D_FEATURE_LEVEL featureLevel;
-	HRESULT hr = D3D11CreateDevice(0,D3D_DRIVER_TYPE_HARDWARE,0,D3D10_CREATE_DEVICE_DEBUG,0,0,D3D11_SDK_VERSION,&_d3dDevice,&featureLevel,&_d3dDeviceContext);
-	hr = _d3dDevice->CheckMultisampleQualityLevels(DXGI_FORMAT_R8G8B8A8_UNORM, 4, &_4xMsaaQuality);	//4xMSAA 지원여부 확인
-	if (FAILED(hr))
-	{
-	MessageBox(0, L"4xMSAA 에러입니다.", L"ErrorMessage", 0);
-	return false;
-	}
-	//클라이언트 화면 크기의 특징 서술
-	DXGI_SWAP_CHAIN_DESC swapChain;
-	swapChain.BufferDesc.Width = 1280;
-	swapChain.BufferDesc.Height = 800;
-	swapChain.BufferDesc.RefreshRate.Numerator = 60;
-	swapChain.BufferDesc.RefreshRate.Denominator = 1;
-	swapChain.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	swapChain.BufferDesc.ScanlineOrdering = DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED;
-	swapChain.BufferDesc.Scaling = DXGI_MODE_SCALING_UNSPECIFIED;
-	if (_isEnable4xMsaa)
-	{
-	swapChain.SampleDesc.Count = 4;
-	swapChain.SampleDesc.Quality = _4xMsaaQuality-1;
-	}
-	else
-	{
-	swapChain.SampleDesc.Count = 1;
-	swapChain.SampleDesc.Quality = 0;
-	}
-	swapChain.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	swapChain.BufferCount = 1;
-	swapChain.OutputWindow = _hMainWnd;
-	swapChain.Windowed = true;
-	swapChain.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
-	swapChain.Flags = 0;
-
-	// IDXGISwapChain 인스턴스 생성(하기 위해서 _dxgiFactory를 가져옴)
-	IDXGIDevice* dxgiDevice = 0;
-	hr = _d3dDevice->QueryInterface(__uuidof(IDXGIDevice), (void**)&dxgiDevice);
-	if (FAILED(hr))
-	{
-	MessageBox(0, L"dxgiDevice 에러입니다.", L"ErrorMessage", 0);
-	return false;
-	}
-	IDXGIAdapter* dxgiAdapter = 0;
-	hr = dxgiDevice->GetParent(__uuidof(IDXGIAdapter), (void**)&dxgiAdapter);
-	if (FAILED(hr))
-	{
-	MessageBox(0, L"dxgiAdapter 에러입니다.", L"ErrorMessage", 0);
-	return false;
-	}
-	IDXGIFactory* dxgiFactory = 0;
-	hr = dxgiAdapter->GetParent(__uuidof(IDXGIFactory), (void**)&dxgiFactory);
-	if (FAILED(hr))
-	{
-	MessageBox(0, L"dxgiFactory 에러입니다.", L"ErrorMessage", 0);
-	return false;
-	}
-
-	hr = dxgiFactory->CreateSwapChain(_d3dDevice,&swapChain,&_swapChain);
-	if (FAILED(hr))
-	{
-	MessageBox(0, L"dxgiFactory 에러입니다.", L"ErrorMessage", 0);
-	return false;
-	}
-	//메모리 해제
-	dxgiDevice->Release();
-	dxgiDevice = 0;
-
-	dxgiAdapter->Release();
-	dxgiAdapter = 0;
-
-	dxgiFactory->Release();
-	dxgiFactory = 0;
-
-	//SwapChain 후면 버퍼 대한 랜더 대상 뷰 생성
-	ID3D11Texture2D* backBuffer;
-	hr = _swapChain->GetBuffer(
-	0,	//백버퍼 인덱스
-	__uuidof(ID3D11Texture2D),
-	reinterpret_cast<void**>(&backBuffer));
-	if (FAILED(hr))
-	{
-	MessageBox(0, L"backBuffer 에러입니다.", L"ErrorMessage", 0);
-	return false;
-	}
-	hr = _d3dDevice->CreateRenderTargetView(backBuffer, 0, &_renderTargetView);
-	if (FAILED(hr))
-	{
-	MessageBox(0, L"_renderTargetView 에러입니다.", L"ErrorMessage", 0);
-	return false;
-	}
-	backBuffer->Release();
-	backBuffer = 0;
-	//깊이 스텐실 버퍼와 그에 연결되는 깊이 스텐실 뷰 생성
-	D3D11_TEXTURE2D_DESC depthStencilDesc;
-	depthStencilDesc.Width = 1280;
-	depthStencilDesc.Height = 800;
-	depthStencilDesc.MipLevels = 1;
-	depthStencilDesc.ArraySize = 1;
-	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-
-	if (_isEnable4xMsaa)
-	{
-	depthStencilDesc.SampleDesc.Count = 4;
-	depthStencilDesc.SampleDesc.Quality = _4xMsaaQuality;
-	}
-	else
-	{
-	depthStencilDesc.SampleDesc.Count = 1;
-	depthStencilDesc.SampleDesc.Quality = 0;
-	}
-	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
-	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	depthStencilDesc.CPUAccessFlags = 0;
-	depthStencilDesc.MiscFlags = 0;
-	hr = _d3dDevice->CreateTexture2D(&depthStencilDesc, 0, &_depthStencilBuffer);
-	if (FAILED(hr))
-	{
-	MessageBox(0, L"_depthStencilBuffer 에러입니다.", L"ErrorMessage", 0);
-	return false;
-	}
-
-	hr = _d3dDevice->CreateDepthStencilView(_depthStencilBuffer, 0, &_depthStencilView);
-	if (FAILED(hr))
-	{
-	MessageBox(0, L"_depthStencilView 에러입니다.", L"ErrorMessage", 0);
-	return false;
-	}
-	// 렌더 대상 뷰와 깊이 스텐실 뷰를 Direct3D가 사용할 수 있도록 렌더링 파이프리인의 출력 병합기에 묶는다.
-	_d3dDeviceContext->OMSetRenderTargets(1, &_renderTargetView, _depthStencilView);
-
-	// 뷰포트 설정
-	_screenViewport.TopLeftX = 0;
-	_screenViewport.TopLeftY = 0;
-	_screenViewport.Width = 1280.0f;
-	_screenViewport.Height = 800.0f;
-	_screenViewport.MinDepth = 0.0f;
-	_screenViewport.MaxDepth = 1.0f;
-
-	_d3dDeviceContext->RSSetViewports(1, &_screenViewport);*/
 	LPDIRECT3D9 direct3d = Direct3DCreate9(D3D_SDK_VERSION);
 
 	if (NULL == direct3d)
@@ -378,6 +248,46 @@ bool GameSystem::InitDirect3D()
 		MessageBox(0, L"D3DXCreateSprite 에러입니다.", L"ErrorMessage", 0);
 		return false;
 	}
+	//Texture
+	{
+		//파일로 이미지 폭과 너비를 가져온다.
+		hr = D3DXGetImageInfoFromFile(L"character_sprite.png",&_textureInfo);
+		if (FAILED(hr))
+		{
+			MessageBox(0, L"D3DXGetImageInfoFromFile 에러입니다.", L"ErrorMessage", 0);
+			return false;
+		}
+		//텍스쳐 생성
+		hr = D3DXCreateTextureFromFileEx(
+			_device3d, 
+			L"character_sprite.png", 
+			_textureInfo.Width, 
+			_textureInfo.Height,
+			1,0,
+			D3DFMT_UNKNOWN,
+			D3DPOOL_DEFAULT,
+			D3DX_DEFAULT, 
+			D3DX_DEFAULT,
+			D3DCOLOR_ARGB(255,255,255,255),
+			&_textureInfo,
+			NULL,
+			&_texture
+		);
+		/*for (int i = 0; i < 3; i++)
+		{
+			_srcTextureRect.left = textureInfo.Width / 3 * i;
+			_srcTextureRect.top = 0;
+			_srcTextureRect.right = textureInfo.Width / 3 * (i + 1);
+			_srcTextureRect.bottom = textureInfo.Height / 4;
+		}*/
+		_srcTextureRect.left = 0;
+		_srcTextureRect.top = 0;
+		_srcTextureRect.right = _textureInfo.Width;
+		_srcTextureRect.bottom = _textureInfo.Height;
+
+		_textureColor = D3DCOLOR_ARGB(255, 255, 255, 255);
+	}
+
 
 	return true;
 }
