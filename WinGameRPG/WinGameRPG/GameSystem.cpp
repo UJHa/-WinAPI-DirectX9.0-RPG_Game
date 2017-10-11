@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include "GameTimer.h"
 #include<string>
+#include "Sprite.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
 	{
@@ -21,30 +22,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 GameSystem* GameSystem::_instance = NULL;
 GameSystem::GameSystem()
 {
-	//_isEnable4xMsaa = false;
-	_isFullScreen = false;
+	_isFullScreen = true;
+	if (_isFullScreen)
+	{
+		_WindowWidth = 1920;
+		_WindowHeight = 1080;
+	}
+	else
+	{
+		_WindowWidth = 1280;
+		_WindowHeight = 800;
+	}
+	_testSprite = NULL;
 }
 GameSystem::~GameSystem()
 {
+	if (NULL != _testSprite)
+	{
+		_testSprite->DInit();
+		delete _testSprite;
+		_testSprite = NULL;
+	}
 	RELEASE_COM(_sprite);
 	RELEASE_COM(_device3d);
-	/*_swapChain->Release();
-	_swapChain = 0;
-
-	_d3dDevice->Release();
-	_d3dDevice = 0;
-
-	_d3dDeviceContext->Release();
-	_d3dDeviceContext = 0;
-
-	_renderTargetView->Release();
-	_renderTargetView = 0;
-
-	_depthStencilBuffer->Release();
-	_depthStencilBuffer = 0;
-
-	_depthStencilView->Release();
-	_depthStencilView = 0;*/
 }
 GameSystem* GameSystem::GetInstance()
 {
@@ -98,10 +98,10 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 		RECT clientRect;
 		GetClientRect(_hMainWnd, &clientRect);
 
-		int addWidth = 1280 - clientRect.right;
-		int addHeight = 800 - clientRect.bottom;
-		int finalWidth = 1280 + addWidth;
-		int finalHeight = 800 + addHeight;
+		int addWidth = _WindowWidth - clientRect.right;
+		int addHeight = _WindowHeight - clientRect.bottom;
+		int finalWidth = _WindowWidth + addWidth;
+		int finalHeight = _WindowHeight + addHeight;
 		MoveWindow(_hMainWnd, 0, 0, finalWidth, finalHeight, TRUE);
 	}
 	//윈도우 출력
@@ -112,6 +112,47 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	{
 		return false;
 	}
+	_testSprite = new Sprite();
+	_testSprite->Init(_device3d, _sprite);
+	////Texture
+	//{
+	//	//파일로 이미지 폭과 너비를 가져온다.
+	//	HRESULT hr = D3DXGetImageInfoFromFile(L"character_sprite.png", &_textureInfo);
+	//	if (FAILED(hr))
+	//	{
+	//		MessageBox(0, L"D3DXGetImageInfoFromFile 에러입니다.", L"ErrorMessage", 0);
+	//		return false;
+	//	}
+	//	//텍스쳐 생성
+	//	hr = D3DXCreateTextureFromFileEx(
+	//		_device3d,
+	//		L"character_sprite.png",
+	//		_textureInfo.Width,
+	//		_textureInfo.Height,
+	//		0, 0,
+	//		D3DFMT_UNKNOWN,
+	//		D3DPOOL_DEFAULT,
+	//		D3DX_DEFAULT,
+	//		D3DX_DEFAULT,
+	//		D3DCOLOR_ARGB(255, 255, 255, 255),
+	//		&_textureInfo,
+	//		NULL,
+	//		&_texture
+	//	);
+	//	/*for (int i = 0; i < 3; i++)
+	//	{
+	//	_srcTextureRect.left = textureInfo.Width / 3 * i;
+	//	_srcTextureRect.top = 0;
+	//	_srcTextureRect.right = textureInfo.Width / 3 * (i + 1);
+	//	_srcTextureRect.bottom = textureInfo.Height / 4;
+	//	}*/
+	//	_srcTextureRect.left = 0;
+	//	_srcTextureRect.top = 0;
+	//	_srcTextureRect.right = _textureInfo.Width;
+	//	_srcTextureRect.bottom = _textureInfo.Height;
+
+	//	_textureColor = D3DCOLOR_ARGB(255, 255, 255, 255);
+	//}
 	return true;
 }
 int GameSystem::Update()
@@ -144,37 +185,29 @@ int GameSystem::Update()
 
 				frameDuration = 0.0f;
 
-				//colorRed += 0.1f;
-				//if(colorRed>1.0f)
-				//	colorRed -= 1.0f;
-				//float color[4];
-				//color[0] = colorRed;	//R
-				//color[1] = 0.2f;	//G
-				//color[2] = 0.3f;	//B
-				//color[3] = 1.0f;	//Alpha
-
-				//_d3dDeviceContext->ClearRenderTargetView(_renderTargetView, color);
-				//_d3dDeviceContext->ClearDepthStencilView(_depthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-
-				//_swapChain->Present(0, 0);
 				_device3d->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 100, 0), 0.0f, 0);
+				
+
 				_device3d->BeginScene();
 
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
+				_testSprite->Render();
 				//스프라이트 출력 전 모양 조정(위치,크기,회전)
-				D3DXVECTOR2 spriteCenter = D3DXVECTOR2((float)_textureInfo.Width / 2.0f, (float)_textureInfo.Height / 2.0f);
-				D3DXVECTOR2 translate = D3DXVECTOR2(1280.0f / 2.0f - (float)_textureInfo.Width / 2.0f, 800.0f / 2.0f - (float)_textureInfo.Height / 2.0f);
+				/*D3DXVECTOR2 spriteCenter = D3DXVECTOR2((float)_textureInfo.Width / 2.0f, (float)_textureInfo.Height / 2.0f);
+				D3DXVECTOR2 translate = D3DXVECTOR2((float)_WindowWidth / 2.0f - (float)_textureInfo.Width / 2.0f, (float)_WindowHeight / 2.0f - (float)_textureInfo.Height / 2.0f);
 				D3DXVECTOR2 scaling = D3DXVECTOR2(1.0f, 1.0f);
 				D3DXMATRIX matrix;
 				D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, &scaling, &spriteCenter, 0.0f, &translate);
-				_sprite->SetTransform(&matrix);
-
-				_sprite->Draw(_texture, &_srcTextureRect, NULL, NULL, _textureColor);
+				_sprite->SetTransform(&matrix);*/
+				//_sprite->Draw(_texture, &_srcTextureRect, NULL, NULL, _textureColor);
 
 				_sprite->End();
 
 				_device3d->EndScene();
+
+				CheckDeviceLost();
+
 				_device3d->Present(NULL, NULL, NULL, NULL);
 			}
 
@@ -197,25 +230,24 @@ bool GameSystem::InitDirect3D()
 		return false;
 	}
 
-	D3DPRESENT_PARAMETERS d3dpp;
-	ZeroMemory(&d3dpp, sizeof(d3dpp));
-	d3dpp.BackBufferWidth = 1280;
-	d3dpp.BackBufferHeight = 800;
+	ZeroMemory(&_d3dpp, sizeof(_d3dpp));
+	_d3dpp.BackBufferWidth = _WindowWidth;
+	_d3dpp.BackBufferHeight = _WindowHeight;
 
 	if (_isFullScreen)
 	{
-		d3dpp.BackBufferFormat = D3DFMT_X8R8G8B8;
+		_d3dpp.BackBufferFormat = D3DFMT_X8R8G8B8;
 	}
 	else
 	{
-		d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
+		_d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
 	}
 
-	d3dpp.BackBufferCount = 1;
-	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dpp.hDeviceWindow = _hMainWnd;
-	d3dpp.Windowed = (!_isFullScreen);
-	d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
+	_d3dpp.BackBufferCount = 1;
+	_d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
+	_d3dpp.hDeviceWindow = _hMainWnd;
+	_d3dpp.Windowed = (!_isFullScreen);
+	_d3dpp.PresentationInterval = D3DPRESENT_INTERVAL_IMMEDIATE;
 
 	D3DCAPS9 caps;
 	HRESULT hr = direct3d->GetDeviceCaps(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, &caps);
@@ -235,7 +267,7 @@ bool GameSystem::InitDirect3D()
 		behavior = D3DCREATE_HARDWARE_VERTEXPROCESSING;
 	}
 
-	hr = direct3d->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, _hMainWnd, behavior, &d3dpp, &_device3d);
+	hr = direct3d->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, _hMainWnd, behavior, &_d3dpp, &_device3d);
 	if (FAILED(hr))
 	{
 		MessageBox(0, L"CreateDevice 에러입니다.", L"ErrorMessage", 0);
@@ -248,46 +280,64 @@ bool GameSystem::InitDirect3D()
 		MessageBox(0, L"D3DXCreateSprite 에러입니다.", L"ErrorMessage", 0);
 		return false;
 	}
-	//Texture
-	{
-		//파일로 이미지 폭과 너비를 가져온다.
-		hr = D3DXGetImageInfoFromFile(L"character_sprite.png",&_textureInfo);
-		if (FAILED(hr))
-		{
-			MessageBox(0, L"D3DXGetImageInfoFromFile 에러입니다.", L"ErrorMessage", 0);
-			return false;
-		}
-		//텍스쳐 생성
-		hr = D3DXCreateTextureFromFileEx(
-			_device3d, 
-			L"character_sprite.png", 
-			_textureInfo.Width, 
-			_textureInfo.Height,
-			1,0,
-			D3DFMT_UNKNOWN,
-			D3DPOOL_DEFAULT,
-			D3DX_DEFAULT, 
-			D3DX_DEFAULT,
-			D3DCOLOR_ARGB(255,255,255,255),
-			&_textureInfo,
-			NULL,
-			&_texture
-		);
-		/*for (int i = 0; i < 3; i++)
-		{
-			_srcTextureRect.left = textureInfo.Width / 3 * i;
-			_srcTextureRect.top = 0;
-			_srcTextureRect.right = textureInfo.Width / 3 * (i + 1);
-			_srcTextureRect.bottom = textureInfo.Height / 4;
-		}*/
-		_srcTextureRect.left = 0;
-		_srcTextureRect.top = 0;
-		_srcTextureRect.right = _textureInfo.Width;
-		_srcTextureRect.bottom = _textureInfo.Height;
-
-		_textureColor = D3DCOLOR_ARGB(255, 255, 255, 255);
-	}
-
-
 	return true;
+}
+void GameSystem::CheckDeviceLost()
+{
+	HRESULT hr = _device3d->TestCooperativeLevel();
+	if (FAILED(hr))
+	{
+		if (D3DERR_DEVICELOST == hr)
+		{
+			Sleep(100);
+			return;
+		}
+		else if (D3DERR_DEVICENOTRESET == hr)
+		{
+			//RELEASE_COM(_texture);
+			_testSprite->Release();
+			hr = _device3d->Reset(&_d3dpp);
+			InitDirect3D();
+			_testSprite->Reset(_device3d, _sprite);
+			////Texture
+			//{
+			//	//파일로 이미지 폭과 너비를 가져온다.
+			//	HRESULT hr = D3DXGetImageInfoFromFile(L"character_sprite.png", &_textureInfo);
+			//	if (FAILED(hr))
+			//	{
+			//		MessageBox(0, L"D3DXGetImageInfoFromFile 에러입니다.", L"ErrorMessage", 0);
+			//		return;
+			//	}
+			//	//텍스쳐 생성
+			//	hr = D3DXCreateTextureFromFileEx(
+			//		_device3d,
+			//		L"character_sprite.png",
+			//		_textureInfo.Width,
+			//		_textureInfo.Height,
+			//		0, 0,
+			//		D3DFMT_UNKNOWN,
+			//		D3DPOOL_DEFAULT,
+			//		D3DX_DEFAULT,
+			//		D3DX_DEFAULT,
+			//		D3DCOLOR_ARGB(255, 255, 255, 255),
+			//		&_textureInfo,
+			//		NULL,
+			//		&_texture
+			//	);
+			//	/*for (int i = 0; i < 3; i++)
+			//	{
+			//	_srcTextureRect.left = textureInfo.Width / 3 * i;
+			//	_srcTextureRect.top = 0;
+			//	_srcTextureRect.right = textureInfo.Width / 3 * (i + 1);
+			//	_srcTextureRect.bottom = textureInfo.Height / 4;
+			//	}*/
+			//	_srcTextureRect.left = 0;
+			//	_srcTextureRect.top = 0;
+			//	_srcTextureRect.right = _textureInfo.Width;
+			//	_srcTextureRect.bottom = _textureInfo.Height;
+
+			//	_textureColor = D3DCOLOR_ARGB(255, 255, 255, 255);
+			//}
+		}
+	}
 }

@@ -1,7 +1,9 @@
-﻿  GameSystem.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gametimer.h(3): warning C4099: 'GameTimer': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gametimer.h(2): note: 'GameTimer' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gamesystem.cpp(142): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\corecrt_wstdio.h(1822): note: 'swprintf' 선언을 참조하십시오.
-  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
-  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)
+﻿  Sprite.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Sprite.h': No such file or directory
+  GameSystem.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gamesystem.h(6): fatal error C1083: 포함 파일을 열 수 없습니다. 'Sp': No such file or directory
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  main.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gamesystem.h(6): fatal error C1083: 포함 파일을 열 수 없습니다. 'Sp': No such file or directory
+  코드를 생성하고 있습니다...
