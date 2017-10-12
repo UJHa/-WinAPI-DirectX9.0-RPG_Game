@@ -30,6 +30,9 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>소스 파일\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>소스 파일\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameSystem.h">
@@ -39,6 +42,9 @@
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
+      <Filter>소스 파일\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
       <Filter>소스 파일\Graphics</Filter>
     </ClInclude>
   </ItemGroup>

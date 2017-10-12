@@ -1,9 +1,8 @@
 ﻿  Sprite.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.cpp(1): fatal error C1083: 포함 파일을 열 수 없습니다. 'Sprite.h': No such file or directory
-  GameSystem.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gamesystem.h(6): fatal error C1083: 포함 파일을 열 수 없습니다. 'Sp': No such file or directory
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  main.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gamesystem.h(6): fatal error C1083: 포함 파일을 열 수 없습니다. 'Sp': No such file or directory
-  코드를 생성하고 있습니다...
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gamesystem.h(10): warning C4099: 'Sprite': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(6): note: 'Sprite' 선언을 참조하십시오.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\frame.h(4): warning C4099: 'Frame': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
+  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\frame.h(3): note: 'Frame' 선언을 참조하십시오.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.cpp(77): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
+  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)

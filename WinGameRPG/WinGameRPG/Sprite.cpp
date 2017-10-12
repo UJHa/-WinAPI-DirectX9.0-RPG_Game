@@ -1,5 +1,7 @@
 #include"Sprite.h"
-Sprite::Sprite()
+#include"GameSystem.h"
+#include"Frame.h"
+Sprite::Sprite() : _currentFrame(0)
 {
 }
 
@@ -8,6 +10,7 @@ Sprite::~Sprite()
 }
 void Sprite::Init(LPDIRECT3DDEVICE9 device3d, LPD3DXSPRITE sprite)
 {
+	_device3d = device3d;
 	_sprite = sprite;
 	//Texture
 	{
@@ -34,41 +37,61 @@ void Sprite::Init(LPDIRECT3DDEVICE9 device3d, LPD3DXSPRITE sprite)
 			NULL,
 			&_texture
 		);
+		{
+			Frame* frame = new Frame();
+			frame->Init(device3d, sprite, _texture, 32*0, 0, 32, 32);
+			_frameList.push_back(frame);
+		}
+		{
+			Frame* frame = new Frame();
+			frame->Init(device3d, sprite, _texture, 32*1, 0, 32, 32);
+			_frameList.push_back(frame);
+		}
+		{
+			Frame* frame = new Frame();
+			frame->Init(device3d, sprite, _texture, 32*2, 0, 32, 32);
+			_frameList.push_back(frame);
+		}
 		/*for (int i = 0; i < 3; i++)
 		{
-		_srcTextureRect.left = textureInfo.Width / 3 * i;
-		_srcTextureRect.top = 0;
-		_srcTextureRect.right = textureInfo.Width / 3 * (i + 1);
-		_srcTextureRect.bottom = textureInfo.Height / 4;
+			Frame* frame = new Frame();
+			frame->Init(device3d, sprite, _texture, _textureInfo.Width / 3 * i, 0, _textureInfo.Width / 3 * (i+1), _textureInfo.Height / 4);
+			_frameList.push_back(frame);
 		}*/
-		_srcTextureRect.left = 0;
-		_srcTextureRect.top = 0;
-		_srcTextureRect.right = _textureInfo.Width;
-		_srcTextureRect.bottom = _textureInfo.Height;
-
-		_textureColor = D3DCOLOR_ARGB(255, 255, 255, 255);
 	}
+	_currentFrame = 1;
 }
 void Sprite::DInit()
 {
+	for (std::vector<Frame*>::iterator it = _frameList.begin(); it != _frameList.end(); it++)
+	{
+		Frame* frame = *it;
+		frame->DInit();
+		delete frame;
+	}
+	_frameList.clear();
 	RELEASE_COM(_texture);
 }
 void Sprite::Render()
 {
-	//스프라이트 출력 전 모양 조정(위치,크기,회전)
-	D3DXVECTOR2 spriteCenter = D3DXVECTOR2((float)_textureInfo.Width / 2.0f, (float)_textureInfo.Height / 2.0f);
-	D3DXVECTOR2 translate = D3DXVECTOR2((float)_WindowWidth / 2.0f - (float)_textureInfo.Width / 2.0f, (float)_WindowHeight / 2.0f - (float)_textureInfo.Height / 2.0f);
-	D3DXVECTOR2 scaling = D3DXVECTOR2(1.0f, 1.0f);
-	D3DXMATRIX matrix;
-	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, &scaling, &spriteCenter, 0.0f, &translate);
-	_sprite->SetTransform(&matrix);
-	_sprite->Draw(_texture, &_srcTextureRect, NULL, NULL, _textureColor);
+	if(_currentFrame < _frameList.size())
+		_frameList[_currentFrame]->Render();
 }
 void Sprite::Release()
 {
+	for (std::vector<Frame*>::iterator it = _frameList.begin(); it != _frameList.end(); it++)
+	{
+		Frame* frame = *it;
+		frame->Release();
+	}
 	RELEASE_COM(_texture);
 }
 void Sprite::Reset(LPDIRECT3DDEVICE9 device3d, LPD3DXSPRITE sprite)
 {
 	Init(device3d, sprite);
+	for (std::vector<Frame*>::iterator it = _frameList.begin(); it != _frameList.end(); it++)
+	{
+		Frame* frame = *it;
+		frame->Reset(device3d, sprite);
+	}
 }

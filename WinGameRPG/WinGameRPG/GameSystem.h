@@ -38,4 +38,6 @@ public:
 	int Update();
 	bool InitDirect3D();
 	void CheckDeviceLost();
+	int GetWindowWidth();
+	int GetWindowHeight();
 };
