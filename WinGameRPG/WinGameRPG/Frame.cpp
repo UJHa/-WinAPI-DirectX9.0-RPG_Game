@@ -1,31 +1,26 @@
 #include "Frame.h"
 #include "GameSystem.h"
-Frame::Frame()
+#include "Texture.h"
+Frame::Frame() :_frameDelay(0.0f)
 {
 }
 
 Frame::~Frame()
 {
 }
-void Frame::Init(LPDIRECT3DDEVICE9 device3d, LPD3DXSPRITE sprite, LPDIRECT3DTEXTURE9 texture, int left, int top, int width, int height)
+void Frame::Init(Texture* texture, int left, int top, int width, int height, float frameDelay)
 {
-	_sprite = sprite;
 	_texture = texture;
 	_width = width;
 	_height = height;
-	/*for (int i = 0; i < 3; i++)
-	{
-	_srcTextureRect.left = textureInfo.Width / 3 * i;
-	_srcTextureRect.top = 0;
-	_srcTextureRect.right = textureInfo.Width / 3 * (i + 1);
-	_srcTextureRect.bottom = textureInfo.Height / 4;
-	}*/
 	_srcTextureRect.left = left;
 	_srcTextureRect.top = top;
-	_srcTextureRect.right = _width;
-	_srcTextureRect.bottom = _height;
+	_srcTextureRect.right = left + _width;
+	_srcTextureRect.bottom = top + _height;
 
 	_textureColor = D3DCOLOR_ARGB(255, 255, 255, 255);
+	
+	_frameDelay = frameDelay;
 }
 void Frame::DInit()
 {
@@ -39,15 +34,19 @@ void Frame::Render()
 	D3DXVECTOR2 scaling = D3DXVECTOR2(1.0f, 1.0f);
 	D3DXMATRIX matrix;
 	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, &scaling, &spriteCenter, 0.0f, &translate);
-	_sprite->SetTransform(&matrix);
+	GameSystem::GetInstance()->GetSprite()->SetTransform(&matrix);
 	
-	_sprite->Draw(_texture, &_srcTextureRect, NULL, NULL, _textureColor);
+	GameSystem::GetInstance()->GetSprite()->Draw(_texture->GetTextureDX(), &_srcTextureRect, NULL, NULL, _textureColor);
 }
 void Frame::Release()
 {
 
 }
-void Frame::Reset(LPDIRECT3DDEVICE9 device3d, LPD3DXSPRITE sprite)
+void Frame::Reset()
 {
 
+}
+float Frame::GetFrameDelay()
+{
+	return _frameDelay;
 }

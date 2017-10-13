@@ -40,4 +40,6 @@ public:
 	void CheckDeviceLost();
 	int GetWindowWidth();
 	int GetWindowHeight();
+	LPD3DXSPRITE GetSprite();
+	LPDIRECT3DDEVICE9 GetDevice3d();
 };

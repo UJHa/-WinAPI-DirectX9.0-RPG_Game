@@ -113,7 +113,7 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 		return false;
 	}
 	_testSprite = new Sprite();
-	_testSprite->Init(_device3d, _sprite);
+	_testSprite->Init();
 	////Texture
 	//{
 	//	//파일로 이미지 폭과 너비를 가져온다.
@@ -178,7 +178,7 @@ int GameSystem::Update()
 			float deltaTime = _gameTimer->GetDeltaTime();
 			frameDuration += deltaTime;
 
-			//_testSprite->Update(deltaTime);
+			_testSprite->Update(deltaTime);
 			if (frameTime <= frameDuration)
 			{
 				wchar_t timeCheck[256];
@@ -289,7 +289,7 @@ void GameSystem::CheckDeviceLost()
 			_testSprite->Release();
 			hr = _device3d->Reset(&_d3dpp);
 			InitDirect3D();
-			_testSprite->Reset(_device3d, _sprite);
+			_testSprite->Reset();
 		}
 	}
 }
@@ -300,4 +300,12 @@ int GameSystem::GetWindowWidth()
 int GameSystem::GetWindowHeight()
 {
 	return _WindowHeight;
+}
+LPD3DXSPRITE GameSystem::GetSprite()
+{
+	return _sprite;
+}
+LPDIRECT3DDEVICE9 GameSystem::GetDevice3d()
+{
+	return _device3d;
 }
