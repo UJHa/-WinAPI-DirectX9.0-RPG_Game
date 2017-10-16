@@ -146,6 +146,7 @@
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
@@ -153,6 +154,7 @@
     <ClInclude Include="Frame.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameTimer.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
   </ItemGroup>

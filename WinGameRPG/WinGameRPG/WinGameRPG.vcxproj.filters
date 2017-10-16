@@ -16,15 +16,12 @@
     <Filter Include="소스 파일\Graphics">
       <UniqueIdentifier>{47d71ca9-cc45-4b15-8c0d-155548ad3e73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\System">
+      <UniqueIdentifier>{e4bdc8bc-2a06-49d7-9c8e-7b3171953926}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameSystem.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="GameTimer.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
@@ -36,14 +33,17 @@
     <ClCompile Include="Texture.cpp">
       <Filter>소스 파일\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="GameSystem.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
+    <ClCompile Include="GameTimer.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>소스 파일\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameSystem.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="GameTimer.h">
-      <Filter>소스 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>소스 파일\Graphics</Filter>
     </ClInclude>
@@ -52,6 +52,15 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>소스 파일\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSystem.h">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
+    <ClInclude Include="GameTimer.h">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>소스 파일\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

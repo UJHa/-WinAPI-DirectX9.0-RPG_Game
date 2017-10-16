@@ -2,7 +2,7 @@
 #include"GameSystem.h"
 #include"Frame.h"
 #include"Texture.h"
-//#include"ResourceManager.h"
+#include"ResourceManager.h"
 Sprite::Sprite() : _currentFrame(0), _frameTime(0.0f), _srcTexture(NULL)
 {
 }
@@ -20,7 +20,7 @@ void Sprite::Init()
 {
 	_srcTexture = new Texture();
 	_srcTexture->Init(L"character_sprite.png");
-	//_srcTexture = ResourceManager::GetInstance().LoadTexture(L"character_sprite.png");
+	_srcTexture = ResourceManager::GetInstance()->LoadTexture(L"character_sprite.png");
 
 	////Texture
 	//{
