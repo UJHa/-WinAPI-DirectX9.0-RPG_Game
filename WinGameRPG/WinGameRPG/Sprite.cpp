@@ -1,3 +1,6 @@
+#include<fstream>
+#include<reader.h>
+
 #include"Sprite.h"
 #include"GameSystem.h"
 #include"Frame.h"
@@ -18,9 +21,33 @@ Sprite::~Sprite()
 }
 void Sprite::Init()
 {
-	_srcTexture = new Texture();
-	_srcTexture->Init(L"character_sprite.png");
+	/*_srcTexture = new Texture();
+	_srcTexture->Init(L"character_sprite.png");*/
 	_srcTexture = ResourceManager::GetInstance()->LoadTexture(L"character_sprite.png");
+
+	//jsonTest
+	{
+		//파일 읽어 들여서 텍스트정보
+		//텍스트 정보 파싱
+		//파싱된 정보 토근 >> 의미있는 게임정보 변환
+		//변환된 정보로 이용해서 Frame 생성
+		char inputBuffer[1000];
+		std::ifstream infile("jsonText.json");
+		while (!infile.eof())
+		{
+			infile.getline(inputBuffer,100);
+			
+			Json::Value root;
+			Json::Reader reader;
+			bool isSuccess = reader.parse(inputBuffer, root);
+			while (isSuccess)
+			{
+				std::string texture = root["texture"].asString();
+				int x = root["width"].asInt();
+				int y = root["y"].asInt();
+			}
+		}
+	}
 
 	////Texture
 	//{
