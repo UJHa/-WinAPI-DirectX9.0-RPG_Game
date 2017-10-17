@@ -6,7 +6,9 @@
 #include"Frame.h"
 #include"Texture.h"
 #include"ResourceManager.h"
-Sprite::Sprite() : _currentFrame(0), _frameTime(0.0f), _srcTexture(NULL)
+Sprite::Sprite(LPCWSTR textureFileName, LPCWSTR scriptFileName)
+	: _currentFrame(0), _frameTime(0.0f), _srcTexture(NULL),
+	_textureFileName(textureFileName), _scriptFileName(scriptFileName)
 {
 }
 
@@ -23,7 +25,7 @@ void Sprite::Init()
 {
 	/*_srcTexture = new Texture();
 	_srcTexture->Init(L"character_sprite.png");*/
-	_srcTexture = ResourceManager::GetInstance()->LoadTexture(L"character_sprite.png");
+	_srcTexture = ResourceManager::GetInstance()->LoadTexture(_textureFileName);
 
 	//jsonTest
 	{
@@ -32,7 +34,7 @@ void Sprite::Init()
 		//파싱된 정보 토근 >> 의미있는 게임정보 변환
 		//변환된 정보로 이용해서 Frame 생성
 		char inputBuffer[1000];
-		std::ifstream infile("jsonText.json");
+		std::ifstream infile(_scriptFileName);
 		while (!infile.eof())
 		{
 			infile.getline(inputBuffer,100);
@@ -40,51 +42,21 @@ void Sprite::Init()
 			Json::Value root;
 			Json::Reader reader;
 			bool isSuccess = reader.parse(inputBuffer, root);
-			while (isSuccess)
+			if (isSuccess)
 			{
 				std::string texture = root["texture"].asString();
-				int x = root["width"].asInt();
+				int x = root["x"].asInt();
 				int y = root["y"].asInt();
+				int width = root["width"].asInt();
+				int height = root["height"].asInt();
+				double delay = root["frameDelay"].asDouble();
+
+				Frame* frame = new Frame();
+				frame->Init(_srcTexture, x, y, width, height, delay);
+				_frameList.push_back(frame);
 			}
 		}
 	}
-
-	////Texture
-	//{
-	//	//파일로 이미지 폭과 너비를 가져온다.
-	//	HRESULT hr = D3DXGetImageInfoFromFile(L"character_sprite.png", &_textureInfo);
-	//	if (FAILED(hr))
-	//	{
-	//		MessageBox(0, L"D3DXGetImageInfoFromFile 에러입니다.", L"ErrorMessage", 0);
-	//		return;
-	//	}
-	//	//텍스쳐 생성
-	//	hr = D3DXCreateTextureFromFileEx(
-	//		GameSystem::GetInstance()->GetDevice3d(),
-	//		L"character_sprite.png",
-	//		_textureInfo.Width,
-	//		_textureInfo.Height,
-	//		0, 0,
-	//		D3DFMT_UNKNOWN,
-	//		D3DPOOL_DEFAULT,
-	//		D3DX_DEFAULT,
-	//		D3DX_DEFAULT,
-	//		D3DCOLOR_ARGB(255, 255, 255, 255),
-	//		&_textureInfo,
-	//		NULL,
-	//		&_texture
-	//	);
-		{
-			Frame* frame = new Frame();
-			frame->Init(_srcTexture, 32 * 0, 0, 32, 32, 0.2f);
-			_frameList.push_back(frame);
-		}
-		{
-			Frame* frame = new Frame();
-			frame->Init(_srcTexture, 32 * 2, 0, 32, 32, 0.2f);
-			_frameList.push_back(frame);
-		}
-	//}
 	_currentFrame = 0;
 	_frameTime = 0.0f;
 }
@@ -110,8 +82,11 @@ void Sprite::Update(float deltaTime)
 }
 void Sprite::Render()
 {
-	if(_currentFrame < _frameList.size())
+	if (_currentFrame < _frameList.size())
+	{
+		_frameList[_currentFrame]->SetPosition(_x, _y);
 		_frameList[_currentFrame]->Render();
+	}
 }
 void Sprite::Release()
 {
@@ -130,4 +105,9 @@ void Sprite::Reset()
 		Frame* frame = *it;
 		frame->Reset();
 	}
+}
+void Sprite::SetPosition(float x, float y)
+{
+	_x = x;
+	_y = y;
 }

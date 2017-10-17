@@ -3,7 +3,7 @@
 //#include<D3DX11.h>
 #include<D3DX9.h>
 #include<D3D9.h>
-
+#include<vector>
 #define RELEASE_COM(x) {if(x){x->Release();x=NULL;}}
 #define SAVE_DELETE(x) {if(x){delete x;x=NULL;}}
 struct GameTimer;
@@ -28,11 +28,9 @@ private:
 	int _WindowWidth;
 	int _WindowHeight;
 	GameTimer* _gameTimer;
-	Sprite* _testSprite;
-	/*LPDIRECT3DTEXTURE9 _texture;
-	RECT _srcTextureRect;
-	D3DCOLOR _textureColor;
-	D3DXIMAGE_INFO _textureInfo;*/
+	//Sprite* _testSprite;
+	//std::vector<Sprite*> _testSpriteList;
+	Sprite* _testTileMap[16][16];
 public:
 	bool InitSystem(HINSTANCE hInstance, int nCmdShow);
 	int Update();

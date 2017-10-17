@@ -1,7 +1,6 @@
 #include "GameSystem.h"
 #include <Windows.h>
 #include "GameTimer.h"
-#include<string>
 #include "Sprite.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
@@ -33,15 +32,37 @@ GameSystem::GameSystem()
 		_WindowWidth = 1280;
 		_WindowHeight = 800;
 	}
-	_testSprite = NULL;
+	//_testSprite = NULL;
+	//_testSpriteList.clear();
+	for (int y = 0; y < 16; y++)
+	{
+		for (int x = 0; x < 16; x++)
+		{
+			_testTileMap[x][y] = NULL;
+		}
+	}
 }
 GameSystem::~GameSystem()
 {
-	if (NULL != _testSprite)
+	/*if (NULL != _testSprite)
 	{
 		_testSprite->DInit();
 		delete _testSprite;
 		_testSprite = NULL;
+	}*/
+	/*for (int i = 0; i < _testSpriteList.size(); i++)
+	{
+		_testSpriteList[i]->DInit();
+		delete _testSpriteList[i];
+	}
+	_testSpriteList.clear();*/
+	for (int y = 0; y < 16; y++)
+	{
+		for (int x = 0; x < 16; x++)
+		{
+			_testTileMap[x][y]->DInit();
+			delete _testTileMap[x][y];
+		}
 	}
 	RELEASE_COM(_sprite);
 	RELEASE_COM(_device3d);
@@ -112,47 +133,50 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	{
 		return false;
 	}
-	_testSprite = new Sprite();
-	_testSprite->Init();
-	////Texture
-	//{
-	//	//파일로 이미지 폭과 너비를 가져온다.
-	//	HRESULT hr = D3DXGetImageInfoFromFile(L"character_sprite.png", &_textureInfo);
-	//	if (FAILED(hr))
-	//	{
-	//		MessageBox(0, L"D3DXGetImageInfoFromFile 에러입니다.", L"ErrorMessage", 0);
-	//		return false;
-	//	}
-	//	//텍스쳐 생성
-	//	hr = D3DXCreateTextureFromFileEx(
-	//		_device3d,
-	//		L"character_sprite.png",
-	//		_textureInfo.Width,
-	//		_textureInfo.Height,
-	//		0, 0,
-	//		D3DFMT_UNKNOWN,
-	//		D3DPOOL_DEFAULT,
-	//		D3DX_DEFAULT,
-	//		D3DX_DEFAULT,
-	//		D3DCOLOR_ARGB(255, 255, 255, 255),
-	//		&_textureInfo,
-	//		NULL,
-	//		&_texture
-	//	);
-	//	/*for (int i = 0; i < 3; i++)
-	//	{
-	//	_srcTextureRect.left = textureInfo.Width / 3 * i;
-	//	_srcTextureRect.top = 0;
-	//	_srcTextureRect.right = textureInfo.Width / 3 * (i + 1);
-	//	_srcTextureRect.bottom = textureInfo.Height / 4;
-	//	}*/
-	//	_srcTextureRect.left = 0;
-	//	_srcTextureRect.top = 0;
-	//	_srcTextureRect.right = _textureInfo.Width;
-	//	_srcTextureRect.bottom = _textureInfo.Height;
 
-	//	_textureColor = D3DCOLOR_ARGB(255, 255, 255, 255);
-	//}
+	{
+		/*Sprite* sprite1 = new Sprite(L"character_sprite.png", L"char_sprite_01.json");
+		sprite1->Init();
+		_testSpriteList.push_back(sprite1);
+		Sprite* sprite2 = new Sprite(L"character_sprite.png", L"char_sprite_02.json");
+		sprite2->Init();
+		_testSpriteList.push_back(sprite2);
+		Sprite* sprite3 = new Sprite(L"character_sprite.png", L"char_sprite_03.json");
+		sprite3->Init();
+		_testSpriteList.push_back(sprite3);
+		Sprite* sprite4 = new Sprite(L"character_sprite.png", L"char_sprite_04.json");
+		sprite4->Init();
+		_testSpriteList.push_back(sprite4);*/
+		for (int y = 0; y < 16; y++)
+		{
+			for (int x = 0; x < 16; x++)
+			{
+				Sprite* sprite;
+				int randValue = rand() % 4;
+				switch (randValue)
+				{
+				case 0:
+					sprite = new Sprite(L"character_sprite.png", L"char_sprite_01.json");
+					break;
+				case 1:
+					sprite = new Sprite(L"character_sprite.png", L"char_sprite_02.json");
+					break;
+				case 2:
+					sprite = new Sprite(L"character_sprite.png", L"char_sprite_03.json");
+					break;
+				case 3:
+					sprite = new Sprite(L"character_sprite.png", L"char_sprite_04.json");
+					break;
+				default:
+					break;
+				}
+				sprite->Init();
+				_testTileMap[x][y] = sprite;
+			}
+		}
+	}
+	//_testSprite = new Sprite(L"character_sprite.png",L"jsonText.json");
+	//_testSprite->Init();
 	return true;
 }
 int GameSystem::Update()
@@ -178,7 +202,19 @@ int GameSystem::Update()
 			float deltaTime = _gameTimer->GetDeltaTime();
 			frameDuration += deltaTime;
 
-			_testSprite->Update(deltaTime);
+			//_testSpriteList[3]->Update(deltaTime);
+			/*for (int i = 0; i < _testSpriteList.size(); i++)
+			{
+				_testSpriteList[i]->Update(deltaTime);
+			}*/
+			//_testSprite->Update(deltaTime);
+			for (int y = 0; y < 16; y++)
+			{
+				for (int x = 0; x < 16; x++)
+				{
+					_testTileMap[x][y]->Update(deltaTime);
+				}
+			}
 			if (frameTime <= frameDuration)
 			{
 				wchar_t timeCheck[256];
@@ -188,13 +224,34 @@ int GameSystem::Update()
 				frameDuration = 0.0f;
 
 				_device3d->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 100, 0), 0.0f, 0);
-				
 
 				_device3d->BeginScene();
 
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
-				_testSprite->Render();
+				//_testSpriteList[3]->Render();
+				/*for (int i = 0; i < _testSpriteList.size(); i++)
+				{
+					_testSpriteList[3]->Render();
+				}*/
+				//_testSprite->Render();
+				int tileSize = 32;
+				float startX = 0.0f + tileSize / 2;
+				float startY = 0.0f + tileSize / 2;
+				float posX = startX;
+				float posY = startY;
+				for (int y = 0; y < 16; y++)
+				{
+					for (int x = 0; x < 16; x++)
+					{
+						_testTileMap[x][y]->SetPosition(posX, posY);
+						_testTileMap[x][y]->Render();
+						posX += tileSize;
+					}
+					posX = startX;
+					posY += tileSize;
+
+				}
 				
 				_sprite->End();
 
@@ -286,10 +343,32 @@ void GameSystem::CheckDeviceLost()
 		}
 		else if (D3DERR_DEVICENOTRESET == hr)
 		{
-			_testSprite->Release();
+			/*for (int i = 0; i < _testSpriteList.size(); i++)
+			{
+				_testSpriteList[i]->Release();
+			}*/
+			//_testSprite->Release();
+			for (int y = 0; y < 16; y++)
+			{
+				for (int x = 0; x < 16; x++)
+				{
+					_testTileMap[x][y]->Release();
+				}
+			}
 			hr = _device3d->Reset(&_d3dpp);
 			InitDirect3D();
-			_testSprite->Reset();
+			/*for (int i = 0; i < _testSpriteList.size(); i++)
+			{
+				_testSpriteList[i]->Reset();
+			}*/
+			//_testSprite->Reset();
+			for (int y = 0; y < 16; y++)
+			{
+				for (int x = 0; x < 16; x++)
+				{
+					_testTileMap[x][y]->Reset();
+				}
+			}
 		}
 	}
 }
