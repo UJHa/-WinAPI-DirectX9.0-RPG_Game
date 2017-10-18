@@ -6,8 +6,12 @@
 #include<vector>
 #define RELEASE_COM(x) {if(x){x->Release();x=NULL;}}
 #define SAVE_DELETE(x) {if(x){delete x;x=NULL;}}
+
+//#define MAP_WIDTH 100
+//#define MAP_HEIGHT 100
 struct GameTimer;
-struct Sprite;
+//struct Sprite;
+struct Map;
 class GameSystem
 {
 private:
@@ -24,20 +28,30 @@ private:
 	LPD3DXSPRITE _sprite;
 
 	bool _isFullScreen;
-private:
-	int _WindowWidth;
-	int _WindowHeight;
-	GameTimer* _gameTimer;
-	//Sprite* _testSprite;
-	//std::vector<Sprite*> _testSpriteList;
-	Sprite* _testTileMap[16][16];
 public:
 	bool InitSystem(HINSTANCE hInstance, int nCmdShow);
 	int Update();
 	bool InitDirect3D();
 	void CheckDeviceLost();
+private:
+	int _WindowWidth;
+	int _WindowHeight;
+	GameTimer* _gameTimer;
+	
+	/*Sprite* _testTileMap[MAP_HEIGHT][MAP_WIDTH];
+
+	float _startX;
+	float _startY;
+	float _deltaX;
+	float _deltaY;*/
+	Map* _map;
+
+//get Method
+public:
 	int GetWindowWidth();
 	int GetWindowHeight();
 	LPD3DXSPRITE GetSprite();
 	LPDIRECT3DDEVICE9 GetDevice3d();
+public:
+	void MapScrollTest(float moveX, float moveY);
 };

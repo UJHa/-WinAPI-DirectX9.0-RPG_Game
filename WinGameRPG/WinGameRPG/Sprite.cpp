@@ -33,15 +33,14 @@ void Sprite::Init()
 		//텍스트 정보 파싱
 		//파싱된 정보 토근 >> 의미있는 게임정보 변환
 		//변환된 정보로 이용해서 Frame 생성
-		char inputBuffer[1000];
-		std::ifstream infile(_scriptFileName);
-		while (!infile.eof())
+		std::vector<std::string> scriptTextList = ResourceManager::GetInstance()->LoadScript(_scriptFileName);
+		for (int i = 0; i < scriptTextList.size();i++)
 		{
-			infile.getline(inputBuffer,100);
+			std::string record = scriptTextList[i];
 			
 			Json::Value root;
 			Json::Reader reader;
-			bool isSuccess = reader.parse(inputBuffer, root);
+			bool isSuccess = reader.parse(record, root);
 			if (isSuccess)
 			{
 				std::string texture = root["texture"].asString();

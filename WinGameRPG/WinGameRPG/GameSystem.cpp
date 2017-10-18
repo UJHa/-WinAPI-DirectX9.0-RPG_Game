@@ -1,13 +1,34 @@
 #include "GameSystem.h"
 #include <Windows.h>
 #include "GameTimer.h"
-#include "Sprite.h"
+#include "Map.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
 	{
 	case WM_KEYDOWN:
 		if (VK_ESCAPE == wParam)
+		{
 			DestroyWindow(hWnd);
+		}
+		if (VK_UP == wParam)
+		{
+			GameSystem::GetInstance()->MapScrollTest(0.0f, -3.0f);
+		}
+		if (VK_DOWN == wParam)
+		{
+			GameSystem::GetInstance()->MapScrollTest(0.0f, 3.0f);
+		}
+		if (VK_RIGHT == wParam)
+		{
+			GameSystem::GetInstance()->MapScrollTest(3.0f, 0.0f);
+		}
+		if (VK_LEFT == wParam)
+		{
+			GameSystem::GetInstance()->MapScrollTest(-3.0f, 0.0f);
+		}
+		return 0;
+	case WM_KEYUP:
+		GameSystem::GetInstance()->MapScrollTest(0.0f, 0.0f);
 		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);
@@ -32,37 +53,15 @@ GameSystem::GameSystem()
 		_WindowWidth = 1280;
 		_WindowHeight = 800;
 	}
-	//_testSprite = NULL;
-	//_testSpriteList.clear();
-	for (int y = 0; y < 16; y++)
-	{
-		for (int x = 0; x < 16; x++)
-		{
-			_testTileMap[x][y] = NULL;
-		}
-	}
+	_map = NULL;
 }
 GameSystem::~GameSystem()
 {
-	/*if (NULL != _testSprite)
+	if (NULL != _map)
 	{
-		_testSprite->DInit();
-		delete _testSprite;
-		_testSprite = NULL;
-	}*/
-	/*for (int i = 0; i < _testSpriteList.size(); i++)
-	{
-		_testSpriteList[i]->DInit();
-		delete _testSpriteList[i];
-	}
-	_testSpriteList.clear();*/
-	for (int y = 0; y < 16; y++)
-	{
-		for (int x = 0; x < 16; x++)
-		{
-			_testTileMap[x][y]->DInit();
-			delete _testTileMap[x][y];
-		}
+		_map->DInit();
+		delete _map;
+		_map = NULL;
 	}
 	RELEASE_COM(_sprite);
 	RELEASE_COM(_device3d);
@@ -135,48 +134,9 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	}
 
 	{
-		/*Sprite* sprite1 = new Sprite(L"character_sprite.png", L"char_sprite_01.json");
-		sprite1->Init();
-		_testSpriteList.push_back(sprite1);
-		Sprite* sprite2 = new Sprite(L"character_sprite.png", L"char_sprite_02.json");
-		sprite2->Init();
-		_testSpriteList.push_back(sprite2);
-		Sprite* sprite3 = new Sprite(L"character_sprite.png", L"char_sprite_03.json");
-		sprite3->Init();
-		_testSpriteList.push_back(sprite3);
-		Sprite* sprite4 = new Sprite(L"character_sprite.png", L"char_sprite_04.json");
-		sprite4->Init();
-		_testSpriteList.push_back(sprite4);*/
-		for (int y = 0; y < 16; y++)
-		{
-			for (int x = 0; x < 16; x++)
-			{
-				Sprite* sprite;
-				int randValue = rand() % 4;
-				switch (randValue)
-				{
-				case 0:
-					sprite = new Sprite(L"character_sprite.png", L"char_sprite_01.json");
-					break;
-				case 1:
-					sprite = new Sprite(L"character_sprite.png", L"char_sprite_02.json");
-					break;
-				case 2:
-					sprite = new Sprite(L"character_sprite.png", L"char_sprite_03.json");
-					break;
-				case 3:
-					sprite = new Sprite(L"character_sprite.png", L"char_sprite_04.json");
-					break;
-				default:
-					break;
-				}
-				sprite->Init();
-				_testTileMap[x][y] = sprite;
-			}
-		}
+		_map = new Map(L"tileMap");
+		_map->Init();
 	}
-	//_testSprite = new Sprite(L"character_sprite.png",L"jsonText.json");
-	//_testSprite->Init();
 	return true;
 }
 int GameSystem::Update()
@@ -202,19 +162,7 @@ int GameSystem::Update()
 			float deltaTime = _gameTimer->GetDeltaTime();
 			frameDuration += deltaTime;
 
-			//_testSpriteList[3]->Update(deltaTime);
-			/*for (int i = 0; i < _testSpriteList.size(); i++)
-			{
-				_testSpriteList[i]->Update(deltaTime);
-			}*/
-			//_testSprite->Update(deltaTime);
-			for (int y = 0; y < 16; y++)
-			{
-				for (int x = 0; x < 16; x++)
-				{
-					_testTileMap[x][y]->Update(deltaTime);
-				}
-			}
+			_map->Update(deltaTime);
 			if (frameTime <= frameDuration)
 			{
 				wchar_t timeCheck[256];
@@ -229,30 +177,8 @@ int GameSystem::Update()
 
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
-				//_testSpriteList[3]->Render();
-				/*for (int i = 0; i < _testSpriteList.size(); i++)
-				{
-					_testSpriteList[3]->Render();
-				}*/
-				//_testSprite->Render();
-				int tileSize = 32;
-				float startX = 0.0f + tileSize / 2;
-				float startY = 0.0f + tileSize / 2;
-				float posX = startX;
-				float posY = startY;
-				for (int y = 0; y < 16; y++)
-				{
-					for (int x = 0; x < 16; x++)
-					{
-						_testTileMap[x][y]->SetPosition(posX, posY);
-						_testTileMap[x][y]->Render();
-						posX += tileSize;
-					}
-					posX = startX;
-					posY += tileSize;
-
-				}
-				
+				_map->render();
+								
 				_sprite->End();
 
 				_device3d->EndScene();
@@ -343,32 +269,12 @@ void GameSystem::CheckDeviceLost()
 		}
 		else if (D3DERR_DEVICENOTRESET == hr)
 		{
-			/*for (int i = 0; i < _testSpriteList.size(); i++)
-			{
-				_testSpriteList[i]->Release();
-			}*/
-			//_testSprite->Release();
-			for (int y = 0; y < 16; y++)
-			{
-				for (int x = 0; x < 16; x++)
-				{
-					_testTileMap[x][y]->Release();
-				}
-			}
+			_map->Release();
+
 			hr = _device3d->Reset(&_d3dpp);
 			InitDirect3D();
-			/*for (int i = 0; i < _testSpriteList.size(); i++)
-			{
-				_testSpriteList[i]->Reset();
-			}*/
-			//_testSprite->Reset();
-			for (int y = 0; y < 16; y++)
-			{
-				for (int x = 0; x < 16; x++)
-				{
-					_testTileMap[x][y]->Reset();
-				}
-			}
+
+			_map->Reset();
 		}
 	}
 }
@@ -387,4 +293,8 @@ LPD3DXSPRITE GameSystem::GetSprite()
 LPDIRECT3DDEVICE9 GameSystem::GetDevice3d()
 {
 	return _device3d;
+}
+void GameSystem::MapScrollTest(float moveX, float moveY)
+{
+	_map->Scroll(moveX, moveY);
 }

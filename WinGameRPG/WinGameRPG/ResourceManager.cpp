@@ -26,3 +26,23 @@ Texture* ResourceManager::LoadTexture(const LPCWSTR textureFileName)
 	_textureMap[textureFileName] = texture;
 	return texture;
 }
+std::vector<std::string> ResourceManager::LoadScript(const LPCWSTR scriptFileName)
+{
+	map<LPCWSTR, vector<string>>::iterator it = _scriptMap.find(scriptFileName);
+	if (it != _scriptMap.end())
+	{
+		return it->second;
+	}
+	
+	vector<string> scriptTextList;
+	char record[1000];
+	ifstream infile(scriptFileName);
+	while (!infile.eof())
+	{
+		infile.getline(record,100);
+		scriptTextList.push_back(record);
+	}
+
+	_scriptMap[scriptFileName] = scriptTextList;
+	return scriptTextList;
+}
