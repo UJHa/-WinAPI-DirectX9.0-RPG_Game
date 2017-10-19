@@ -23,8 +23,6 @@ Sprite::~Sprite()
 }
 void Sprite::Init()
 {
-	/*_srcTexture = new Texture();
-	_srcTexture->Init(L"character_sprite.png");*/
 	_srcTexture = ResourceManager::GetInstance()->LoadTexture(_textureFileName);
 
 	//jsonTest
@@ -56,6 +54,15 @@ void Sprite::Init()
 			}
 		}
 	}
+	_currentFrame = 0;
+	_frameTime = 0.0f;
+}
+void Sprite::Init(int x, int y, int width, int height, float delay)
+{
+	_srcTexture = ResourceManager::GetInstance()->LoadTexture(_textureFileName);
+	Frame* frame = new Frame();
+	frame->Init(_srcTexture, x, y, width, height, delay);
+	_frameList.push_back(frame);
 	_currentFrame = 0;
 	_frameTime = 0.0f;
 }

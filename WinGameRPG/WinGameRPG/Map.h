@@ -1,17 +1,23 @@
 #pragma once
 #include<Windows.h>
-#define MAP_WIDTH 100
-#define MAP_HEIGHT 100
+#include<vector>
+//#define MAP_WIDTH 16
+//#define MAP_HEIGHT 16
 struct Sprite;
 class Map
 {
 private:
-	Sprite* _testTileMap[MAP_HEIGHT][MAP_WIDTH];
+	//Sprite* _tileMap[MAP_HEIGHT][MAP_WIDTH];
+	std::vector<std::vector<Sprite*>> _tileMap;
+	int _width;
+	int _height;
 
 	float _startX;
 	float _startY;
 	float _deltaX;
 	float _deltaY;
+
+	std::vector<Sprite*> _spriteList;
 public:
 	Map(LPCWSTR fileName);
 	~Map();

@@ -5,6 +5,7 @@ class Frame
 {
 private:
 	Texture* _texture;
+	LPD3DXSPRITE _sprite;
 
 	RECT _srcTextureRect;
 	D3DCOLOR _textureColor;

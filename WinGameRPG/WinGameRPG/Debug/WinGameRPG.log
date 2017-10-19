@@ -1,6 +1,15 @@
 ﻿  Map.cpp
 c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(7): warning C4099: 'Sprite': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
   c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(6): note: 'Sprite' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.cpp(65): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.cpp(93): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  GameSystem.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gametimer.h(3): warning C4099: 'GameTimer': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
+  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gametimer.h(2): note: 'GameTimer' 선언을 참조하십시오.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.h(8): warning C4099: 'Map': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
+  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.h(7): note: 'Map' 선언을 참조하십시오.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gamesystem.cpp(165): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)

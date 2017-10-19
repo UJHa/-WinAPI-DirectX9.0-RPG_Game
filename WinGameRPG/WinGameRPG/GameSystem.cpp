@@ -165,9 +165,9 @@ int GameSystem::Update()
 			_map->Update(deltaTime);
 			if (frameTime <= frameDuration)
 			{
-				wchar_t timeCheck[256];
+				/*wchar_t timeCheck[256];
 				swprintf(timeCheck, L"frameDuration %f\n", frameDuration);
-				OutputDebugString(timeCheck);
+				OutputDebugString(timeCheck);*/
 
 				frameDuration = 0.0f;
 

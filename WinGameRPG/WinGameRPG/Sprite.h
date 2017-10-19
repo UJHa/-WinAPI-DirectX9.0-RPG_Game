@@ -28,6 +28,7 @@ public:
 	~Sprite();
 
 	void Init();
+	void Init(int x, int y, int width, int height, float delay);
 	void DInit();
 	void Update(float deltaTime);
 	void Render();
