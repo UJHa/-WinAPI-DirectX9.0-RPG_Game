@@ -1,12 +1,5 @@
-﻿  Sprite.cpp
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\gamesystem.h(10): warning C4099: 'Sprite': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
-  c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\sprite.h(7): note: 'Sprite' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\frame.h(3): warning C4099: 'Texture': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\sprite.h(5): note: 'Texture' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\frame.h(5): warning C4099: 'Frame': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\frame.h(4): note: 'Frame' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\texture.h(4): warning C4099: 'Texture': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\texture.h(3): note: 'Texture' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\sprite.cpp(113): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+﻿  Map.cpp
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\sprite.h(7): warning C4099: 'Sprite': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
+  c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\sprite.h(6): note: 'Sprite' 선언을 참조하십시오.
   WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\git-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\WinGameRPG.exe
   WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\git-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)

@@ -17,14 +17,22 @@ private:
 	std::vector<Frame*> _frameList;
 	int _currentFrame;
 	float _frameTime;
+
+	LPCWSTR _textureFileName;
+	LPCWSTR _scriptFileName;
+
+	float _x;
+	float _y;
 public:
-	Sprite();
+	Sprite(LPCWSTR textureFileName, LPCWSTR scriptFileName);
 	~Sprite();
 
 	void Init();
+	void Init(int x, int y, int width, int height, float delay);
 	void DInit();
 	void Update(float deltaTime);
 	void Render();
 	void Release();
 	void Reset();
+	void SetPosition(float x, float y);
 };
