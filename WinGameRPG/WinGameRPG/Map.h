@@ -1,13 +1,10 @@
 #pragma once
 #include<Windows.h>
 #include<vector>
-//#define MAP_WIDTH 16
-//#define MAP_HEIGHT 16
 struct Sprite;
 class Map
 {
 private:
-	//Sprite* _tileMap[MAP_HEIGHT][MAP_WIDTH];
 	std::vector<std::vector<Sprite*>> _tileMap;
 	int _width;
 	int _height;
@@ -24,7 +21,7 @@ public:
 
 	void Init();
 	void DInit();
-	void Update(int deltaTime);
+	void Update(float deltaTime);
 	void render();
 	void Release();
 	void Reset();

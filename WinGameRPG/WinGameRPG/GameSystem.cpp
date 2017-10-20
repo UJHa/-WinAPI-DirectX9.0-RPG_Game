@@ -42,7 +42,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 GameSystem* GameSystem::_instance = NULL;
 GameSystem::GameSystem()
 {
-	_isFullScreen = false;
+	_isFullScreen = true;
 	if (_isFullScreen)
 	{
 		_WindowWidth = 1920;
