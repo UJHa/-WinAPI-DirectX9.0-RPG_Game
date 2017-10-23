@@ -1,8 +1,9 @@
 #pragma once
 #include<Windows.h>
 #include<vector>
+#include"Component.h"
 struct Sprite;
-class Map
+class Map : public Component
 {
 private:
 	std::vector<std::vector<Sprite*>> _tileMap;
@@ -16,13 +17,13 @@ private:
 
 	std::vector<Sprite*> _spriteList;
 public:
-	Map(LPCWSTR fileName);
+	Map(LPCWSTR name);
 	~Map();
 
 	void Init();
 	void DInit();
 	void Update(float deltaTime);
-	void render();
+	void Render();
 	void Release();
 	void Reset();
 	void Scroll(float moveX, float moveY);

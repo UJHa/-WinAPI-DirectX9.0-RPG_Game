@@ -1,7 +1,7 @@
 #include"Map.h"
 #include "Sprite.h"
 #include<fstream>
-Map::Map(LPCWSTR fileName)
+Map::Map(LPCWSTR name) : Component(name)
 {
 	_startX = _startY = _deltaX = _deltaY = 0.0f;
 
@@ -115,13 +115,13 @@ void Map::Update(float deltaTime)
 		}
 	}
 }
-void Map::render()
+void Map::Render()
 {
-	int tileSize = 32;
-	_startX += _deltaX;// +tileSize / 2;
-	_startY += _deltaY;// +tileSize / 2;
-	float posX = _startX + tileSize / 2;
-	float posY = _startY + tileSize / 2;
+	float tileSize = 32.0f;
+	_startX += _deltaX;
+	_startY += _deltaY;
+	float posX = _startX;
+	float posY = _startY;
 	for (int y = 0; y < _height; y++)
 	{
 		for (int x = 0; x < _width; x++)
@@ -130,7 +130,7 @@ void Map::render()
 			_tileMap[y][x]->Render();
 			posX += tileSize;
 		}
-		posX = _startX + tileSize / 2;
+		posX = _startX;
 		posY += tileSize;
 	}
 }

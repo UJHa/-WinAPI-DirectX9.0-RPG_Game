@@ -2,12 +2,15 @@
 #include <Windows.h>
 #include "GameTimer.h"
 #include "Map.h"
+#include "Character.h"
+#include "ComponentSystem.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
 	{
 	case WM_KEYDOWN:
 		if (VK_ESCAPE == wParam)
 		{
+			ComponentSystem::GetInstance()->RemoveAllComponents();
 			DestroyWindow(hWnd);
 		}
 		if (VK_UP == wParam)
@@ -42,7 +45,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 GameSystem* GameSystem::_instance = NULL;
 GameSystem::GameSystem()
 {
-	_isFullScreen = true;
+	_isFullScreen = false;
 	if (_isFullScreen)
 	{
 		_WindowWidth = 1920;
@@ -54,6 +57,7 @@ GameSystem::GameSystem()
 		_WindowHeight = 800;
 	}
 	_map = NULL;
+	_character = NULL;
 }
 GameSystem::~GameSystem()
 {
@@ -62,6 +66,12 @@ GameSystem::~GameSystem()
 		_map->DInit();
 		delete _map;
 		_map = NULL;
+	}
+	if (NULL != _character)
+	{
+		_character->DInit();
+		delete _character;
+		_character = NULL;
 	}
 	RELEASE_COM(_sprite);
 	RELEASE_COM(_device3d);
@@ -133,10 +143,12 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 		return false;
 	}
 
-	{
-		_map = new Map(L"tileMap");
-		_map->Init();
-	}
+	_map = new Map(L"tileMap");
+	_map->Init();
+
+	_character = new Character(L"testCharacter");
+	_character->Init();
+
 	return true;
 }
 int GameSystem::Update()
@@ -163,11 +175,9 @@ int GameSystem::Update()
 			frameDuration += deltaTime;
 
 			_map->Update(deltaTime);
+			_character->Update(deltaTime);
 			if (frameTime <= frameDuration)
 			{
-				/*wchar_t timeCheck[256];
-				swprintf(timeCheck, L"frameDuration %f\n", frameDuration);
-				OutputDebugString(timeCheck);*/
 
 				frameDuration = 0.0f;
 
@@ -177,7 +187,8 @@ int GameSystem::Update()
 
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
-				_map->render();
+				_map->Render();
+				_character->Render();
 								
 				_sprite->End();
 
@@ -270,11 +281,13 @@ void GameSystem::CheckDeviceLost()
 		else if (D3DERR_DEVICENOTRESET == hr)
 		{
 			_map->Release();
+			_character->Release();
 
 			hr = _device3d->Reset(&_d3dpp);
 			InitDirect3D();
 
 			_map->Reset();
+			_character->Reset();
 		}
 	}
 }
@@ -297,4 +310,5 @@ LPDIRECT3DDEVICE9 GameSystem::GetDevice3d()
 void GameSystem::MapScrollTest(float moveX, float moveY)
 {
 	_map->Scroll(moveX, moveY);
+	//_character->Scroll(moveX, moveY);
 }
