@@ -1,5 +1,17 @@
-﻿  ComponentSystem.cpp
+﻿  TileCell.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(7): warning C4099: 'Sprite': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
+  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(6): note: 'Sprite' 선언을 참조하십시오.
 c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(4): warning C4099: 'Component': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
   c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(3): note: 'Component' 선언을 참조하십시오.
+  GameSystem.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gametimer.h(3): warning C4099: 'GameTimer': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
+  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gametimer.h(2): note: 'GameTimer' 선언을 참조하십시오.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.h(7): warning C4099: 'Map': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
+  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.h(7): note: 'Map' 선언을 참조하십시오.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.h(5): warning C4099: 'Character': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
+  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.h(5): note: 'Character' 선언을 참조하십시오.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\componentsystem.h(6): warning C4099: 'Component': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(4): note: 'Component' 선언을 참조하십시오.
+  코드를 생성하고 있습니다...
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)

@@ -1,10 +1,11 @@
 #include"Map.h"
 #include "Sprite.h"
+#include"TileCell.h"
 #include<fstream>
 Map::Map(LPCWSTR name) : Component(name)
 {
 	_startX = _startY = _deltaX = _deltaY = 0.0f;
-
+	_tileSize = 32;
 	_spriteList.clear();
 }
 Map::~Map()
@@ -60,14 +61,16 @@ void Map::Init()
 				//map data read
 				if (NULL != token)
 				{
-					
-					std::vector<Sprite*> rowList;
+					//std::vector<Sprite*> rowList;
+					std::vector<TileCell*> rowList;
 					for (int x = 0; x < _width; x++)
 					{
 						index = atoi(token);
 
-						rowList.push_back(_spriteList[index]);
-
+						//rowList.push_back(_spriteList[index]);
+						TileCell* tileCell = new TileCell();
+						tileCell->SetSprite(_spriteList[index]);
+						rowList.push_back(tileCell);
 						token = strtok(NULL, ",");
 					}
 					_tileMap.push_back(rowList);
@@ -93,6 +96,22 @@ void Map::Init()
 	//	}
 	//	_tileMap.push_back(rowList);
 	//}
+
+	_startX += _deltaX;
+	_startY += _deltaY;
+	float posX = _startX;
+	float posY = _startY;
+	for (int y = 0; y < _height; y++)
+	{
+		for (int x = 0; x < _width; x++)
+		{
+			_tileMap[y][x]->SetPosition(posX, posY);
+			_tileMap[y][x]->Render();
+			posX += _tileSize;
+		}
+		posX = _startX;
+		posY += _tileSize;
+	}
 }
 void Map::DInit()
 {
@@ -117,7 +136,6 @@ void Map::Update(float deltaTime)
 }
 void Map::Render()
 {
-	float tileSize = 32.0f;
 	_startX += _deltaX;
 	_startY += _deltaY;
 	float posX = _startX;
@@ -128,10 +146,10 @@ void Map::Render()
 		{
 			_tileMap[y][x]->SetPosition(posX, posY);
 			_tileMap[y][x]->Render();
-			posX += tileSize;
+			posX += _tileSize;
 		}
 		posX = _startX;
-		posY += tileSize;
+		posY += _tileSize;
 	}
 }
 void Map::Release()
@@ -158,4 +176,18 @@ void Map::Scroll(float moveX, float moveY)
 {
 	_deltaX = moveX;
 	_deltaY = moveY;
+}
+int Map::GetPositionX(int tileX, int tileY)
+{
+	
+	return _tileMap[tileY][tileX]->GetPositionX();
+	
+}
+int Map::GetPositionY(int tileX, int tileY)
+{
+	return _tileMap[tileY][tileX]->GetPositionY();
+}
+void Map::setTileComponent(int tileX, int tileY, Component* component)
+{
+	_tileMap[tileY][tileX]->AddComponent(component);
 }

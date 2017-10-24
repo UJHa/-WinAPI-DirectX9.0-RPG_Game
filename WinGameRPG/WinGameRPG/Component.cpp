@@ -3,7 +3,7 @@
 Component::Component(LPCWSTR name)
 {
 	_name = name;
-	ComponentSystem::GetInstance()->AddComponent(name, this);
+	ComponentSystem::GetInstance()->AddComponent(_name, this);
 }
 
 Component::~Component()
