@@ -1,5 +1,4 @@
 #include "ComponentSystem.h"
-#include<stdio.h>
 #include"Component.h"
 ComponentSystem* ComponentSystem::_instance = NULL;
 ComponentSystem::ComponentSystem()

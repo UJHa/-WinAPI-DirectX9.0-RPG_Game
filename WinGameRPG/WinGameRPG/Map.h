@@ -4,11 +4,11 @@
 #include"Component.h"
 struct Sprite;
 struct TileCell;
+using namespace std;
 class Map : public Component
 {
 private:
-	//std::vector<std::vector<Sprite*>> _tileMap;
-	std::vector<std::vector<TileCell*>> _tileMap;
+	vector<vector<TileCell*>> _tileMap;
 	int _width;
 	int _height;
 
@@ -19,7 +19,7 @@ private:
 
 	int _tileSize;
 
-	std::vector<Sprite*> _spriteList;
+	vector<Sprite*> _spriteList;
 public:
 	Map(LPCWSTR name);
 	~Map();
@@ -35,4 +35,5 @@ public:
 	int GetPositionX(int tileX, int tileY);
 	int GetPositionY(int tileX, int tileY);
 	void setTileComponent(int tileX, int tileY, Component* component);
+	void ResetTileComponent(int tileX, int tileY, Component* component);
 };
