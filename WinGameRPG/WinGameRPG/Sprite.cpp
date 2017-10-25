@@ -42,14 +42,14 @@ void Sprite::Init()
 			if (isSuccess)
 			{
 				std::string texture = root["texture"].asString();
-				int x = root["x"].asInt();
-				int y = root["y"].asInt();
-				int width = root["width"].asInt();
-				int height = root["height"].asInt();
-				double delay = root["frameDelay"].asDouble();
+				_initX = root["x"].asInt();
+				_initY = root["y"].asInt();
+				_width = root["width"].asInt();
+				_height = root["height"].asInt();
+				_delay = root["frameDelay"].asDouble();
 
 				Frame* frame = new Frame();
-				frame->Init(_srcTexture, x, y, width, height, delay);
+				frame->Init(_srcTexture, _initX, _initY, _width, _height, _delay);
 				_frameList.push_back(frame);
 			}
 		}
@@ -109,7 +109,7 @@ void Sprite::Reset()
 	for (std::vector<Frame*>::iterator it = _frameList.begin(); it != _frameList.end(); it++)
 	{
 		Frame* frame = *it;
-		frame->Reset();
+		frame->Reset(_srcTexture, _initX, _initY, _width, _height, _delay);
 	}
 }
 void Sprite::SetPosition(float x, float y)

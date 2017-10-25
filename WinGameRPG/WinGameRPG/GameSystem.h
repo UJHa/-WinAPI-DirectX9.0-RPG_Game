@@ -7,11 +7,9 @@
 #define RELEASE_COM(x) {if(x){x->Release();x=NULL;}}
 #define SAVE_DELETE(x) {if(x){delete x;x=NULL;}}
 
-//#define MAP_WIDTH 100
-//#define MAP_HEIGHT 100
 struct GameTimer;
-//struct Sprite;
 struct Map;
+struct Character;
 class GameSystem
 {
 private:
@@ -45,6 +43,7 @@ private:
 	float _deltaX;
 	float _deltaY;*/
 	Map* _map;
+	Character* _character;
 
 //get Method
 public:

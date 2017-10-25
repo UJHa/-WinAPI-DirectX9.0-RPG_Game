@@ -1,10 +1,11 @@
 #include"Map.h"
 #include "Sprite.h"
+#include"TileCell.h"
 #include<fstream>
-Map::Map(LPCWSTR fileName)
+Map::Map(LPCWSTR name) : Component(name)
 {
 	_startX = _startY = _deltaX = _deltaY = 0.0f;
-
+	_tileSize = 32;
 	_spriteList.clear();
 }
 Map::~Map()
@@ -32,17 +33,15 @@ void Map::Init()
 	}
 
 	int index = 0;
-	/*_width = 16;
-	_height = 16;*/
 	{
 		//Load Script
-		char record[1000];
+		char record[1024];
 		int line = 0;
 
-		std::ifstream infile("MapData.csv");
+		ifstream infile("MapData.csv");
 		while (!infile.eof())
 		{
-			infile.getline(record, 100);
+			infile.getline(record, 1024);
 
 			char* token = strtok(record, ",");
 			switch (line)
@@ -60,50 +59,41 @@ void Map::Init()
 				break;
 			default:
 				//map data read
+				if (NULL != token)
+				{
+					vector<TileCell*> rowList;
+					for (int x = 0; x < _width; x++)
+					{
+						index = atoi(token);
+
+						TileCell* tileCell = new TileCell();
+						tileCell->SetSprite(_spriteList[index]);
+						rowList.push_back(tileCell);
+						token = strtok(NULL, ",");
+					}
+					_tileMap.push_back(rowList);
+				}
 				break;
 			}
 			line++;
 		}
 	}
+
+	_startX += _deltaX;
+	_startY += _deltaY;
+	float posX = _startX;
+	float posY = _startY;
 	for (int y = 0; y < _height; y++)
 	{
-		std::vector<Sprite*> rowList;
 		for (int x = 0; x < _width; x++)
 		{
-			rowList.push_back(_spriteList[index]);
-			//int randValue = rand() % _spriteList.size();
-			//_tileMap[y][x] = _spriteList[index];
-			index++;
+			_tileMap[y][x]->SetPosition(posX, posY);
+			//_tileMap[y][x]->Render();
+			posX += _tileSize;
 		}
-		_tileMap.push_back(rowList);
+		posX = _startX;
+		posY += _tileSize;
 	}
-	/*for (int y = 0; y < MAP_HEIGHT; y++)
-	{
-	for (int x = 0; x < MAP_WIDTH; x++)
-	{
-	Sprite* sprite;
-	int randValue = rand() % 4;
-	switch (randValue)
-	{
-	case 0:
-	sprite = new Sprite(L"character_sprite.png", L"char_sprite_01.json");
-	break;
-	case 1:
-	sprite = new Sprite(L"character_sprite.png", L"char_sprite_02.json");
-	break;
-	case 2:
-	sprite = new Sprite(L"character_sprite.png", L"char_sprite_03.json");
-	break;
-	case 3:
-	sprite = new Sprite(L"character_sprite.png", L"char_sprite_04.json");
-	break;
-	default:
-	break;
-	}
-	sprite->Init();
-	_tileMap[y][x] = sprite;
-	}
-	}*/
 }
 void Map::DInit()
 {
@@ -116,7 +106,7 @@ void Map::DInit()
 		}
 	}
 }
-void Map::Update(int deltaTime)
+void Map::Update(float deltaTime)
 {
 	for (int y = 0; y < _height; y++)
 	{
@@ -126,11 +116,10 @@ void Map::Update(int deltaTime)
 		}
 	}
 }
-void Map::render()
+void Map::Render()
 {
-	int tileSize = 32;
-	_startX += _deltaX;// +tileSize / 2;
-	_startY += _deltaY;// +tileSize / 2;
+	_startX += _deltaX;
+	_startY += _deltaY;
 	float posX = _startX;
 	float posY = _startY;
 	for (int y = 0; y < _height; y++)
@@ -139,10 +128,10 @@ void Map::render()
 		{
 			_tileMap[y][x]->SetPosition(posX, posY);
 			_tileMap[y][x]->Render();
-			posX += tileSize;
+			posX += _tileSize;
 		}
 		posX = _startX;
-		posY += tileSize;
+		posY += _tileSize;
 	}
 }
 void Map::Release()
@@ -169,4 +158,22 @@ void Map::Scroll(float moveX, float moveY)
 {
 	_deltaX = moveX;
 	_deltaY = moveY;
+}
+int Map::GetPositionX(int tileX, int tileY)
+{
+	
+	return _tileMap[tileY][tileX]->GetPositionX();
+	
+}
+int Map::GetPositionY(int tileX, int tileY)
+{
+	return _tileMap[tileY][tileX]->GetPositionY();
+}
+void Map::setTileComponent(int tileX, int tileY, Component* component)
+{
+	_tileMap[tileY][tileX]->AddComponent(component);
+}
+void Map::ResetTileComponent(int tileX, int tileY, Component* component)
+{
+	_tileMap[tileY][tileX]->RemoveComponent(component);
 }

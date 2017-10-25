@@ -1,5 +1,4 @@
 #include"ResourceManager.h"
-#include<stdio.h>
 ResourceManager* ResourceManager::_instance = NULL;
 ResourceManager* ResourceManager::GetInstance()
 {
@@ -15,7 +14,7 @@ ResourceManager::~ResourceManager()
 }
 Texture* ResourceManager::LoadTexture(const LPCWSTR textureFileName)
 {
-	std::map<LPCWSTR, Texture*>::iterator it = _textureMap.find(textureFileName);
+	map<LPCWSTR, Texture*>::iterator it = _textureMap.find(textureFileName);
 	if (it != _textureMap.end())
 	{
 		return it->second;
@@ -26,7 +25,7 @@ Texture* ResourceManager::LoadTexture(const LPCWSTR textureFileName)
 	_textureMap[textureFileName] = texture;
 	return texture;
 }
-std::vector<std::string> ResourceManager::LoadScript(const LPCWSTR scriptFileName)
+vector<string> ResourceManager::LoadScript(const LPCWSTR scriptFileName)
 {
 	map<LPCWSTR, vector<string>>::iterator it = _scriptMap.find(scriptFileName);
 	if (it != _scriptMap.end())

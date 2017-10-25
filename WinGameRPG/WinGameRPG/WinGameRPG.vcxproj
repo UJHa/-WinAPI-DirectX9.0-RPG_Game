@@ -142,6 +142,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GameTimer.cpp" />
@@ -150,8 +153,12 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TileCell.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
+    <ClInclude Include="Component.h" />
+    <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameTimer.h" />
@@ -159,6 +166,7 @@
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TileCell.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

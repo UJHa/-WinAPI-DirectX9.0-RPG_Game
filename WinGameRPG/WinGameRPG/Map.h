@@ -1,14 +1,14 @@
 #pragma once
 #include<Windows.h>
 #include<vector>
-//#define MAP_WIDTH 16
-//#define MAP_HEIGHT 16
+#include"Component.h"
 struct Sprite;
-class Map
+struct TileCell;
+using namespace std;
+class Map : public Component
 {
 private:
-	//Sprite* _tileMap[MAP_HEIGHT][MAP_WIDTH];
-	std::vector<std::vector<Sprite*>> _tileMap;
+	vector<vector<TileCell*>> _tileMap;
 	int _width;
 	int _height;
 
@@ -17,16 +17,23 @@ private:
 	float _deltaX;
 	float _deltaY;
 
-	std::vector<Sprite*> _spriteList;
+	int _tileSize;
+
+	vector<Sprite*> _spriteList;
 public:
-	Map(LPCWSTR fileName);
+	Map(LPCWSTR name);
 	~Map();
 
 	void Init();
 	void DInit();
-	void Update(int deltaTime);
-	void render();
+	void Update(float deltaTime);
+	void Render();
 	void Release();
 	void Reset();
 	void Scroll(float moveX, float moveY);
+
+	int GetPositionX(int tileX, int tileY);
+	int GetPositionY(int tileX, int tileY);
+	void setTileComponent(int tileX, int tileY, Component* component);
+	void ResetTileComponent(int tileX, int tileY, Component* component);
 };

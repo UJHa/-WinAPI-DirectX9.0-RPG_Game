@@ -51,11 +51,11 @@ void Frame::Render()
 }
 void Frame::Release()
 {
-
+	RELEASE_COM(_texture);
 }
-void Frame::Reset()
+void Frame::Reset(Texture* texture, int left, int top, int width, int height, float frameDelay)
 {
-
+	Init(texture,left,top, width, height, frameDelay);
 }
 float Frame::GetFrameDelay()
 {

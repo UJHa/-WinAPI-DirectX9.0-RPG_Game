@@ -24,7 +24,7 @@ public:
 	void DInit();
 	void Render();
 	void Release();
-	void Reset();
+	void Reset(Texture* texture, int left, int top, int width, int height, float frameDelay);
 	float GetFrameDelay();
 	void SetPosition(float x, float y);
 };

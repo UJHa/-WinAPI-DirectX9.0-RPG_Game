@@ -21,6 +21,12 @@ private:
 	LPCWSTR _textureFileName;
 	LPCWSTR _scriptFileName;
 
+	int _initX;
+	int _initY;
+	int _width;
+	int _height;
+	double _delay;
+
 	float _x;
 	float _y;
 public:
