@@ -38,7 +38,7 @@ void Map::Init()
 		char record[1024];
 		int line = 0;
 
-		std::ifstream infile("MapData.csv");
+		ifstream infile("MapData.csv");
 		while (!infile.eof())
 		{
 			infile.getline(record, 1024);
@@ -61,13 +61,11 @@ void Map::Init()
 				//map data read
 				if (NULL != token)
 				{
-					//std::vector<Sprite*> rowList;
-					std::vector<TileCell*> rowList;
+					vector<TileCell*> rowList;
 					for (int x = 0; x < _width; x++)
 					{
 						index = atoi(token);
 
-						//rowList.push_back(_spriteList[index]);
 						TileCell* tileCell = new TileCell();
 						tileCell->SetSprite(_spriteList[index]);
 						rowList.push_back(tileCell);
@@ -81,22 +79,6 @@ void Map::Init()
 		}
 	}
 
-	//all map Sprite
-	//_width = 16;
-	//_height = 16;
-	//for (int y = 0; y < _height; y++)
-	//{
-	//	std::vector<Sprite*> rowList;
-	//	for (int x = 0; x < _width; x++)
-	//	{
-	//		rowList.push_back(_spriteList[index]);
-	//		//int randValue = rand() % _spriteList.size();
-	//		//_tileMap[y][x] = _spriteList[index];
-	//		index++;
-	//	}
-	//	_tileMap.push_back(rowList);
-	//}
-
 	_startX += _deltaX;
 	_startY += _deltaY;
 	float posX = _startX;
@@ -106,7 +88,7 @@ void Map::Init()
 		for (int x = 0; x < _width; x++)
 		{
 			_tileMap[y][x]->SetPosition(posX, posY);
-			_tileMap[y][x]->Render();
+			//_tileMap[y][x]->Render();
 			posX += _tileSize;
 		}
 		posX = _startX;
@@ -190,4 +172,8 @@ int Map::GetPositionY(int tileX, int tileY)
 void Map::setTileComponent(int tileX, int tileY, Component* component)
 {
 	_tileMap[tileY][tileX]->AddComponent(component);
+}
+void Map::ResetTileComponent(int tileX, int tileY, Component* component)
+{
+	_tileMap[tileY][tileX]->RemoveComponent(component);
 }
