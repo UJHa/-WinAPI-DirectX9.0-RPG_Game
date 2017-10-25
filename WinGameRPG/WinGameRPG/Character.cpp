@@ -14,13 +14,13 @@ Character::~Character()
 void Character::Init()
 {
 	InitMove();
-	WCHAR textureFileName[256];
-	WCHAR scriptFileName[256];
 	/*wsprintf(textureFileName, L"%s.png", _name);
 	wsprintf(scriptFileName, L"%s.json", _name);
 	_sprite = new Sprite(textureFileName, scriptFileName);
 	_sprite->Init();*/
 	{
+		WCHAR textureFileName[256];
+		WCHAR scriptFileName[256];
 		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_left.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
@@ -28,6 +28,8 @@ void Character::Init()
 		_spriteList.push_back(sprite);
 	}
 	{
+		WCHAR textureFileName[256];
+		WCHAR scriptFileName[256];
 		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_right.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
@@ -35,6 +37,8 @@ void Character::Init()
 		_spriteList.push_back(sprite);
 	}
 	{
+		WCHAR textureFileName[256];
+		WCHAR scriptFileName[256];
 		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_up.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
@@ -42,6 +46,8 @@ void Character::Init()
 		_spriteList.push_back(sprite);
 	}
 	{
+		WCHAR textureFileName[256];
+		WCHAR scriptFileName[256];
 		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_down.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
@@ -74,6 +80,9 @@ void Character::DInit()
 void Character::Update(float deltaTime)
 {
 	_spriteList[(int)_currentDirection]->Update(deltaTime);
+	wchar_t directionCheck[256];
+	swprintf(directionCheck,L"_currentDirection %d\n", (int)_currentDirection);
+	OutputDebugString(directionCheck);
 
 	UpdateAI();
 	UpdateMove(deltaTime);
