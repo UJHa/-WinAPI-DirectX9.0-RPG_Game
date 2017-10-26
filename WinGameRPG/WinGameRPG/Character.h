@@ -27,7 +27,9 @@ public:
 	void Render();
 	void Release();
 	void Reset();
-
+	// transform
+public:
+	void MoveDeltaPosition(float deltaX, float deltaY);
 	//AI
 public:
 	void UpdateAI();
@@ -41,6 +43,10 @@ private:
 	float _moveTime;
 	float _movingDuration;
 	eDirection _currentDirection;
+	float _targetX;
+	float _targetY;
+	float _moveDistancePerTimeX;
+	float _moveDistancePerTimeY;
 public:
 	void InitMove();
 	void MoveStart(eDirection direction);

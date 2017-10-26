@@ -17,10 +17,10 @@ public:
 	~ResourceManager();
 
 private:
-	map<LPCWSTR, Texture*> _textureMap;
-	map<LPCWSTR, vector<string>> _scriptMap;
+	map<wstring, Texture*> _textureMap;
+	map<wstring, vector<string>> _scriptMap;
 public:
-	Texture* LoadTexture(const LPCWSTR textureFileName);
-	vector<string> LoadScript(const LPCWSTR scriptFileName);
+	Texture* LoadTexture(const wstring textureFileName);
+	vector<string> LoadScript(const wstring scriptFileName);
 
 };

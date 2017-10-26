@@ -118,7 +118,7 @@ void Map::Update(float deltaTime)
 }
 void Map::Render()
 {
-	_startX += _deltaX;
+	/*_startX += _deltaX;
 	_startY += _deltaY;
 	float posX = _startX;
 	float posY = _startY;
@@ -132,6 +132,14 @@ void Map::Render()
 		}
 		posX = _startX;
 		posY += _tileSize;
+	}*/
+	for (int y = 0; y < _height; y++)
+	{
+		for (int x = 0; x < _width; x++)
+		{
+			_tileMap[y][x]->MoveDeltaPosition(_deltaX, _deltaY);
+			_tileMap[y][x]->Render();
+		}
 	}
 }
 void Map::Release()
@@ -161,17 +169,15 @@ void Map::Scroll(float moveX, float moveY)
 }
 int Map::GetPositionX(int tileX, int tileY)
 {
-	
 	return _tileMap[tileY][tileX]->GetPositionX();
-	
 }
 int Map::GetPositionY(int tileX, int tileY)
 {
 	return _tileMap[tileY][tileX]->GetPositionY();
 }
-void Map::setTileComponent(int tileX, int tileY, Component* component)
+void Map::setTileComponent(int tileX, int tileY, Component* component, bool isRender)
 {
-	_tileMap[tileY][tileX]->AddComponent(component);
+	_tileMap[tileY][tileX]->AddComponent(component, isRender);
 }
 void Map::ResetTileComponent(int tileX, int tileY, Component* component)
 {
