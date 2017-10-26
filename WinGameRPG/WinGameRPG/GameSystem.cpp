@@ -310,5 +310,4 @@ LPDIRECT3DDEVICE9 GameSystem::GetDevice3d()
 void GameSystem::MapScrollTest(float moveX, float moveY)
 {
 	_map->Scroll(moveX, moveY);
-	//_character->Scroll(moveX, moveY);
 }
