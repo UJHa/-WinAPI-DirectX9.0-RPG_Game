@@ -1,76 +1,21 @@
-﻿  TileCell.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(7): warning C4099: 'Sprite': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(6): note: 'Sprite' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(4): warning C4099: 'Component': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(3): note: 'Component' 선언을 참조하십시오.
-  Sprite.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\frame.h(3): warning C4099: 'Texture': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(5): note: 'Texture' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\frame.h(5): warning C4099: 'Frame': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\frame.h(4): note: 'Frame' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\texture.h(4): warning C4099: 'Texture': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\texture.h(3): note: 'Texture' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.cpp(35): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.cpp(52): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.cpp(91): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.cpp(112): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Map.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(7): warning C4099: 'Sprite': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(6): note: 'Sprite' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\tilecell.h(2): warning C4099: 'Sprite': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(7): note: 'Sprite' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\tilecell.h(4): warning C4099: 'Component': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(4): note: 'Component' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\tilecell.h(6): warning C4099: 'TileCell': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\tilecell.h(5): note: 'TileCell' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.cpp(46): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.cpp(52): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.cpp(54): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.cpp(72): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.cpp(165): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.cpp(170): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  GameSystem.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gametimer.h(3): warning C4099: 'GameTimer': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\gametimer.h(2): note: 'GameTimer' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.h(8): warning C4099: 'Map': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.h(8): note: 'Map' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.h(6): warning C4099: 'Character': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.h(6): note: 'Character' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\componentsystem.h(6): warning C4099: 'Component': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(4): note: 'Component' 선언을 참조하십시오.
-  ComponentSystem.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(4): warning C4099: 'Component': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(3): note: 'Component' 선언을 참조하십시오.
-  Component.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\componentsystem.h(6): warning C4099: 'Component': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(4): note: 'Component' 선언을 참조하십시오.
-  Character.cpp
+﻿  Character.cpp
 c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(7): warning C4099: 'Sprite': 처음에는 'struct'을(를) 사용하여 형식 이름을 표시했는데 이제는 'class'을(를) 사용하여 표시합니다.
   c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(6): note: 'Sprite' 선언을 참조하십시오.
 c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\componentsystem.h(6): warning C4099: 'Component': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
   c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(4): note: 'Component' 선언을 참조하십시오.
 c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.h(5): warning C4099: 'Sprite': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
   c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\sprite.h(7): note: 'Sprite' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(61): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(62): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(68): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(84): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\corecrt_wstdio.h(1822): note: 'swprintf' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(97): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(104): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(159): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(160): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(56): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(57): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(63): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(88): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(95): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(168): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(169): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
   건너뛰고 있습니다... (관련된 변경 내용 없음)
   main.cpp
-  Texture.cpp
-  ResourceManager.cpp
   GameTimer.cpp
   Frame.cpp
-  LINK : C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)

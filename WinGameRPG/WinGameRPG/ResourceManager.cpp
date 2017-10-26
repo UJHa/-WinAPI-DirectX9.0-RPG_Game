@@ -12,22 +12,22 @@ ResourceManager::ResourceManager()
 ResourceManager::~ResourceManager()
 {
 }
-Texture* ResourceManager::LoadTexture(const LPCWSTR textureFileName)
+Texture* ResourceManager::LoadTexture(const wstring textureFileName)
 {
-	map<LPCWSTR, Texture*>::iterator it = _textureMap.find(textureFileName);
+	map<wstring, Texture*>::iterator it = _textureMap.find(textureFileName);
 	if (it != _textureMap.end())
 	{
 		return it->second;
 	}
 	Texture* texture = new Texture();
-	texture->Init(textureFileName);
+	texture->Init(textureFileName.c_str());
 
 	_textureMap[textureFileName] = texture;
 	return texture;
 }
-vector<string> ResourceManager::LoadScript(const LPCWSTR scriptFileName)
+vector<string> ResourceManager::LoadScript(const wstring scriptFileName)
 {
-	map<LPCWSTR, vector<string>>::iterator it = _scriptMap.find(scriptFileName);
+	map<wstring, vector<string>>::iterator it = _scriptMap.find(scriptFileName);
 	if (it != _scriptMap.end())
 	{
 		return it->second;

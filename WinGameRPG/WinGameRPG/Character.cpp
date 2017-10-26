@@ -18,9 +18,9 @@ void Character::Init()
 	wsprintf(scriptFileName, L"%s.json", _name);
 	_sprite = new Sprite(textureFileName, scriptFileName);
 	_sprite->Init();*/
+	WCHAR textureFileName[256];
+	WCHAR scriptFileName[256];
 	{
-		WCHAR textureFileName[256];
-		WCHAR scriptFileName[256];
 		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_left.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
@@ -28,8 +28,6 @@ void Character::Init()
 		_spriteList.push_back(sprite);
 	}
 	{
-		WCHAR textureFileName[256];
-		WCHAR scriptFileName[256];
 		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_right.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
@@ -37,8 +35,6 @@ void Character::Init()
 		_spriteList.push_back(sprite);
 	}
 	{
-		WCHAR textureFileName[256];
-		WCHAR scriptFileName[256];
 		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_up.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
@@ -46,21 +42,20 @@ void Character::Init()
 		_spriteList.push_back(sprite);
 	}
 	{
-		WCHAR textureFileName[256];
-		WCHAR scriptFileName[256];
 		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_down.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
 		sprite->Init();
 		_spriteList.push_back(sprite);
 	}
+
 	{
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		_tileX = 7;
 		_tileY = 5;
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
-		map->setTileComponent(_tileX, _tileY, this);
+		map->setTileComponent(_tileX, _tileY, this, false);
 	}
 }
 void Character::DInit()
@@ -80,10 +75,6 @@ void Character::DInit()
 void Character::Update(float deltaTime)
 {
 	_spriteList[(int)_currentDirection]->Update(deltaTime);
-	wchar_t directionCheck[256];
-	swprintf(directionCheck,L"_currentDirection %d\n", (int)_currentDirection);
-	OutputDebugString(directionCheck);
-
 	UpdateAI();
 	UpdateMove(deltaTime);
 }
@@ -106,6 +97,12 @@ void Character::Reset()
 		_spriteList[i]->Reset();
 	}
 }
+void Character::MoveDeltaPosition(float deltaX, float deltaY)
+{
+	_x += deltaX;
+	_y += deltaY;
+}
+
 void Character::UpdateAI()
 {
 	if (false == _isMoving)
@@ -120,6 +117,10 @@ void Character::InitMove()
 	_isMoving = false;
 	_moveTime = 1.0f;
 	_movingDuration = 0.0f;
+	_targetX = 0.0f;
+	_targetY = 0.0f;
+	_moveDistancePerTimeX = 0.0f;
+	_moveDistancePerTimeY = 0.0f;
 }
 void Character::MoveStart(eDirection direction)
 {
@@ -128,7 +129,7 @@ void Character::MoveStart(eDirection direction)
 		return;
 	Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 	map->ResetTileComponent(_tileX, _tileY, this);
-
+	
 	switch (direction)
 	{
 	case eDirection::LEFT:
@@ -156,9 +157,24 @@ void Character::MoveStart(eDirection direction)
 			_tileY = 10;
 		break;
 	}
-	_x = map->GetPositionX(_tileX, _tileY);
+	/*_x = map->GetPositionX(_tileX, _tileY);
 	_y = map->GetPositionY(_tileX, _tileY);
-	map->setTileComponent(_tileX, _tileY, this);
+	map->setTileComponent(_tileX, _tileY, this);*/
+	{
+		//자연스러운 이동 보간
+		map->setTileComponent(_tileX, _tileY, this, true);
+
+		//이동거리
+		_targetX = map->GetPositionX(_tileX, _tileY);
+		_targetY = map->GetPositionY(_tileX, _tileY);
+
+		float distanceX = _targetX - _x;
+		float distanceY = _targetY - _y;
+
+		//최소 이동거리
+		_moveDistancePerTimeX = distanceX / _moveTime;
+		_moveDistancePerTimeY = distanceY / _moveTime;
+	}
 	_isMoving = true;
 }
 void Character::UpdateMove(float deltaTime)
@@ -169,9 +185,17 @@ void Character::UpdateMove(float deltaTime)
 	{
 		_movingDuration = 0.0f;
 		_isMoving = false;
+		_x = _targetX;
+		_y = _targetY;
 	}
 	else
 	{
 		_movingDuration += deltaTime;
+
+		float moveDistanceX = _moveDistancePerTimeX * deltaTime;
+		float moveDistanceY = _moveDistancePerTimeY * deltaTime;
+
+		_x += moveDistanceX;
+		_y += moveDistanceY;
 	}
 }

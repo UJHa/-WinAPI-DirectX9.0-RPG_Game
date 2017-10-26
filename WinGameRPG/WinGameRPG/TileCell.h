@@ -7,6 +7,7 @@ class TileCell
 private:
 	Sprite* _sprite;
 	std::list<Component*> _componentList;
+	std::list<Component*> _renderList;
 	float _posX;
 	float _posY;
 public:
@@ -22,6 +23,7 @@ public:
 	float GetPositionX();
 	float GetPositionY();
 	void SetSprite(Sprite* sprite);
-	void AddComponent(Component* component);
+	void AddComponent(Component* component, bool isRender);
 	void RemoveComponent(Component* component);
+	void MoveDeltaPosition(float _deltaX, float  _deltaY);
 };

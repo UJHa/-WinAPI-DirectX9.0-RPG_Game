@@ -188,7 +188,7 @@ int GameSystem::Update()
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 				_map->Render();
-				//_character->Render();
+				_character->Render();
 								
 				_sprite->End();
 
