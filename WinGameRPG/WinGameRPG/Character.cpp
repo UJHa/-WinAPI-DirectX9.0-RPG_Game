@@ -91,15 +91,6 @@ void Character::MoveDeltaPosition(float deltaX, float deltaY)
 	_x += deltaX;
 	_y += deltaY;
 }
-
-void Character::UpdateAI()
-{
-	if (false == _isMoving)
-	{
-		int direction = rand() % 4;
-		MoveStart((eDirection)direction);
-	}
-}
 void Character::InitMove()
 {
 	_currentDirection = eDirection::DOWN;

@@ -1,4 +1,0 @@
-[
-{"texture":"character_sprite.png","x":0,"y":64,"width":32,"height":32,"frameDelay":0.2},
-{"texture":"character_sprite.png","x":64,"y":64,"width":32,"height":32,"frameDelay":0.2}
-]

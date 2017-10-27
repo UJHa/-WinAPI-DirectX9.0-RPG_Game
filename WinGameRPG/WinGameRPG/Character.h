@@ -31,14 +31,15 @@ public:
 	void MoveDeltaPosition(float deltaX, float deltaY);
 	//AI
 public:
-	void UpdateAI();
+	virtual void UpdateAI() = 0;
 	//Move
 public:
 	enum eDirection {
 		LEFT,RIGHT,UP,DOWN
 	};
-private:
+protected:
 	bool _isMoving;
+private:
 	float _moveTime;
 	float _movingDuration;
 	eDirection _currentDirection;
