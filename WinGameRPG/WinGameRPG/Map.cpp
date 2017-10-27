@@ -88,7 +88,7 @@ void Map::Init()
 		for (int x = 0; x < _width; x++)
 		{
 			_tileMap[y][x]->SetPosition(posX, posY);
-			//_tileMap[y][x]->Render();
+			_tileMap[y][x]->Render();
 			posX += _tileSize;
 		}
 		posX = _startX;
@@ -118,21 +118,6 @@ void Map::Update(float deltaTime)
 }
 void Map::Render()
 {
-	/*_startX += _deltaX;
-	_startY += _deltaY;
-	float posX = _startX;
-	float posY = _startY;
-	for (int y = 0; y < _height; y++)
-	{
-		for (int x = 0; x < _width; x++)
-		{
-			_tileMap[y][x]->SetPosition(posX, posY);
-			_tileMap[y][x]->Render();
-			posX += _tileSize;
-		}
-		posX = _startX;
-		posY += _tileSize;
-	}*/
 	for (int y = 0; y < _height; y++)
 	{
 		for (int x = 0; x < _width; x++)

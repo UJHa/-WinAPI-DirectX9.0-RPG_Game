@@ -5,7 +5,6 @@
 Character::Character(LPCWSTR name) : Component(name)
 {
 	_spriteList.clear();
-	//_sprite = NULL;
 }
 
 Character::~Character()
@@ -14,10 +13,6 @@ Character::~Character()
 void Character::Init()
 {
 	InitMove();
-	/*wsprintf(textureFileName, L"%s.png", _name);
-	wsprintf(scriptFileName, L"%s.json", _name);
-	_sprite = new Sprite(textureFileName, scriptFileName);
-	_sprite->Init();*/
 	WCHAR textureFileName[256];
 	WCHAR scriptFileName[256];
 	{
@@ -51,8 +46,8 @@ void Character::Init()
 
 	{
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
-		_tileX = 7;
-		_tileY = 5;
+		_tileX = 20;
+		_tileY = 20;
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
 		map->setTileComponent(_tileX, _tileY, this, false);
@@ -65,12 +60,6 @@ void Character::DInit()
 		_spriteList[i]->DInit();
 		delete _spriteList[i];
 	}
-	/*if (NULL != _sprite)
-	{
-		_sprite->DInit();
-		delete _sprite;
-		_sprite = NULL;
-	}*/
 }
 void Character::Update(float deltaTime)
 {
@@ -121,6 +110,8 @@ void Character::InitMove()
 	_targetY = 0.0f;
 	_moveDistancePerTimeX = 0.0f;
 	_moveDistancePerTimeY = 0.0f;
+
+	_deltaX = _deltaY = 0.0f;
 }
 void Character::MoveStart(eDirection direction)
 {
@@ -129,6 +120,8 @@ void Character::MoveStart(eDirection direction)
 		return;
 	Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 	map->ResetTileComponent(_tileX, _tileY, this);
+	_x = map->GetPositionX(_tileX, _tileY);
+	_y = map->GetPositionY(_tileX, _tileY);
 	
 	switch (direction)
 	{
@@ -141,8 +134,8 @@ void Character::MoveStart(eDirection direction)
 	case eDirection::RIGHT:
 		//Right
 		_tileX++;
-		if (10 < _tileX)
-			_tileX = 10;
+		if (49 < _tileX)
+			_tileX = 49;
 		break;
 	case eDirection::UP:
 		//Up
@@ -153,13 +146,10 @@ void Character::MoveStart(eDirection direction)
 	case eDirection::DOWN:
 		//Down
 		_tileY++;
-		if (10 < _tileY)
-			_tileY = 10;
+		if (29 < _tileY)
+			_tileY = 29;
 		break;
 	}
-	/*_x = map->GetPositionX(_tileX, _tileY);
-	_y = map->GetPositionY(_tileX, _tileY);
-	map->setTileComponent(_tileX, _tileY, this);*/
 	{
 		//자연스러운 이동 보간
 		map->setTileComponent(_tileX, _tileY, this, true);

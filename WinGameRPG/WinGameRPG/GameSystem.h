@@ -1,6 +1,5 @@
 #pragma once
 #include <Windows.h>
-//#include<D3DX11.h>
 #include<D3DX9.h>
 #include<D3D9.h>
 #include<vector>
@@ -36,12 +35,6 @@ private:
 	int _WindowHeight;
 	GameTimer* _gameTimer;
 	
-	/*Sprite* _testTileMap[MAP_HEIGHT][MAP_WIDTH];
-
-	float _startX;
-	float _startY;
-	float _deltaX;
-	float _deltaY;*/
 	Map* _map;
 	Character* _character;
 

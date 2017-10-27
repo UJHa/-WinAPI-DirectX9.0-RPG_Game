@@ -6,7 +6,6 @@ struct Sprite;
 class Character : public Component
 {
 private:
-	//Sprite* _sprite;
 	std::vector<Sprite*> _spriteList;
 
 	float _x;
