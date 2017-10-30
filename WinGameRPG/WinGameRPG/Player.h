@@ -10,5 +10,6 @@ public:
 	//AI
 public:
 	void UpdateAI();
+	void UpdateMove(float deltaTime);
 };
 

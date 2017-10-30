@@ -36,7 +36,8 @@ private:
 	GameTimer* _gameTimer;
 	
 	Map* _map;
-	Character* _character;
+	Character* _player;
+	Character* _npc;
 
 //get System
 public:
@@ -58,4 +59,5 @@ public:
 	void InitInput();
 	void KeyDown(unsigned int keyCode);
 	void KeyUp(unsigned int keyCode);
+	bool IsKeyDown(int keyCode);
 };

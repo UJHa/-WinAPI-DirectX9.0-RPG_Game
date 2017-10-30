@@ -3,7 +3,7 @@
 #include "GameTimer.h"
 #include "Map.h"
 //#include "Character.h"
-//#include "NPC.h"
+#include "NPC.h"
 #include "Player.h"
 #include "ComponentSystem.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
@@ -62,22 +62,11 @@ GameSystem::GameSystem()
 		_WindowHeight = 800;
 	}
 	_map = NULL;
-	_character = NULL;
+	_player = NULL;
+	_npc = NULL;
 }
 GameSystem::~GameSystem()
 {
-	if (NULL != _map)
-	{
-		_map->DInit();
-		delete _map;
-		_map = NULL;
-	}
-	if (NULL != _character)
-	{
-		_character->DInit();
-		delete _character;
-		_character = NULL;
-	}
 	RELEASE_COM(_sprite);
 	RELEASE_COM(_device3d);
 }
@@ -152,8 +141,10 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	_map = new Map(L"tileMap");
 	_map->Init();
 
-	_character = new Player(L"npc");
-	_character->Init();
+	_player = new Player(L"npc");
+	_player->Init();
+	_npc = new NPC(L"npc");
+	_npc->Init();
 
 	return true;
 }
@@ -181,7 +172,8 @@ int GameSystem::Update()
 			frameDuration += deltaTime;
 
 			_map->Update(deltaTime);
-			_character->Update(deltaTime);
+			_player->Update(deltaTime);
+			_npc->Update(deltaTime);
 			if (frameTime <= frameDuration)
 			{
 
@@ -194,7 +186,8 @@ int GameSystem::Update()
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 				_map->Render();
-				_character->Render();
+				_player->Render();
+				_npc->Render();
 								
 				_sprite->End();
 
@@ -287,13 +280,15 @@ void GameSystem::CheckDeviceLost()
 		else if (D3DERR_DEVICENOTRESET == hr)
 		{
 			_map->Release();
-			_character->Release();
+			_player->Release();
+			_npc->Release();
 
 			hr = _device3d->Reset(&_d3dpp);
 			InitDirect3D();
 
 			_map->Reset();
-			_character->Reset();
+			_player->Reset();
+			_npc->Reset();
 		}
 	}
 }
@@ -331,4 +326,10 @@ void GameSystem::KeyDown(unsigned int keyCode)
 void GameSystem::KeyUp(unsigned int keyCode)
 {
 	_keyState[keyCode] = eKeyState::KEY_UP;
+}
+bool GameSystem::IsKeyDown(int keyCode)
+{
+	if(eKeyState::KEY_DOWN == _keyState[keyCode])
+		return true;
+	return false;
 }

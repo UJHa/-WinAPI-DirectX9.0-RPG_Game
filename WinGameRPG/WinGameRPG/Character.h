@@ -5,11 +5,11 @@
 struct Sprite;
 class Character : public Component
 {
-private:
-	std::vector<Sprite*> _spriteList;
-
+protected:
 	float _x;
 	float _y;
+private:
+	std::vector<Sprite*> _spriteList;
 
 	float _deltaX;
 	float _deltaY;
@@ -39,7 +39,6 @@ public:
 	};
 protected:
 	bool _isMoving;
-private:
 	float _moveTime;
 	float _movingDuration;
 	eDirection _currentDirection;
@@ -50,5 +49,5 @@ private:
 public:
 	void InitMove();
 	void MoveStart(eDirection direction);
-	void UpdateMove(float deltaTime);
+	virtual void UpdateMove(float deltaTime);
 };

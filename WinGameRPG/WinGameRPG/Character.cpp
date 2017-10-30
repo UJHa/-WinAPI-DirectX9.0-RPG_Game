@@ -4,6 +4,7 @@
 #include "Map.h"
 Character::Character(LPCWSTR name) : Component(name)
 {
+	_moveTime = 1.0f;
 	_spriteList.clear();
 }
 
@@ -95,7 +96,6 @@ void Character::InitMove()
 {
 	_currentDirection = eDirection::DOWN;
 	_isMoving = false;
-	_moveTime = 1.0f;
 	_movingDuration = 0.0f;
 	_targetX = 0.0f;
 	_targetY = 0.0f;
@@ -175,7 +175,6 @@ void Character::UpdateMove(float deltaTime)
 
 		float moveDistanceX = _moveDistancePerTimeX * deltaTime;
 		float moveDistanceY = _moveDistancePerTimeY * deltaTime;
-
 		_x += moveDistanceX;
 		_y += moveDistanceY;
 	}
