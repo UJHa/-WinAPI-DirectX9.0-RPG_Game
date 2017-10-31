@@ -32,13 +32,12 @@ void Map::Init()
 		srcY += 32;
 	}
 
-	int index = 0;
+	//Load Script Script 1Ãþ
 	{
-		//Load Script
 		char record[1024];
 		int line = 0;
-
-		ifstream infile("MapData.csv");
+		int index = 0;
+		ifstream infile("MapData_layer1.csv");
 		while (!infile.eof())
 		{
 			infile.getline(record, 1024);
@@ -67,11 +66,57 @@ void Map::Init()
 						index = atoi(token);
 
 						TileCell* tileCell = new TileCell();
-						tileCell->SetSprite(_spriteList[index]);
+						WCHAR componetName[256];
+						wsprintf(componetName, L"map_layer01_%d_%d", Line, x);
+						TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
+						tileCell->AddComponent(tileObject, true);
 						rowList.push_back(tileCell);
 						token = strtok(NULL, ",");
 					}
 					_tileMap.push_back(rowList);
+				}
+				break;
+			}
+			line++;
+		}
+	}
+	{
+
+	}
+	//Load Script Script 2Ãþ
+	{
+		char record[1024];
+		int line = 0;
+		int row = 0;
+		int index = 0;
+		ifstream infile("MapData_layer2.csv");
+		while (!infile.eof())
+		{
+			infile.getline(record, 1024);
+
+			char* token = strtok(record, ",");
+			switch (line)
+			{
+			case 0:
+				break;
+			case 1:
+				break;
+			default:
+				//map data read
+				if (NULL != token)
+				{
+					vector<TileCell*> rowList = _tileMap[row];
+					for (int x = 0; x < _width; x++)
+					{
+						index = atoi(token);
+						if (0 < index)
+						{
+							TileCell* tileCell = rowList[x];
+							tileCell->SetSprite(_spriteList[index]);
+						}
+						token = strtok(NULL, ",");
+					}
+					row++;
 				}
 				break;
 			}
@@ -112,6 +157,7 @@ void Map::Update(float deltaTime)
 	{
 		for (int x = 0; x < _width; x++)
 		{
+			_tileMap[y][x]->MoveDeltaPosition(_deltaX, _deltaY);
 			_tileMap[y][x]->Update(deltaTime);
 		}
 	}
@@ -122,7 +168,6 @@ void Map::Render()
 	{
 		for (int x = 0; x < _width; x++)
 		{
-			_tileMap[y][x]->MoveDeltaPosition(_deltaX, _deltaY);
 			_tileMap[y][x]->Render();
 		}
 	}

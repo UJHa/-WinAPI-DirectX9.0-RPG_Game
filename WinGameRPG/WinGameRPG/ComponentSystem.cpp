@@ -27,10 +27,11 @@ void ComponentSystem::AddComponent(wstring name, Component* component)
 }
 void ComponentSystem::RemoveAllComponents()
 {
-	for (map<wstring, Component*>::iterator it = _componentMap.begin(); 
+	for (map<wstring, Component*>::iterator it = _componentMap.begin();
 		it != _componentMap.end(); 
 		it++)
 	{
+		//it->second->DInit();
 		delete it->second;
 	}
 	_componentMap.clear();

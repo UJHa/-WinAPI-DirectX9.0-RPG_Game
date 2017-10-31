@@ -4,6 +4,7 @@
 #include "Map.h"
 Character::Character(LPCWSTR name) : Component(name)
 {
+	_moveTime = 1.0f;
 	_spriteList.clear();
 }
 
@@ -91,20 +92,10 @@ void Character::MoveDeltaPosition(float deltaX, float deltaY)
 	_x += deltaX;
 	_y += deltaY;
 }
-
-void Character::UpdateAI()
-{
-	if (false == _isMoving)
-	{
-		int direction = rand() % 4;
-		MoveStart((eDirection)direction);
-	}
-}
 void Character::InitMove()
 {
 	_currentDirection = eDirection::DOWN;
 	_isMoving = false;
-	_moveTime = 1.0f;
 	_movingDuration = 0.0f;
 	_targetX = 0.0f;
 	_targetY = 0.0f;
@@ -152,8 +143,7 @@ void Character::MoveStart(eDirection direction)
 	}
 	{
 		//자연스러운 이동 보간
-		map->setTileComponent(_tileX, _tileY, this, true);
-
+		map->setTileComponent(_tileX, _tileY, this, false);
 		//이동거리
 		_targetX = map->GetPositionX(_tileX, _tileY);
 		_targetY = map->GetPositionY(_tileX, _tileY);
@@ -184,7 +174,6 @@ void Character::UpdateMove(float deltaTime)
 
 		float moveDistanceX = _moveDistancePerTimeX * deltaTime;
 		float moveDistanceY = _moveDistancePerTimeY * deltaTime;
-
 		_x += moveDistanceX;
 		_y += moveDistanceY;
 	}

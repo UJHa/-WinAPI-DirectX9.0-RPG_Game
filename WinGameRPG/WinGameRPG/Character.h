@@ -5,11 +5,11 @@
 struct Sprite;
 class Character : public Component
 {
-private:
-	std::vector<Sprite*> _spriteList;
-
+protected:
 	float _x;
 	float _y;
+private:
+	std::vector<Sprite*> _spriteList;
 
 	float _deltaX;
 	float _deltaY;
@@ -28,16 +28,16 @@ public:
 	void Reset();
 	// transform
 public:
-	void MoveDeltaPosition(float deltaX, float deltaY);
+	virtual void MoveDeltaPosition(float deltaX, float deltaY);
 	//AI
 public:
-	void UpdateAI();
+	virtual void UpdateAI() = 0;
 	//Move
 public:
 	enum eDirection {
 		LEFT,RIGHT,UP,DOWN
 	};
-private:
+protected:
 	bool _isMoving;
 	float _moveTime;
 	float _movingDuration;
@@ -49,5 +49,5 @@ private:
 public:
 	void InitMove();
 	void MoveStart(eDirection direction);
-	void UpdateMove(float deltaTime);
+	virtual void UpdateMove(float deltaTime);
 };

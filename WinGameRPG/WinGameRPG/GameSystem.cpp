@@ -2,18 +2,22 @@
 #include <Windows.h>
 #include "GameTimer.h"
 #include "Map.h"
-#include "Character.h"
+//#include "Character.h"
+#include "NPC.h"
+#include "Player.h"
 #include "ComponentSystem.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
 	{
 	case WM_KEYDOWN:
+		GameSystem::GetInstance()->KeyDown(wParam);
 		if (VK_ESCAPE == wParam)
 		{
 			ComponentSystem::GetInstance()->RemoveAllComponents();
 			DestroyWindow(hWnd);
 		}
-		if (VK_UP == wParam)
+		//sroll test
+		/*if (VK_UP == wParam)
 		{
 			GameSystem::GetInstance()->MapScrollTest(0.0f, -3.0f);
 		}
@@ -28,10 +32,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 		if (VK_LEFT == wParam)
 		{
 			GameSystem::GetInstance()->MapScrollTest(-3.0f, 0.0f);
-		}
+		}*/
 		return 0;
 	case WM_KEYUP:
-		GameSystem::GetInstance()->MapScrollTest(0.0f, 0.0f);
+		GameSystem::GetInstance()->KeyUp(wParam);
+		//GameSystem::GetInstance()->MapScrollTest(0.0f, 0.0f);
 		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);
@@ -57,22 +62,11 @@ GameSystem::GameSystem()
 		_WindowHeight = 800;
 	}
 	_map = NULL;
-	_character = NULL;
+	_player = NULL;
+	_npc = NULL;
 }
 GameSystem::~GameSystem()
 {
-	if (NULL != _map)
-	{
-		_map->DInit();
-		delete _map;
-		_map = NULL;
-	}
-	if (NULL != _character)
-	{
-		_character->DInit();
-		delete _character;
-		_character = NULL;
-	}
 	RELEASE_COM(_sprite);
 	RELEASE_COM(_device3d);
 }
@@ -143,11 +137,14 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 		return false;
 	}
 
+	InitInput();
 	_map = new Map(L"tileMap");
 	_map->Init();
 
-	_character = new Character(L"testCharacter");
-	_character->Init();
+	_player = new Player(L"npc");
+	_player->Init();
+	_npc = new NPC(L"npc");
+	_npc->Init();
 
 	return true;
 }
@@ -175,7 +172,8 @@ int GameSystem::Update()
 			frameDuration += deltaTime;
 
 			_map->Update(deltaTime);
-			_character->Update(deltaTime);
+			_player->Update(deltaTime);
+			_npc->Update(deltaTime);
 			if (frameTime <= frameDuration)
 			{
 
@@ -188,7 +186,8 @@ int GameSystem::Update()
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 				_map->Render();
-				_character->Render();
+				_player->Render();
+				_npc->Render();
 								
 				_sprite->End();
 
@@ -281,13 +280,15 @@ void GameSystem::CheckDeviceLost()
 		else if (D3DERR_DEVICENOTRESET == hr)
 		{
 			_map->Release();
-			_character->Release();
+			_player->Release();
+			_npc->Release();
 
 			hr = _device3d->Reset(&_d3dpp);
 			InitDirect3D();
 
 			_map->Reset();
-			_character->Reset();
+			_player->Reset();
+			_npc->Reset();
 		}
 	}
 }
@@ -310,4 +311,25 @@ LPDIRECT3DDEVICE9 GameSystem::GetDevice3d()
 void GameSystem::MapScrollTest(float moveX, float moveY)
 {
 	_map->Scroll(moveX, moveY);
+}
+void GameSystem::InitInput()
+{
+	for (int i = 0; i < 256; i++)
+	{
+		_keyState[i] = eKeyState::KEY_UP;
+	}
+}
+void GameSystem::KeyDown(unsigned int keyCode)
+{
+	_keyState[keyCode] = eKeyState::KEY_DOWN;
+}
+void GameSystem::KeyUp(unsigned int keyCode)
+{
+	_keyState[keyCode] = eKeyState::KEY_UP;
+}
+bool GameSystem::IsKeyDown(int keyCode)
+{
+	if(eKeyState::KEY_DOWN == _keyState[keyCode])
+		return true;
+	return false;
 }

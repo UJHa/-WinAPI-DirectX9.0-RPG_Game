@@ -36,9 +36,10 @@ private:
 	GameTimer* _gameTimer;
 	
 	Map* _map;
-	Character* _character;
+	Character* _player;
+	Character* _npc;
 
-//get Method
+//get System
 public:
 	int GetWindowWidth();
 	int GetWindowHeight();
@@ -46,4 +47,17 @@ public:
 	LPDIRECT3DDEVICE9 GetDevice3d();
 public:
 	void MapScrollTest(float moveX, float moveY);
+//Input System
+public:
+	enum eKeyState {
+		KEY_DOWN,
+		KEY_UP,
+	};
+private:
+	eKeyState _keyState[256];
+public:
+	void InitInput();
+	void KeyDown(unsigned int keyCode);
+	void KeyUp(unsigned int keyCode);
+	bool IsKeyDown(int keyCode);
 };
