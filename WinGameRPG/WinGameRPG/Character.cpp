@@ -143,8 +143,7 @@ void Character::MoveStart(eDirection direction)
 	}
 	{
 		//자연스러운 이동 보간
-		map->setTileComponent(_tileX, _tileY, this, true);
-
+		map->setTileComponent(_tileX, _tileY, this, false);
 		//이동거리
 		_targetX = map->GetPositionX(_tileX, _tileY);
 		_targetY = map->GetPositionY(_tileX, _tileY);

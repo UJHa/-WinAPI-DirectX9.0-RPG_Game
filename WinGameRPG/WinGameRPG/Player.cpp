@@ -1,6 +1,7 @@
 #include"Player.h"
 #include"GameSystem.h"
 #include"ComponentSystem.h"
+#include"Map.h"
 Player::Player(LPCWSTR name) : Character(name)
 {
 	_moveTime = 0.1f;
@@ -32,6 +33,7 @@ void Player::UpdateMove(float deltaTime)
 		_movingDuration = 0.0f;
 		_isMoving = false;
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		map->Scroll(0.0f, 0.0f);
 		/*_x = _targetX;
 		_y = _targetY;*/
 	}
@@ -43,5 +45,11 @@ void Player::UpdateMove(float deltaTime)
 		float moveDistanceY = _moveDistancePerTimeY * deltaTime;
 		/*_x += moveDistanceX;
 		_y += moveDistanceY;*/
+		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		map->Scroll(-moveDistanceX, -moveDistanceY);
 	}
+}
+void Player::MoveDeltaPosition(float deltaX, float deltaY)
+{
+	
 }

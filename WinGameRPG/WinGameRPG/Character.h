@@ -28,7 +28,7 @@ public:
 	void Reset();
 	// transform
 public:
-	void MoveDeltaPosition(float deltaX, float deltaY);
+	virtual void MoveDeltaPosition(float deltaX, float deltaY);
 	//AI
 public:
 	virtual void UpdateAI() = 0;

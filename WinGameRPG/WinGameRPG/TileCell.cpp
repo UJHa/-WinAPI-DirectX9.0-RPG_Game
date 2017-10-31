@@ -20,6 +20,7 @@ void TileCell::Update(float deltaTime)
 }
 void TileCell::Render()
 {
+	_sprite->SetPosition(_posX, _posY);
 	_sprite->Render();
 
 	for (std::list<Component*>::iterator it = _renderList.begin(); it != _renderList.end(); it++)
