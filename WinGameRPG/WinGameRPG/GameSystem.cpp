@@ -142,8 +142,10 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	_map->Init();
 
 	_player = new Player(L"npc");
+	_player->SetCanMove(false);
 	_player->Init();
 	_npc = new NPC(L"npc");
+	_npc->SetCanMove(false);
 	_npc->Init();
 
 	return true;

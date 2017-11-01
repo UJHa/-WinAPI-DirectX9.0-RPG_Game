@@ -1,5 +1,5 @@
 #include "TileCell.h"
-#include "Sprite.h"
+//#include "Sprite.h"
 #include "Component.h"
 TileCell::TileCell()
 {
@@ -12,16 +12,16 @@ TileCell::~TileCell()
 }
 void TileCell::DInit()
 {
-	_sprite->DInit();
+	//_sprite->DInit();
 }
 void TileCell::Update(float deltaTime)
 {
-	_sprite->Update(deltaTime);
+	//_sprite->Update(deltaTime);
 }
 void TileCell::Render()
 {
-	_sprite->SetPosition(_posX, _posY);
-	_sprite->Render();
+	/*_sprite->SetPosition(_posX, _posY);
+	_sprite->Render();*/
 
 	for (std::list<Component*>::iterator it = _renderList.begin(); it != _renderList.end(); it++)
 	{
@@ -30,17 +30,11 @@ void TileCell::Render()
 }
 void TileCell::Release()
 {
-	_sprite->Release();
+	//_sprite->Release();
 }
 void TileCell::Reset()
 {
-	_sprite->Reset();
-}
-void TileCell::SetPosition(float posX, float posY)
-{
-	_posX = posX;
-	_posY = posY;
-	_sprite->SetPosition(_posX, _posY);
+	//_sprite->Reset();
 }
 float TileCell::GetPositionX()
 {
@@ -49,10 +43,6 @@ float TileCell::GetPositionX()
 float TileCell::GetPositionY()
 {
 	return _posY;
-}
-void TileCell::SetSprite(Sprite* sprite)
-{
-	_sprite = sprite;
 }
 void TileCell::AddComponent(Component* component, bool isRender)
 {
@@ -68,13 +58,31 @@ void TileCell::RemoveComponent(Component* component)
 	_componentList.remove(component);
 	_renderList.remove(component);
 }
-void TileCell::MoveDeltaPosition(float _deltaX, float  _deltaY)
+void TileCell::MoveDeltaPosition(float deltaX, float  deltaY)
 {
-	_posX += _deltaX;
-	_posY += _deltaY;
-	_sprite->SetPosition(_posX, _posY);
+	_posX += deltaX;
+	_posY += deltaY;
+	//_sprite->SetPosition(_posX, _posY);
 	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 	{
-		(*it)->MoveDeltaPosition(_deltaX, _deltaY);
+		(*it)->MoveDeltaPosition(deltaX, deltaY);
 	}
+}
+void TileCell::SetPosition(float posX, float posY)
+{
+	_posX = posX;
+	_posY = posY;
+	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		(*it)->SetPosition(posX, posY);
+	}
+}
+bool TileCell::CanMove()
+{
+	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		if (false == (*it)->CanMove())
+			return false;
+	}
+	return true;
 }

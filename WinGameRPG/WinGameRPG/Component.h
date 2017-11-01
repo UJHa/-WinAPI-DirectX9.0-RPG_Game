@@ -4,8 +4,9 @@ class Component
 {
 protected:
 	LPCWSTR _name;
+	bool _canMove;
 public:
-	Component() {}
+	Component() { _canMove = true; }
 	Component(LPCWSTR name);
 	virtual ~Component();
 
@@ -17,4 +18,7 @@ public:
 	virtual void Reset() = 0;
 
 	virtual void MoveDeltaPosition(float deltaX, float deltaY) {}
+	virtual void SetPosition(float posX, float posY) {}
+	void SetCanMove(bool canMove) { _canMove = canMove; }
+	bool CanMove() { return _canMove; }
 };

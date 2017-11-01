@@ -2,8 +2,8 @@
 #include<Windows.h>
 #include<vector>
 #include"Component.h"
-struct Sprite;
-struct TileCell;
+class Sprite;
+class TileCell;
 using namespace std;
 class Map : public Component
 {
@@ -36,4 +36,5 @@ public:
 	int GetPositionY(int tileX, int tileY);
 	void setTileComponent(int tileX, int tileY, Component* component, bool isRender);
 	void ResetTileComponent(int tileX, int tileY, Component* component);
+	bool CanMoveTileMap(int tileX, int tileY);
 };
