@@ -670,3 +670,7 @@ __pycache__/
 # OpenCover UI analysis results
 
 OpenCover/
+
+# UJHa VS 2017 ignore(vc.db file not ignore : add .db files)
+
+*.db
