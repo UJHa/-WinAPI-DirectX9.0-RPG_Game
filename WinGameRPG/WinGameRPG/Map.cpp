@@ -2,6 +2,7 @@
 #include "Sprite.h"
 #include"TileCell.h"
 #include"TileObject.h"
+#include"GameSystem.h"
 #include<fstream>
 Map::Map(LPCWSTR name) : Component(name)
 {
@@ -130,7 +131,7 @@ void Map::Init()
 		}
 	}
 
-	_startX += _deltaX;
+	/*_startX += _deltaX;
 	_startY += _deltaY;
 	float posX = _startX;
 	float posY = _startY;
@@ -143,7 +144,7 @@ void Map::Init()
 		}
 		posX = _startX;
 		posY += _tileSize;
-	}
+	}*/
 }
 void Map::DInit()
 {
@@ -229,4 +230,41 @@ bool Map::CanMoveTileMap(int tileX, int tileY)
 	if (tileY < 0)
 		return false;
 	return _tileMap[tileY][tileX]->CanMove();
+}
+void Map::InitViewer(Component* viewer)
+{
+	Component* _viewer = viewer;
+	//뷰어중심 렌더링 범위 구하기이
+	int midX = GameSystem::GetInstance()->GetWindowWidth() / 2;
+	int midY = GameSystem::GetInstance()->GetWindowHeight() / 2;
+
+	int minX = _viewer->GetTileX() - (midX / _tileSize) - 1;
+	int maxX = _viewer->GetTileX() + (midX / _tileSize) + 1;
+	int minY = _viewer->GetTileY() - (midX / _tileSize) - 1;
+	int maxY = _viewer->GetTileY() + (midX / _tileSize) + 1;
+
+	if (minX < 0)
+		minX = 0;
+	if (_width <= maxX)
+		maxX = _width - 1;
+	if (minY < 0)
+		minY = 0;
+	if (_height <= maxY)
+		maxY = _height - 1;
+
+
+	_startX = (-_viewer->GetTileX() * _tileSize) + midX + _tileSize / 2;
+	_startY = (-_viewer->GetTileY() * _tileSize) + midY + _tileSize / 2;
+	float posX = _startX;
+	float posY = _startY;
+	for (int y = 0; y < _height; y++)
+	{
+		for (int x = 0; x < _width; x++)
+		{
+			_tileMap[y][x]->SetPosition(posX, posY);
+			posX += _tileSize;
+		}
+		posX = _startX;
+		posY += _tileSize;
+	}
 }

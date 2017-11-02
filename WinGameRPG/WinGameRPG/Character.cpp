@@ -47,11 +47,11 @@ void Character::Init()
 
 	{
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
-		_tileX = 20;
-		_tileY = 20;
+		_tileX = 0;
+		_tileY = 0;
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
-		map->setTileComponent(_tileX, _tileY, this, false);
+		map->setTileComponent(_tileX, _tileY, this, true);
 	}
 }
 void Character::DInit()
