@@ -13,9 +13,6 @@ private:
 
 	float _deltaX;
 	float _deltaY;
-
-	int _tileX;
-	int _tileY;
 public:
 	Character(LPCWSTR name);
 	~Character();

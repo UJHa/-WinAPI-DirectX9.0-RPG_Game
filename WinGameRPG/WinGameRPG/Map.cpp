@@ -1,6 +1,8 @@
 #include"Map.h"
 #include "Sprite.h"
 #include"TileCell.h"
+#include"TileObject.h"
+#include"GameSystem.h"
 #include<fstream>
 Map::Map(LPCWSTR name) : Component(name)
 {
@@ -67,7 +69,7 @@ void Map::Init()
 
 						TileCell* tileCell = new TileCell();
 						WCHAR componetName[256];
-						wsprintf(componetName, L"map_layer01_%d_%d", Line, x);
+						wsprintf(componetName, L"map_layer01_%d_%d", line, x);
 						TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
 						tileCell->AddComponent(tileObject, true);
 						rowList.push_back(tileCell);
@@ -109,10 +111,15 @@ void Map::Init()
 					for (int x = 0; x < _width; x++)
 					{
 						index = atoi(token);
-						if (0 < index)
+						if (0 <= index)
 						{
 							TileCell* tileCell = rowList[x];
-							tileCell->SetSprite(_spriteList[index]);
+							//tileCell->SetSprite(_spriteList[index]);
+							WCHAR componetName[256];
+							wsprintf(componetName, L"map_layer02_%d_%d", line, x);
+							TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
+							tileObject->SetCanMove(false);
+							tileCell->AddComponent(tileObject, true);
 						}
 						token = strtok(NULL, ",");
 					}
@@ -124,7 +131,7 @@ void Map::Init()
 		}
 	}
 
-	_startX += _deltaX;
+	/*_startX += _deltaX;
 	_startY += _deltaY;
 	float posX = _startX;
 	float posY = _startY;
@@ -133,12 +140,11 @@ void Map::Init()
 		for (int x = 0; x < _width; x++)
 		{
 			_tileMap[y][x]->SetPosition(posX, posY);
-			_tileMap[y][x]->Render();
 			posX += _tileSize;
 		}
 		posX = _startX;
 		posY += _tileSize;
-	}
+	}*/
 }
 void Map::DInit()
 {
@@ -212,4 +218,53 @@ void Map::setTileComponent(int tileX, int tileY, Component* component, bool isRe
 void Map::ResetTileComponent(int tileX, int tileY, Component* component)
 {
 	_tileMap[tileY][tileX]->RemoveComponent(component);
+}
+bool Map::CanMoveTileMap(int tileX, int tileY)
+{
+	if (_width <= tileX)
+		return false;
+	if (tileX < 0)
+		return false;
+	if (_height <= tileY)
+		return false;
+	if (tileY < 0)
+		return false;
+	return _tileMap[tileY][tileX]->CanMove();
+}
+void Map::InitViewer(Component* viewer)
+{
+	Component* _viewer = viewer;
+	//뷰어중심 렌더링 범위 구하기이
+	int midX = GameSystem::GetInstance()->GetWindowWidth() / 2;
+	int midY = GameSystem::GetInstance()->GetWindowHeight() / 2;
+
+	int minX = _viewer->GetTileX() - (midX / _tileSize) - 1;
+	int maxX = _viewer->GetTileX() + (midX / _tileSize) + 1;
+	int minY = _viewer->GetTileY() - (midX / _tileSize) - 1;
+	int maxY = _viewer->GetTileY() + (midX / _tileSize) + 1;
+
+	if (minX < 0)
+		minX = 0;
+	if (_width <= maxX)
+		maxX = _width - 1;
+	if (minY < 0)
+		minY = 0;
+	if (_height <= maxY)
+		maxY = _height - 1;
+
+
+	_startX = (-_viewer->GetTileX() * _tileSize) + midX + _tileSize / 2;
+	_startY = (-_viewer->GetTileY() * _tileSize) + midY + _tileSize / 2;
+	float posX = _startX;
+	float posY = _startY;
+	for (int y = 0; y < _height; y++)
+	{
+		for (int x = 0; x < _width; x++)
+		{
+			_tileMap[y][x]->SetPosition(posX, posY);
+			posX += _tileSize;
+		}
+		posX = _startX;
+		posY += _tileSize;
+	}
 }
