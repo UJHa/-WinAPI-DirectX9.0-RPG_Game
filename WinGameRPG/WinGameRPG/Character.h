@@ -1,6 +1,7 @@
 #pragma once
 #include<Windows.h>
 #include<vector>
+#include<string>
 #include"Component.h"
 struct Sprite;
 class Character : public Component
@@ -8,14 +9,15 @@ class Character : public Component
 protected:
 	float _x;
 	float _y;
+	std::wstring _pngName;
 private:
 	std::vector<Sprite*> _spriteList;
 
 	float _deltaX;
 	float _deltaY;
 public:
-	Character(LPCWSTR name);
-	~Character();
+	Character(LPCWSTR name, LPCWSTR pngName);
+	virtual ~Character();
 
 	void Init();
 	void DInit();
@@ -26,9 +28,10 @@ public:
 	// transform
 public:
 	virtual void MoveDeltaPosition(float deltaX, float deltaY);
+	void SetPosition(float posX, float posY);
 	//AI
 public:
-	virtual void UpdateAI() = 0;
+	virtual void UpdateAI();
 	//Move
 public:
 	enum eDirection {

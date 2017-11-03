@@ -4,9 +4,6 @@ class NPC : public Character
 {
 private:
 public:
-	NPC(LPCWSTR name);
+	NPC(LPCWSTR name, LPCWSTR pngName);
 	~NPC();
-	//AI
-public:
-	void UpdateAI();
 };

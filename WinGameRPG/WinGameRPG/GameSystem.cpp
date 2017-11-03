@@ -5,6 +5,7 @@
 //#include "Character.h"
 #include "NPC.h"
 #include "Player.h"
+#include"Monster.h"
 #include "ComponentSystem.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
@@ -61,12 +62,17 @@ GameSystem::GameSystem()
 		_WindowWidth = 1280;
 		_WindowHeight = 800;
 	}
-	_map = NULL;
+	_componentList.clear();
+	/*_map = NULL;
 	_player = NULL;
-	_npc = NULL;
+	_npc = NULL;*/
 }
 GameSystem::~GameSystem()
 {
+	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		(*it)->DInit();
+	}
 	RELEASE_COM(_sprite);
 	RELEASE_COM(_device3d);
 }
@@ -138,18 +144,27 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	}
 
 	InitInput();
-	_map = new Map(L"tileMap");
-	_map->Init();
+	_componentList.clear();
+	Map* map = new Map(L"tileMap");
+	//_map->Init();
+	_componentList.push_back(map);
 
-	_player = new Player(L"npc");
-	_player->SetCanMove(false);
-	_player->Init();
+	Player* player = new Player(L"npc", L"character_sprite");
+	//player->Init();
+	_componentList.push_back(player);
+	NPC* npc = new NPC(L"npc", L"character_sprite2");
+	//npc->Init();
+	_componentList.push_back(npc);
+	Monster* monster = new Monster(L"monster", L"monster");
+	//monster->Init();
+	_componentList.push_back(monster);
 
-	_npc = new NPC(L"npc");
-	_npc->SetCanMove(false);
-	_npc->Init();
+	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		(*it)->Init();
+	}
 
-	_map->InitViewer(_player);
+	map->InitViewer(npc);
 
 	return true;
 }
@@ -176,9 +191,14 @@ int GameSystem::Update()
 			float deltaTime = _gameTimer->GetDeltaTime();
 			frameDuration += deltaTime;
 
-			_map->Update(deltaTime);
+			for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+			{
+				(*it)->Update(deltaTime);
+			}
+			/*_map->Update(deltaTime);
 			_player->Update(deltaTime);
 			_npc->Update(deltaTime);
+			_monster->Update(deltaTime);*/
 			if (frameTime <= frameDuration)
 			{
 
@@ -190,9 +210,14 @@ int GameSystem::Update()
 
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
-				_map->Render();
+				for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+				{
+					(*it)->Render();
+				}
+				/*_map->Render();
 				_player->Render();
 				_npc->Render();
+				_monster->Render();*/
 								
 				_sprite->End();
 
@@ -284,16 +309,26 @@ void GameSystem::CheckDeviceLost()
 		}
 		else if (D3DERR_DEVICENOTRESET == hr)
 		{
-			_map->Release();
+			for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+			{
+				(*it)->Release();
+			}
+			/*_map->Release();
 			_player->Release();
 			_npc->Release();
+			_monster->Release();*/
 
 			hr = _device3d->Reset(&_d3dpp);
 			InitDirect3D();
 
-			_map->Reset();
+			for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+			{
+				(*it)->Release();
+			}
+			/*_map->Reset();
 			_player->Reset();
 			_npc->Reset();
+			_monster->Reset();*/
 		}
 	}
 }
@@ -312,10 +347,6 @@ LPD3DXSPRITE GameSystem::GetSprite()
 LPDIRECT3DDEVICE9 GameSystem::GetDevice3d()
 {
 	return _device3d;
-}
-void GameSystem::MapScrollTest(float moveX, float moveY)
-{
-	_map->Scroll(moveX, moveY);
 }
 void GameSystem::InitInput()
 {

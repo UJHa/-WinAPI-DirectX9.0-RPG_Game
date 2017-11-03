@@ -3,12 +3,14 @@
 #include<D3DX9.h>
 #include<D3D9.h>
 #include<vector>
+#include<list>
 #define RELEASE_COM(x) {if(x){x->Release();x=NULL;}}
 #define SAVE_DELETE(x) {if(x){delete x;x=NULL;}}
 
-struct GameTimer;
-struct Map;
-struct Character;
+class GameTimer;
+class Map;
+class Character;
+class Component;
 class GameSystem
 {
 private:
@@ -35,9 +37,11 @@ private:
 	int _WindowHeight;
 	GameTimer* _gameTimer;
 	
-	Map* _map;
+	std::list<Component*> _componentList;
+	/*Map* _map;
 	Character* _player;
 	Character* _npc;
+	Character* _monster;*/
 
 //get System
 public:
@@ -45,8 +49,6 @@ public:
 	int GetWindowHeight();
 	LPD3DXSPRITE GetSprite();
 	LPDIRECT3DDEVICE9 GetDevice3d();
-public:
-	void MapScrollTest(float moveX, float moveY);
 //Input System
 public:
 	enum eKeyState {
