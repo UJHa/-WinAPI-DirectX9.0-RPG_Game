@@ -4,6 +4,7 @@
 #include"Component.h"
 class Sprite;
 class TileCell;
+class Component;
 using namespace std;
 class Map : public Component
 {
@@ -38,6 +39,8 @@ public:
 	void ResetTileComponent(int tileX, int tileY, Component* component);
 	bool CanMoveTileMap(int tileX, int tileY);
 	//Viewer
+private:
+	Component* _viewer;
 public:
 	void InitViewer(Component* viewer);
 };

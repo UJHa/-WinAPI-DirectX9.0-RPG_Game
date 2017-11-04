@@ -78,6 +78,9 @@
     <ClCompile Include="TileObject.cpp">
       <Filter>소스 파일\Game\Map</Filter>
     </ClCompile>
+    <ClCompile Include="monster.cpp">
+      <Filter>소스 파일\Game\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -121,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="TileObject.h">
       <Filter>소스 파일\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>소스 파일\Game\Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

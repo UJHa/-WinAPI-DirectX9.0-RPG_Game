@@ -2,10 +2,11 @@
 #include "Sprite.h"
 #include "ComponentSystem.h"
 #include "Map.h"
-Character::Character(LPCWSTR name) : Component(name)
+Character::Character(LPCWSTR name, LPCWSTR pngName) : Component(name)
 {
 	_moveTime = 1.0f;
 	_spriteList.clear();
+	_pngName = pngName;
 }
 
 Character::~Character()
@@ -15,40 +16,37 @@ void Character::Init()
 {
 	InitMove();
 	WCHAR textureFileName[256];
+	wsprintf(textureFileName, L"%s.png", _pngName.c_str());
 	WCHAR scriptFileName[256];
 	{
-		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_left.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
 		sprite->Init();
 		_spriteList.push_back(sprite);
 	}
 	{
-		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_right.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
 		sprite->Init();
 		_spriteList.push_back(sprite);
 	}
 	{
-		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_up.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
 		sprite->Init();
 		_spriteList.push_back(sprite);
 	}
 	{
-		wsprintf(textureFileName, L"%s.png", _name);
 		wsprintf(scriptFileName, L"%s_down.json", _name);
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
 		sprite->Init();
 		_spriteList.push_back(sprite);
 	}
-
+	
 	{
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		_tileX = 0;
-		_tileY = 0;
+		_tileY = 3;
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
 		map->setTileComponent(_tileX, _tileY, this, true);
@@ -92,6 +90,19 @@ void Character::MoveDeltaPosition(float deltaX, float deltaY)
 	_x += deltaX;
 	_y += deltaY;
 }
+void Character::SetPosition(float posX, float posY)
+{
+	_x = posX;
+	_y = posY;
+}
+void Character::UpdateAI()
+{
+	if (false == _isMoving)
+	{
+		int direction = rand() % 4;
+		MoveStart((eDirection)direction);
+	}
+}
 void Character::InitMove()
 {
 	_currentDirection = eDirection::DOWN;
@@ -133,8 +144,16 @@ void Character::MoveStart(eDirection direction)
 		newTileY++;
 		break;
 	}
-	if (false == map->CanMoveTileMap(newTileX, newTileY))
-		return;
+
+	/*if (false == map->CanMoveTileMap(newTileX, newTileY))
+		return;*/
+	std::list<Component*> collisionList;
+	bool canMove = map->GetTileCollisionList(newTileX, newTileY, collisionList);
+	if (false == canMove)
+	{
+		//collisionList ¼øÈ¯
+
+	}
 
 	map->ResetTileComponent(_tileX, _tileY, this);
 	_x = map->GetPositionX(_tileX, _tileY);
@@ -184,7 +203,7 @@ void Character::MoveStart(eDirection direction)
 		_moveDistancePerTimeX = distanceX / _moveTime;
 		_moveDistancePerTimeY = distanceY / _moveTime;
 	}
-	_isMoving = true;
+	_isMoving = true;	
 }
 void Character::UpdateMove(float deltaTime)
 {

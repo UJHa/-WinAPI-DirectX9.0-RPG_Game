@@ -4,7 +4,7 @@ class Player : public Character
 {
 private:
 public:
-	Player(LPCWSTR name);
+	Player(LPCWSTR name, LPCWSTR pngName);
 	~Player();
 	//AI
 public:

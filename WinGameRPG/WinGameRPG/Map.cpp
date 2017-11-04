@@ -71,6 +71,7 @@ void Map::Init()
 						WCHAR componetName[256];
 						wsprintf(componetName, L"map_layer01_%d_%d", line, x);
 						TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
+						tileObject->SetCanMove(true);
 						tileCell->AddComponent(tileObject, true);
 						rowList.push_back(tileCell);
 						token = strtok(NULL, ",");
@@ -118,7 +119,7 @@ void Map::Init()
 							WCHAR componetName[256];
 							wsprintf(componetName, L"map_layer02_%d_%d", line, x);
 							TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
-							tileObject->SetCanMove(false);
+							//tileObject->SetCanMove(false);
 							tileCell->AddComponent(tileObject, true);
 						}
 						token = strtok(NULL, ",");
@@ -170,9 +171,27 @@ void Map::Update(float deltaTime)
 }
 void Map::Render()
 {
-	for (int y = 0; y < _height; y++)
+	//
+	int midX = GameSystem::GetInstance()->GetWindowWidth() / 2;
+	int midY = GameSystem::GetInstance()->GetWindowHeight() / 2;
+
+	int minX = _viewer->GetTileX() - (midX / _tileSize) - 2;
+	int maxX = _viewer->GetTileX() + (midX / _tileSize) + 2;
+	int minY = _viewer->GetTileY() - (midX / _tileSize) - 2;
+	int maxY = _viewer->GetTileY() + (midX / _tileSize) + 2;
+
+	if (minX < 0)
+	minX = 0;
+	if (_width <= maxX)
+	maxX = _width;
+	if (minY < 0)
+	minY = 0;
+	if (_height <= maxY)
+	maxY = _height;
+
+	for (int y = minY; y < maxY; y++)
 	{
-		for (int x = 0; x < _width; x++)
+		for (int x = minX; x < maxX; x++)
 		{
 			_tileMap[y][x]->Render();
 		}
@@ -233,25 +252,10 @@ bool Map::CanMoveTileMap(int tileX, int tileY)
 }
 void Map::InitViewer(Component* viewer)
 {
-	Component* _viewer = viewer;
+	_viewer = viewer;
 	//뷰어중심 렌더링 범위 구하기이
 	int midX = GameSystem::GetInstance()->GetWindowWidth() / 2;
 	int midY = GameSystem::GetInstance()->GetWindowHeight() / 2;
-
-	int minX = _viewer->GetTileX() - (midX / _tileSize) - 1;
-	int maxX = _viewer->GetTileX() + (midX / _tileSize) + 1;
-	int minY = _viewer->GetTileY() - (midX / _tileSize) - 1;
-	int maxY = _viewer->GetTileY() + (midX / _tileSize) + 1;
-
-	if (minX < 0)
-		minX = 0;
-	if (_width <= maxX)
-		maxX = _width - 1;
-	if (minY < 0)
-		minY = 0;
-	if (_height <= maxY)
-		maxY = _height - 1;
-
 
 	_startX = (-_viewer->GetTileX() * _tileSize) + midX + _tileSize / 2;
 	_startY = (-_viewer->GetTileY() * _tileSize) + midY + _tileSize / 2;
