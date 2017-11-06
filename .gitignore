@@ -673,4 +673,4 @@ OpenCover/
 
 # UJHa VS 2017 ignore(vc.db file not ignore : add .db files)
 
-*.db
+Browse.VC.db
