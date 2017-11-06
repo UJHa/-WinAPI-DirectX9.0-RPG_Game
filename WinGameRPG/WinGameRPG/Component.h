@@ -1,5 +1,6 @@
 #pragma once
 #include<Windows.h>
+#include<string>
 class Component
 {
 protected:
@@ -26,4 +27,7 @@ public:
 	bool CanMove() { return _canMove; }
 	int GetTileX() { return _tileX; }
 	int GetTileY() { return _tileY; }
+	//message
+public:
+	virtual void ReceiveMessage(Component* sender, std::wstring message);
 };

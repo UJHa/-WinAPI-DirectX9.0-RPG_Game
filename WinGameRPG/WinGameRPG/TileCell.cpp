@@ -1,5 +1,4 @@
 #include "TileCell.h"
-//#include "Sprite.h"
 #include "Component.h"
 TileCell::TileCell()
 {
@@ -85,4 +84,19 @@ bool TileCell::CanMove()
 			return false;
 	}
 	return true;
+}
+
+bool TileCell::GetCollisionList(std::list<Component*>& collisionList)
+{
+	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		if (false == (*it)->CanMove())
+		{
+			collisionList.push_back((*it));
+		}
+	}
+	if (0 == collisionList.size())
+		return true;
+	else
+		return false;
 }

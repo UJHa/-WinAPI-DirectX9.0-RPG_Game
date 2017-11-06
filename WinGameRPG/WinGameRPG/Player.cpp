@@ -2,7 +2,7 @@
 #include"GameSystem.h"
 #include"ComponentSystem.h"
 #include"Map.h"
-Player::Player(LPCWSTR name, LPCWSTR pngName) : Character(name, pngName)
+Player::Player(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
 {
 	_moveTime = 0.1f;
 }

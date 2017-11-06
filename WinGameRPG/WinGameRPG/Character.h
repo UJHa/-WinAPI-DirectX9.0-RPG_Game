@@ -9,6 +9,7 @@ class Character : public Component
 protected:
 	float _x;
 	float _y;
+	std::wstring _scrpitName;
 	std::wstring _pngName;
 private:
 	std::vector<Sprite*> _spriteList;
@@ -16,7 +17,7 @@ private:
 	float _deltaX;
 	float _deltaY;
 public:
-	Character(LPCWSTR name, LPCWSTR pngName);
+	Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName);
 	virtual ~Character();
 
 	void Init();

@@ -45,3 +45,7 @@ Component* ComponentSystem::FindComponent(LPCWSTR name)
 	}
 	return 0;
 }
+void ComponentSystem::SendMessage(Component* sender, Component* receiver, std::wstring message)
+{
+	receiver->ReceiveMessage(sender, message);
+}

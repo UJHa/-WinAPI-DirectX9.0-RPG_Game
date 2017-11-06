@@ -146,25 +146,34 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	InitInput();
 	_componentList.clear();
 	Map* map = new Map(L"tileMap");
-	//_map->Init();
 	_componentList.push_back(map);
 
-	Player* player = new Player(L"npc", L"character_sprite");
-	//player->Init();
+	WCHAR name[256];
+	wsprintf(name, L"player");
+	Player* player = new Player(name, L"npc", L"character_sprite");
 	_componentList.push_back(player);
-	NPC* npc = new NPC(L"npc", L"character_sprite2");
-	//npc->Init();
-	_componentList.push_back(npc);
-	Monster* monster = new Monster(L"monster", L"monster");
-	//monster->Init();
-	_componentList.push_back(monster);
+
+	for (int i = 0; i < 3; i++)
+	{
+		WCHAR name[256];
+		wsprintf(name, L"npc_%d", i);
+		NPC* npc = new NPC(name, L"npc", L"character_sprite2");
+		_componentList.push_back(npc);
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		WCHAR name[256];
+		wsprintf(name, L"monster_%d", i);
+		Monster* monster = new Monster(name, L"monster", L"monster");
+		_componentList.push_back(monster);
+	}
 
 	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 	{
 		(*it)->Init();
 	}
 
-	map->InitViewer(npc);
+	map->InitViewer(player);
 
 	return true;
 }

@@ -1,10 +1,10 @@
 #pragma once
 #include<Windows.h>
 #include<vector>
+#include<list>
 #include"Component.h"
 class Sprite;
 class TileCell;
-class Component;
 using namespace std;
 class Map : public Component
 {
@@ -35,6 +35,7 @@ public:
 
 	int GetPositionX(int tileX, int tileY);
 	int GetPositionY(int tileX, int tileY);
+	bool GetTileCollisionList(int tileX, int tileY, std::list<Component*>& collisionList);
 	void setTileComponent(int tileX, int tileY, Component* component, bool isRender);
 	void ResetTileComponent(int tileX, int tileY, Component* component);
 	bool CanMoveTileMap(int tileX, int tileY);
