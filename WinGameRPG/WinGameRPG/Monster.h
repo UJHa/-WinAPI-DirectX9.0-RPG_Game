@@ -5,6 +5,6 @@ class Monster : public Character
 {
 private:
 public:
-	Monster(LPCWSTR name, LPCWSTR pngName);
+	Monster(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName);
 	~Monster();
 };

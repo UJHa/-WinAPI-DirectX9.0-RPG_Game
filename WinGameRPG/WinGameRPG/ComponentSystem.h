@@ -20,4 +20,7 @@ public:
 	void AddComponent(wstring name, Component* component);
 	void RemoveAllComponents();
 	Component* FindComponent(LPCWSTR name);
+//message
+public:
+	void SendMessage(Component* sender, Component* receiver, std::wstring message);
 };

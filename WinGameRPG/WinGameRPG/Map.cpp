@@ -174,7 +174,7 @@ void Map::Render()
 	//
 	int midX = GameSystem::GetInstance()->GetWindowWidth() / 2;
 	int midY = GameSystem::GetInstance()->GetWindowHeight() / 2;
-
+	
 	int minX = _viewer->GetTileX() - (midX / _tileSize) - 2;
 	int maxX = _viewer->GetTileX() + (midX / _tileSize) + 2;
 	int minY = _viewer->GetTileY() - (midX / _tileSize) - 2;
@@ -230,6 +230,20 @@ int Map::GetPositionY(int tileX, int tileY)
 {
 	return _tileMap[tileY][tileX]->GetPositionY();
 }
+
+bool Map::GetTileCollisionList(int tileX, int tileY, std::list<Component*>& collisionList)
+{
+	if (_width <= tileX)
+		return false;
+	if (tileX < 0)
+		return false;
+	if (_height <= tileY)
+		return false;
+	if (tileY < 0)
+		return false;
+	return _tileMap[tileY][tileX]->GetCollisionList(collisionList);
+}
+
 void Map::setTileComponent(int tileX, int tileY, Component* component, bool isRender)
 {
 	_tileMap[tileY][tileX]->AddComponent(component, isRender);

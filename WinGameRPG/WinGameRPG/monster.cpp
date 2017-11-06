@@ -1,5 +1,5 @@
 #include"Monster.h"
-Monster::Monster(LPCWSTR name, LPCWSTR pngName) : Character(name, pngName)
+Monster::Monster(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
 {
 }
 

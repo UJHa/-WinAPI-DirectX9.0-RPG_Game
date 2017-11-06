@@ -1,7 +1,7 @@
 #pragma once
 //struct Sprite;
 #include<list>
-struct Component;
+class Component;
 class TileCell
 {
 private:
@@ -27,4 +27,5 @@ public:
 	void SetPosition(float posX, float posY);
 
 	bool CanMove();
+	bool GetCollisionList(std::list<Component*>& collisionList);
 };

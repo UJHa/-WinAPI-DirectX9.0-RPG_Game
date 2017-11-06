@@ -2,10 +2,11 @@
 #include "Sprite.h"
 #include "ComponentSystem.h"
 #include "Map.h"
-Character::Character(LPCWSTR name, LPCWSTR pngName) : Component(name)
+Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Component(name)
 {
 	_moveTime = 1.0f;
 	_spriteList.clear();
+	_scrpitName = scriptName;
 	_pngName = pngName;
 }
 
@@ -19,25 +20,25 @@ void Character::Init()
 	wsprintf(textureFileName, L"%s.png", _pngName.c_str());
 	WCHAR scriptFileName[256];
 	{
-		wsprintf(scriptFileName, L"%s_left.json", _name);
+		wsprintf(scriptFileName, L"%s_left.json", _scrpitName.c_str());
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
 		sprite->Init();
 		_spriteList.push_back(sprite);
 	}
 	{
-		wsprintf(scriptFileName, L"%s_right.json", _name);
+		wsprintf(scriptFileName, L"%s_right.json", _scrpitName.c_str());
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
 		sprite->Init();
 		_spriteList.push_back(sprite);
 	}
 	{
-		wsprintf(scriptFileName, L"%s_up.json", _name);
+		wsprintf(scriptFileName, L"%s_up.json", _scrpitName.c_str());
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
 		sprite->Init();
 		_spriteList.push_back(sprite);
 	}
 	{
-		wsprintf(scriptFileName, L"%s_down.json", _name);
+		wsprintf(scriptFileName, L"%s_down.json", _scrpitName.c_str());
 		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
 		sprite->Init();
 		_spriteList.push_back(sprite);
@@ -147,12 +148,17 @@ void Character::MoveStart(eDirection direction)
 
 	/*if (false == map->CanMoveTileMap(newTileX, newTileY))
 		return;*/
+
 	std::list<Component*> collisionList;
 	bool canMove = map->GetTileCollisionList(newTileX, newTileY, collisionList);
 	if (false == canMove)
 	{
 		//collisionList ¼øÈ¯
-
+		for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
+		{
+			ComponentSystem::GetInstance()->SendMessage(this, (*it), L"Collision");
+		}
+		return;
 	}
 
 	map->ResetTileComponent(_tileX, _tileY, this);
