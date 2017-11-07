@@ -9,6 +9,7 @@ Map::Map(LPCWSTR name) : Component(name)
 	_startX = _startY = _deltaX = _deltaY = 0.0f;
 	_tileSize = 32;
 	_spriteList.clear();
+	_viewer = NULL;
 }
 Map::~Map()
 {
@@ -157,6 +158,11 @@ void Map::DInit()
 			delete _tileMap[y][x];
 		}
 	}
+	if (NULL != _viewer)
+	{
+		delete _viewer;
+		_viewer = NULL;
+	}
 }
 void Map::Update(float deltaTime)
 {
@@ -168,10 +174,15 @@ void Map::Update(float deltaTime)
 			_tileMap[y][x]->Update(deltaTime);
 		}
 	}
+	if (NULL != _viewer)
+	{
+		float deltaX = _viewer->GetMoveDeltaX() * deltaTime;
+		float deltaY = _viewer->GetMoveDeltaY() * deltaTime;
+		Scroll(-deltaX, -deltaY);
+	}
 }
 void Map::Render()
 {
-	//
 	int midX = GameSystem::GetInstance()->GetWindowWidth() / 2;
 	int midY = GameSystem::GetInstance()->GetWindowHeight() / 2;
 	
@@ -263,6 +274,14 @@ bool Map::CanMoveTileMap(int tileX, int tileY)
 	if (tileY < 0)
 		return false;
 	return _tileMap[tileY][tileX]->CanMove();
+}
+int Map::GetWidth()
+{
+	return _width;
+}
+int Map::GetHeight()
+{
+	return _height;
 }
 void Map::InitViewer(Component* viewer)
 {

@@ -45,8 +45,6 @@ protected:
 	eDirection _currentDirection;
 	float _targetX;
 	float _targetY;
-	float _moveDistancePerTimeX;
-	float _moveDistancePerTimeY;
 public:
 	void InitMove();
 	void MoveStart(eDirection direction);

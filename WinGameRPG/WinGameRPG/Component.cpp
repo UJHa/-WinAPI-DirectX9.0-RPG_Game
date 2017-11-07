@@ -5,6 +5,7 @@ Component::Component(LPCWSTR name)
 	_name = name;
 	ComponentSystem::GetInstance()->AddComponent(_name, this);
 	_canMove = false;
+	_moveDistancePerTimeX = _moveDistancePerTimeY = 0.0f;
 }
 
 Component::~Component()

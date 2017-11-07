@@ -46,8 +46,8 @@ void Character::Init()
 	
 	{
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
-		_tileX = 0;
-		_tileY = 3;
+		_tileX = rand() % map->GetWidth();
+		_tileY = rand() % map->GetHeight();
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
 		map->setTileComponent(_tileX, _tileY, this, true);
@@ -209,7 +209,7 @@ void Character::MoveStart(eDirection direction)
 		_moveDistancePerTimeX = distanceX / _moveTime;
 		_moveDistancePerTimeY = distanceY / _moveTime;
 	}
-	_isMoving = true;	
+	_isMoving = true;
 }
 void Character::UpdateMove(float deltaTime)
 {
@@ -221,6 +221,7 @@ void Character::UpdateMove(float deltaTime)
 		_isMoving = false;
 		_x = _targetX;
 		_y = _targetY;
+		_moveDistancePerTimeX = _moveDistancePerTimeY = 0.0f;
 	}
 	else
 	{

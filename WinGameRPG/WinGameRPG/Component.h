@@ -9,6 +9,9 @@ protected:
 
 	int _tileX;
 	int _tileY;
+
+	float _moveDistancePerTimeX;
+	float _moveDistancePerTimeY;
 public:
 	Component() { _canMove = false; }
 	Component(LPCWSTR name);
@@ -27,6 +30,8 @@ public:
 	bool CanMove() { return _canMove; }
 	int GetTileX() { return _tileX; }
 	int GetTileY() { return _tileY; }
+	float GetMoveDeltaX() { return _moveDistancePerTimeX; };
+	float GetMoveDeltaY() { return _moveDistancePerTimeY; };
 	//message
 public:
 	virtual void ReceiveMessage(Component* sender, std::wstring message);
