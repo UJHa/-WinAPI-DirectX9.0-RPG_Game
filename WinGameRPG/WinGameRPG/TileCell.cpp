@@ -15,13 +15,9 @@ void TileCell::DInit()
 }
 void TileCell::Update(float deltaTime)
 {
-	//_sprite->Update(deltaTime);
 }
 void TileCell::Render()
 {
-	/*_sprite->SetPosition(_posX, _posY);
-	_sprite->Render();*/
-
 	for (std::list<Component*>::iterator it = _renderList.begin(); it != _renderList.end(); it++)
 	{
 		(*it)->Render();
@@ -61,7 +57,6 @@ void TileCell::MoveDeltaPosition(float deltaX, float  deltaY)
 {
 	_posX += deltaX;
 	_posY += deltaY;
-	//_sprite->SetPosition(_posX, _posY);
 	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 	{
 		(*it)->MoveDeltaPosition(deltaX, deltaY);

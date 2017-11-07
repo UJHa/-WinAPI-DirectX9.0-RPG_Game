@@ -39,6 +39,8 @@ public:
 	void setTileComponent(int tileX, int tileY, Component* component, bool isRender);
 	void ResetTileComponent(int tileX, int tileY, Component* component);
 	bool CanMoveTileMap(int tileX, int tileY);
+	int GetWidth();
+	int GetHeight();
 	//Viewer
 private:
 	Component* _viewer;
