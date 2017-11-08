@@ -202,13 +202,11 @@ void Character::UpdateMove(float deltaTime)
 
 		float moveDistanceX = _moveDistancePerTimeX * deltaTime;
 		float moveDistanceY = _moveDistancePerTimeY * deltaTime;
-		if (_moveTime < _movingDuration + deltaTime)
-		{
-			wchar_t distanceXCheck[256];
-			swprintf(distanceXCheck, L"distanceX %f\n", deltaTime);
-			OutputDebugString(distanceXCheck);
-		}
+		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		_x += moveDistanceX;
 		_y += moveDistanceY;
+		wchar_t distanceXCheck[256];
+		swprintf(distanceXCheck, L"char deltaTime %f\n", _x);
+		OutputDebugString(distanceXCheck);
 	}
 }
