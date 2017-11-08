@@ -219,9 +219,10 @@ void Character::UpdateMove(float deltaTime)
 	{
 		_movingDuration = 0.0f;
 		_isMoving = false;
-		_x = _targetX;
-		_y = _targetY;
 		_moveDistancePerTimeX = _moveDistancePerTimeY = 0.0f;
+		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		_x = map->GetPositionX(_tileX, _tileY);
+		_y = map->GetPositionY(_tileX, _tileY);
 	}
 	else
 	{
@@ -229,6 +230,12 @@ void Character::UpdateMove(float deltaTime)
 
 		float moveDistanceX = _moveDistancePerTimeX * deltaTime;
 		float moveDistanceY = _moveDistancePerTimeY * deltaTime;
+		if (_moveTime < _movingDuration + deltaTime)
+		{
+			wchar_t distanceXCheck[256];
+			swprintf(distanceXCheck, L"distanceX %f\n", deltaTime);
+			OutputDebugString(distanceXCheck);
+		}
 		_x += moveDistanceX;
 		_y += moveDistanceY;
 	}
