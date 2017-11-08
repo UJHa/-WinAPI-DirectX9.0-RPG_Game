@@ -3,7 +3,7 @@
 #include<vector>
 #include<string>
 #include"Component.h"
-struct Sprite;
+class Sprite;
 class Character : public Component
 {
 protected:
