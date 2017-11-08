@@ -167,34 +167,6 @@ void Character::MoveStart(eDirection direction)
 
 	_tileX = newTileX;
 	_tileY = newTileY;
-	
-	//switch (direction)
-	//{
-	//case eDirection::LEFT:
-	//	//Left
-	//	_tileX--;
-	//	if (_tileX < 0)
-	//		_tileX = 0;
-	//	break;
-	//case eDirection::RIGHT:
-	//	//Right
-	//	_tileX++;
-	//	if (49 < _tileX)
-	//		_tileX = 49;
-	//	break;
-	//case eDirection::UP:
-	//	//Up
-	//	_tileY--;
-	//	if (_tileY < 0)
-	//		_tileY = 0;
-	//	break;
-	//case eDirection::DOWN:
-	//	//Down
-	//	_tileY++;
-	//	if (29 < _tileY)
-	//		_tileY = 29;
-	//	break;
-	//}
 	{
 		//자연스러운 이동 보간
 		map->setTileComponent(_tileX, _tileY, this, false);

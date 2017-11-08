@@ -7,4 +7,5 @@ private:
 public:
 	Monster(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName);
 	~Monster();
+	void UpdateAI();
 };

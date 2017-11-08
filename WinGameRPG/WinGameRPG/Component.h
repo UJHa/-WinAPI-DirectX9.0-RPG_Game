@@ -1,6 +1,14 @@
 #pragma once
 #include<Windows.h>
 #include<string>
+enum eComponentType
+{
+	CT_PLAYER,
+	CT_MONSTER,
+	CT_NPC,
+	CT_TILE_OBJECT,
+	CT_NONE,
+};
 class Component
 {
 protected:
