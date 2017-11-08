@@ -150,25 +150,24 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 
 	WCHAR name[256];
 	wsprintf(name, L"player");
-	Player* player = new Player(name, L"npc", L"character_sprite");
+	Player* player = new Player(name, L"npc", L"player");
 	_componentList.push_back(player);
 
-	NPC* npc;
-	/*for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		WCHAR name[256];
 		wsprintf(name, L"npc_%d", i);
-		npc = new NPC(name, L"npc", L"character_sprite2");
+		NPC* npc = new NPC(name, L"npc", L"npc");
 		_componentList.push_back(npc);
-	}*/
-	/*for (int i = 0; i < 3; i++)
+	}
+	for (int i = 0; i < 3; i++)
 	{
 		WCHAR name[256];
 		wsprintf(name, L"monster_%d", i);
 		Monster* monster = new Monster(name, L"monster", L"monster");
 		_componentList.push_back(monster);
 	}
-*/
+
 	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 	{
 		(*it)->Init();
