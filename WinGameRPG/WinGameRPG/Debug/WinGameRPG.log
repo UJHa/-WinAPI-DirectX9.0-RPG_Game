@@ -1,7 +1,18 @@
-﻿  GameSystem.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.h(6): warning C4099: 'Sprite': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\map.h(6): note: 'Sprite' 선언을 참조하십시오.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\componentsystem.h(6): warning C4099: 'Component': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
-  c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\component.h(5): note: 'Component' 선언을 참조하십시오.
-  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
-  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)
+﻿  Character.cpp
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\componentsystem.h(6): warning C4099: 'Component': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
+  c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\component.h(5): note: 'Component' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(51): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(52): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(58): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(77): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(84): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(165): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(166): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(202): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(203): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(224): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(225): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(236): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\corecrt_wstdio.h(1822): note: 'swprintf' 선언을 참조하십시오.
+  WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\git-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\WinGameRPG.exe
+  WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\git-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)

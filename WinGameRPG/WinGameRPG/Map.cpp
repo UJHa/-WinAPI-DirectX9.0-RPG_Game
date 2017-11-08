@@ -305,3 +305,7 @@ void Map::InitViewer(Component* viewer)
 		posY += _tileSize;
 	}
 }
+Component* Map::GetViewer()
+{
+	return _viewer;
+}

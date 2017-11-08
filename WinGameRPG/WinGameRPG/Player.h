@@ -9,7 +9,5 @@ public:
 	//AI
 public:
 	void UpdateAI();
-	void UpdateMove(float deltaTime);
-	void MoveDeltaPosition(float deltaX, float deltaY);
 };
 
