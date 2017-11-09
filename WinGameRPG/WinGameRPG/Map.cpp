@@ -179,6 +179,9 @@ void Map::Update(float deltaTime)
 		float deltaX = _viewer->GetMoveDeltaX() * deltaTime;
 		float deltaY = _viewer->GetMoveDeltaY() * deltaTime;
 		Scroll(-deltaX, -deltaY);
+		/*wchar_t distanceXCheck[256];
+		swprintf(distanceXCheck, L"map deltaTime %f\n", deltaX);
+		OutputDebugString(distanceXCheck);*/
 	}
 }
 void Map::Render()

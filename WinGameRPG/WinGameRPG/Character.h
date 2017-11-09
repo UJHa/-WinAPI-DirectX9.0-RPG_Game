@@ -36,7 +36,7 @@ public:
 	//Move
 public:
 	enum eDirection {
-		LEFT,RIGHT,UP,DOWN
+		LEFT,RIGHT,UP,DOWN,NONE,
 	};
 protected:
 	bool _isMoving;

@@ -20,8 +20,10 @@ protected:
 
 	float _moveDistancePerTimeX;
 	float _moveDistancePerTimeY;
+
+	eComponentType _componentType;
 public:
-	Component() { _canMove = false; }
+	Component() { _canMove = false; _componentType = eComponentType::CT_NONE;}
 	Component(LPCWSTR name);
 	virtual ~Component();
 
@@ -40,6 +42,7 @@ public:
 	int GetTileY() { return _tileY; }
 	float GetMoveDeltaX() { return _moveDistancePerTimeX; };
 	float GetMoveDeltaY() { return _moveDistancePerTimeY; };
+	eComponentType GetType() { return _componentType; }
 	//message
 public:
 	virtual void ReceiveMessage(Component* sender, std::wstring message);
