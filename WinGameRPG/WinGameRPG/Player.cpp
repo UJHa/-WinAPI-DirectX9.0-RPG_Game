@@ -4,7 +4,7 @@
 #include"Map.h"
 Player::Player(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
 {
-	_moveTime = 1.0f;
+	_moveTime = 0.1f;
 	_componentType = eComponentType::CT_PLAYER;
 }
 

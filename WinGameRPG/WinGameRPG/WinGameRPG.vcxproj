@@ -172,6 +172,7 @@
     <ClInclude Include="NPC.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="sComponentMsgParam.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TileCell.h" />

@@ -11,6 +11,9 @@ protected:
 	float _y;
 	std::wstring _scrpitName;
 	std::wstring _pngName;
+
+	int _attackPoint;
+	int _hp;
 private:
 	std::vector<Sprite*> _spriteList;
 

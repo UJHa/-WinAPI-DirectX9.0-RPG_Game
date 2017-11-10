@@ -2,12 +2,15 @@
 #include "Sprite.h"
 #include "ComponentSystem.h"
 #include "Map.h"
+#include "sComponentMsgParam.h"
 Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Component(name)
 {
 	_moveTime = 1.0f;
 	_spriteList.clear();
 	_scrpitName = scriptName;
 	_pngName = pngName;
+	_attackPoint = 30;
+	_hp = 100;
 }
 
 Character::~Character()
@@ -43,11 +46,15 @@ void Character::Init()
 		sprite->Init();
 		_spriteList.push_back(sprite);
 	}
-	
 	{
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		_tileX = rand() % map->GetWidth();
 		_tileY = rand() % map->GetHeight();
+		while (!map->CanMoveTileMap(_tileX, _tileY))
+		{
+			_tileX = rand() % map->GetWidth();
+			_tileY = rand() % map->GetHeight();
+		}
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
 		map->setTileComponent(_tileX, _tileY, this, true);
@@ -98,6 +105,8 @@ void Character::SetPosition(float posX, float posY)
 }
 void Character::UpdateAI()
 {
+	if (false == _isLive)
+		return;
 	if (false == _isMoving)
 	{
 		int direction = rand() % 4;
@@ -154,9 +163,19 @@ void Character::MoveStart(eDirection direction)
 	if (false == canMove)
 	{
 		//collisionList ¼øÈ¯
-		for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
+		if (eComponentType::CT_MONSTER == _componentType)
 		{
-			ComponentSystem::GetInstance()->SendMessage(this, (*it), L"Collision");
+			for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
+			{
+				if ((*it)->GetType() == eComponentType::CT_NPC ||
+					(*it)->GetType() == eComponentType::CT_PLAYER)
+				{
+					sComponentMsgParam msgParam;
+					msgParam.sender = this;
+					msgParam.attackPoint = _attackPoint;
+					ComponentSystem::GetInstance()->SendMsg(L"Attack", (*it), msgParam);
+				}
+			}
 		}
 		return;
 	}
@@ -185,6 +204,8 @@ void Character::MoveStart(eDirection direction)
 }
 void Character::UpdateMove(float deltaTime)
 {
+	if (false == _isLive)
+		return;
 	if (false == _isMoving)
 		return;
 	if (_moveTime <= _movingDuration)

@@ -1,6 +1,7 @@
 #pragma once
 #include<Windows.h>
 #include<string>
+struct sComponentMsgParam;
 enum eComponentType
 {
 	CT_PLAYER,
@@ -22,8 +23,9 @@ protected:
 	float _moveDistancePerTimeY;
 
 	eComponentType _componentType;
+	bool _isLive;
 public:
-	Component() { _canMove = false; _componentType = eComponentType::CT_NONE;}
+	Component() { _canMove = false; _componentType = eComponentType::CT_NONE; _isLive = true;}
 	Component(LPCWSTR name);
 	virtual ~Component();
 
@@ -43,7 +45,8 @@ public:
 	float GetMoveDeltaX() { return _moveDistancePerTimeX; };
 	float GetMoveDeltaY() { return _moveDistancePerTimeY; };
 	eComponentType GetType() { return _componentType; }
+	bool IsLive() { return _isLive; }
 	//message
 public:
-	virtual void ReceiveMessage(Component* sender, std::wstring message);
+	virtual void ReceiveMessage(std::wstring message, const sComponentMsgParam msgParam);
 };

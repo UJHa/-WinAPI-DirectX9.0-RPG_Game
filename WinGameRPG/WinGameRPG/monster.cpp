@@ -4,6 +4,8 @@
 Monster::Monster(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
 {
 	_componentType = eComponentType::CT_MONSTER;
+	int speed = (rand() % 1500) + 200;
+	_moveTime = (float)speed / 1000.0f;
 }
 
 Monster::~Monster()
@@ -23,59 +25,60 @@ void Monster::UpdateAI()
 		평소 rand 움직임
 		*/
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
-		Component* findEnemy = NULL;
-		int minX = _tileX - 4;
-		int minY = _tileY - 4;
-		int maxX = _tileX + 4;
-		int maxY = _tileY + 4;
-		if (minX < 0) {
-			minX = 0;
-		}
-		if (minY < 0) {
-			minY = 0;
-		}
-		if (map->GetWidth() <= maxX) {
-			maxX = map->GetWidth() - 1;
-		}
-		if (map->GetHeight() <= maxY) {
-			maxY = map->GetHeight() - 1;
-		}
-		{
-			for (int y = minY; y <= maxY; y++)
-			{
-				for (int x = minX; x <= maxX; x++)
-				{
-					std::list<Component*> collisionList;
-					bool canMove = map->GetTileCollisionList(x, y, collisionList);
-					if (false == canMove)
-					{
-						//collisionList 순환
-						for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
-						{
-							if ((*it)->GetType() == eComponentType::CT_NPC || (*it)->GetType() == eComponentType::CT_PLAYER)
-							{
-								findEnemy = (*it);
-							}
-						}
-					}
-				}
-			}
-		}
+		//Component* findEnemy = NULL;
+		//int range = 4;
+		//int minX = _tileX - range;
+		//int minY = _tileY - range;
+		//int maxX = _tileX + range;
+		//int maxY = _tileY + range;
+		//if (minX < 0) {
+		//	minX = 0;
+		//}
+		//if (minY < 0) {
+		//	minY = 0;
+		//}
+		//if (map->GetWidth() <= maxX) {
+		//	maxX = map->GetWidth() - 1;
+		//}
+		//if (map->GetHeight() <= maxY) {
+		//	maxY = map->GetHeight() - 1;
+		//}
+		//{
+		//	for (int y = minY; y < maxY; y++)
+		//	{
+		//		for (int x = minX; x < maxX; x++)
+		//		{
+		//			std::list<Component*> collisionList;
+		//			if (false == map->GetTileCollisionList(x, y, collisionList))
+		//			{
+		//				//collisionList 순환
+		//				for (std::list<Component*>::iterator it = collisionList.begin();
+		//					it != collisionList.end();
+		//					it++)
+		//				{
+		//					Component* component = (*it);
+		//					if (component->GetType() == eComponentType::CT_NPC ||
+		//						component->GetType() == eComponentType::CT_PLAYER)
+		//					{
+		//						findEnemy = component;
+		//						break;
+		//					}
+		//				}
+		//			}
+		//		}
+		//	}
+		//}
+		std::vector<eComponentType> compareTypeList;
+		compareTypeList.push_back(eComponentType::CT_NPC);
+		compareTypeList.push_back(eComponentType::CT_PLAYER);
+		Component* findEnemy = ComponentSystem::GetInstance()->FindComponentInRange(this, 4, compareTypeList);
 		if (NULL != findEnemy)
 		{
-			_moveTime = 0.05f;
+			//_moveTime = 0.5f;
 			//추격
 			eDirection direction = eDirection::NONE;
-			int distanceX = _tileX - findEnemy->GetTileX();
+			/*int distanceX = _tileX - findEnemy->GetTileX();
 			int distanceY = _tileY - findEnemy->GetTileY();
-			/*if (distanceX < 0)
-			{
-				distanceX = -distanceX;
-			}
-			if (distanceY < 0)
-			{
-				distanceY = -distanceY;
-			}*/
 			int randXY = rand() % 2;
 			if (randXY)
 			{
@@ -92,12 +95,20 @@ void Monster::UpdateAI()
 					direction = eDirection::RIGHT;
 				else
 					direction = eDirection::LEFT;
-			}
+			}*/
+			if (findEnemy->GetTileX() < _tileX)
+				direction = eDirection::LEFT;
+			if (findEnemy->GetTileX() > _tileX)
+				direction = eDirection::RIGHT;
+			if (findEnemy->GetTileY() < _tileY)
+				direction = eDirection::UP;
+			if (findEnemy->GetTileY() > _tileY)
+				direction = eDirection::DOWN;
 			MoveStart(direction);
 		}
 		else
 		{
-			_moveTime = 1.0f;
+			//_moveTime = 1.0f;
 			Character::UpdateAI();
 		}
 	}
