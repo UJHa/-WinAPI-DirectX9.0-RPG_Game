@@ -200,6 +200,8 @@ int GameSystem::Update()
 			float deltaTime = _gameTimer->GetDeltaTime();
 			frameDuration += deltaTime;
 
+			ComponentSystem::GetInstance()->Update(deltaTime);
+
 			for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 			{
 				(*it)->Update(deltaTime);

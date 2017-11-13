@@ -13,6 +13,8 @@ Player::~Player()
 }
 void Player::UpdateAI()
 {
+	if (false == _isLive)
+		return;
 	if (false == _isMoving)
 	{
 		if (GameSystem::GetInstance()->IsKeyDown(VK_UP))

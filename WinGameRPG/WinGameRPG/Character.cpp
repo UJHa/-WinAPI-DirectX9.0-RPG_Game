@@ -9,7 +9,7 @@ Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Compon
 	_spriteList.clear();
 	_scrpitName = scriptName;
 	_pngName = pngName;
-	_attackPoint = 30;
+	_attackPoint = 10;
 	_hp = 100;
 }
 
@@ -162,21 +162,7 @@ void Character::MoveStart(eDirection direction)
 	bool canMove = map->GetTileCollisionList(newTileX, newTileY, collisionList);
 	if (false == canMove)
 	{
-		//collisionList ¼øÈ¯
-		if (eComponentType::CT_MONSTER == _componentType)
-		{
-			for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
-			{
-				if ((*it)->GetType() == eComponentType::CT_NPC ||
-					(*it)->GetType() == eComponentType::CT_PLAYER)
-				{
-					sComponentMsgParam msgParam;
-					msgParam.sender = this;
-					msgParam.attackPoint = _attackPoint;
-					ComponentSystem::GetInstance()->SendMsg(L"Attack", (*it), msgParam);
-				}
-			}
-		}
+		Collision(collisionList);
 		return;
 	}
 
@@ -212,7 +198,8 @@ void Character::UpdateMove(float deltaTime)
 	{
 		_movingDuration = 0.0f;
 		_isMoving = false;
-		_moveDistancePerTimeX = _moveDistancePerTimeY = 0.0f;
+		_moveDistancePerTimeX = 0.0f;
+		_moveDistancePerTimeY = 0.0f;
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
@@ -223,11 +210,40 @@ void Character::UpdateMove(float deltaTime)
 
 		float moveDistanceX = _moveDistancePerTimeX * deltaTime;
 		float moveDistanceY = _moveDistancePerTimeY * deltaTime;
-		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		_x += moveDistanceX;
 		_y += moveDistanceY;
-		wchar_t distanceXCheck[256];
+		/*wchar_t distanceXCheck[256];
 		swprintf(distanceXCheck, L"char deltaTime %f\n", _x);
-		OutputDebugString(distanceXCheck);
+		OutputDebugString(distanceXCheck);*/
+	}
+}
+void Character::Collision(std::list<Component*>& collisionList)
+{
+	for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
+	{
+		sComponentMsgParam msgParam;
+		msgParam.sender = this;
+		msgParam.receiver = (*it);
+		msgParam.message = L"Comunity";
+		ComponentSystem::GetInstance()->SendMsg(msgParam);
+	}
+}
+
+void Character::ReceiveMessage(const sComponentMsgParam msgParam)
+{
+	if (L"Attack" == msgParam.message)
+	{
+		int attackPoint = msgParam.attackPoint;
+		_hp -= attackPoint;
+		if (_hp < 0)
+		{
+			// dead
+			_isLive = false;
+			SetCanMove(true);
+
+			//stop
+			_moveDistancePerTimeX = 0.0f;
+			_moveDistancePerTimeY = 0.0f;
+		}
 	}
 }

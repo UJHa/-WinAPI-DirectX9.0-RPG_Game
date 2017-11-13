@@ -48,5 +48,5 @@ public:
 	bool IsLive() { return _isLive; }
 	//message
 public:
-	virtual void ReceiveMessage(std::wstring message, const sComponentMsgParam msgParam);
+	virtual void ReceiveMessage(const sComponentMsgParam msgParam);
 };

@@ -8,5 +8,4 @@ public:
 	NPC(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName);
 	~NPC();
 	void UpdateAI();
-	void ReceiveMessage(std::wstring message, const sComponentMsgParam msgParam);
 };

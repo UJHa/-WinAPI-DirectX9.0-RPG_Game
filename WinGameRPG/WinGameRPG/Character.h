@@ -1,6 +1,7 @@
 #pragma once
 #include<Windows.h>
 #include<vector>
+#include<list>
 #include<string>
 #include"Component.h"
 class Sprite;
@@ -52,4 +53,6 @@ public:
 	void InitMove();
 	void MoveStart(eDirection direction);
 	virtual void UpdateMove(float deltaTime);
+	virtual void Collision(std::list<Component*>& collisionList);
+	void ReceiveMessage(const sComponentMsgParam msgParam);
 };
