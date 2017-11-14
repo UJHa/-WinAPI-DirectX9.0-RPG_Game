@@ -1,5 +1,20 @@
-﻿  ComponentSystem.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\componentsystem.cpp(85): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\componentsystem.cpp(98): warning C4715: 'ComponentSystem::FindComponentInRange': 모든 제어 경로에서 값을 반환하지는 않습니다.
+﻿  MoveState.cpp
+  Character.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(61): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(62): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(68): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(88): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(95): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(139): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(140): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(148): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(149): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(167): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(168): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
+  건너뛰고 있습니다... (관련된 변경 내용 없음)
+  monster.cpp
+  Player.cpp
+  NPC.cpp
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)

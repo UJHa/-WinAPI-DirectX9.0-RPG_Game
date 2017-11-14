@@ -2,6 +2,7 @@
 #include"GameSystem.h"
 #include"ComponentSystem.h"
 #include"Map.h"
+#include"MoveState.h"
 Player::Player(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
 {
 	_moveTime = 0.1f;
@@ -15,15 +16,22 @@ void Player::UpdateAI()
 {
 	if (false == _isLive)
 		return;
-	if (false == _isMoving)
+	if (false == _state->IsMoving())
 	{
+		eDirection direction = eDirection::NONE;
 		if (GameSystem::GetInstance()->IsKeyDown(VK_UP))
-			MoveStart(eDirection::UP);
+			direction = eDirection::UP;
 		if (GameSystem::GetInstance()->IsKeyDown(VK_DOWN))
-			MoveStart(eDirection::DOWN);
+			direction = eDirection::DOWN;
 		if (GameSystem::GetInstance()->IsKeyDown(VK_LEFT))
-			MoveStart(eDirection::LEFT);
+			direction = eDirection::LEFT;
 		if (GameSystem::GetInstance()->IsKeyDown(VK_RIGHT))
-			MoveStart(eDirection::RIGHT);
+			direction = eDirection::RIGHT;
+			
+		if (eDirection::NONE != direction)
+		{
+			_currentDirection = direction;
+			_state->Start();
+		}
 	}
 }

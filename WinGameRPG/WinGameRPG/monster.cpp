@@ -2,6 +2,7 @@
 #include"ComponentSystem.h"
 #include"Map.h"
 #include "sComponentMsgParam.h"
+#include "MoveState.h"
 Monster::Monster(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
 {
 	_componentType = eComponentType::CT_MONSTER;
@@ -14,7 +15,7 @@ Monster::~Monster()
 }
 void Monster::UpdateAI()
 {
-	if (false == _isMoving)
+	if (false == _state->IsMoving())
 	{
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		std::vector<eComponentType> compareTypeList;
@@ -34,11 +35,11 @@ void Monster::UpdateAI()
 				direction = eDirection::UP;
 			if (findEnemy->GetTileY() > _tileY)
 				direction = eDirection::DOWN;
-			MoveStart(direction);
+			_currentDirection = direction;
+			_state->Start();
 		}
 		else
 		{
-			//_moveTime = 1.0f;
 			Character::UpdateAI();
 		}
 	}

@@ -206,10 +206,6 @@ int GameSystem::Update()
 			{
 				(*it)->Update(deltaTime);
 			}
-			/*_map->Update(deltaTime);
-			_player->Update(deltaTime);
-			_npc->Update(deltaTime);
-			_monster->Update(deltaTime);*/
 			if (frameTime <= frameDuration)
 			{
 
