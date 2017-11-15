@@ -81,6 +81,7 @@ void Character::DInit()
 }
 void Character::Update(float deltaTime)
 {
+	_isMoving;
 	_spriteList[(int)_currentDirection]->Update(deltaTime);
 	_state->Update(deltaTime);
 }
@@ -136,6 +137,7 @@ void Character::ChangeState(eStateType stateType)
 	default:
 		break;
 	}
+	_state->Init(this);
 	_state->Start();
 }
 void Character::InitMove()

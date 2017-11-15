@@ -34,7 +34,6 @@ void Monster::UpdateAI()
 		if (findEnemy->GetTileY() > _tileY)
 			direction = eDirection::DOWN;
 		_currentDirection = direction;
-		//_state->Start();
 		ChangeState(ET_MOVE);
 	}
 	else

@@ -66,28 +66,26 @@ Component* ComponentSystem::FindComponentInRange(Component* component, int range
 	if (map->GetHeight() <= maxY) {
 		maxY = map->GetHeight() - 1;
 	}
+	for (int y = minY; y < maxY; y++)
 	{
-		for (int y = minY; y < maxY; y++)
+		for (int x = minX; x < maxX; x++)
 		{
-			for (int x = minX; x < maxX; x++)
+			std::list<Component*> collisionList;
+			if (false == map->GetTileCollisionList(x, y, collisionList))
 			{
-				std::list<Component*> collisionList;
-				if (false == map->GetTileCollisionList(x, y, collisionList))
+				//collisionList 순환
+				for (std::list<Component*>::iterator itCollision = collisionList.begin();
+					itCollision != collisionList.end();
+					itCollision++)
 				{
-					//collisionList 순환
-					for (std::list<Component*>::iterator itCollision = collisionList.begin();
-						itCollision != collisionList.end();
-						itCollision++)
+					Component* component = (*itCollision);
+					if (component->IsLive())
 					{
-						Component* component = (*itCollision);
-						if (component->IsLive())
+						for (int i = 0; i < compareTypeList.size(); i++)
 						{
-							for (int i=0;i<compareTypeList.size();i++)
+							if (component->GetType() == compareTypeList[i])
 							{
-								if (component->GetType() == compareTypeList[i])
-								{
-									return component;
-								}
+								return component;
 							}
 						}
 					}
@@ -95,6 +93,7 @@ Component* ComponentSystem::FindComponentInRange(Component* component, int range
 			}
 		}
 	}
+	return NULL;
 }
 void ComponentSystem::Update(float deltaTime)
 {
