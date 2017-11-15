@@ -4,15 +4,22 @@
 #include "Map.h"
 #include "sComponentMsgParam.h"
 #include "MoveState.h"
+#include "IdleState.h"
 Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Component(name)
 {
-	_state = new MoveState();
+	_state = new IdleState();
 	_moveTime = 1.0f;
 	_spriteList.clear();
 	_scrpitName = scriptName;
 	_pngName = pngName;
 	_attackPoint = 10;
 	_hp = 100;
+
+	_targetX = 0.0f;
+	_targetY = 0.0f;
+	_moveDistancePerTimeX = 0.0f;
+	_moveDistancePerTimeY = 0.0f;
+	_deltaX = _deltaY = 0.0f;
 }
 
 Character::~Character()
@@ -21,7 +28,6 @@ Character::~Character()
 }
 void Character::Init()
 {
-	InitMove();
 	WCHAR textureFileName[256];
 	wsprintf(textureFileName, L"%s.png", _pngName.c_str());
 	WCHAR scriptFileName[256];
@@ -62,6 +68,8 @@ void Character::Init()
 		_y = map->GetPositionY(_tileX, _tileY);
 		map->setTileComponent(_tileX, _tileY, this, true);
 	}
+	_state->Init(this);
+	InitMove();
 }
 void Character::DInit()
 {
@@ -74,8 +82,6 @@ void Character::DInit()
 void Character::Update(float deltaTime)
 {
 	_spriteList[(int)_currentDirection]->Update(deltaTime);
-	UpdateAI();
-	//UpdateMove(deltaTime);
 	_state->Update(deltaTime);
 }
 void Character::Render()
@@ -109,28 +115,33 @@ void Character::SetPosition(float posX, float posY)
 }
 void Character::UpdateAI()
 {
-	if (false == _isLive)
-		return;
-	if (false == _state->IsMoving())
+	_currentDirection = (eDirection)(rand() % 4);
+	ChangeState(eStateType::ET_MOVE);
+}
+void Character::ChangeState(eStateType stateType)
+{
+	if (NULL != _state)
 	{
-		int direction = rand() % 4;
-		_currentDirection = (eDirection)direction;
-		//MoveStart();
-		_state->Start();
+		_state->Stop();
+		delete _state;
 	}
+	switch (stateType)
+	{
+	case ET_IDLE:
+		_state = new IdleState();
+		break;
+	case ET_MOVE:
+		_state = new MoveState();
+		break;
+	default:
+		break;
+	}
+	_state->Start();
 }
 void Character::InitMove()
 {
+	_isMoving = false;
 	_currentDirection = eDirection::DOWN;
-	/*_state->_isMoving = false;
-	_state->_movingDuration = 0.0f;*/
-	_state->Init(this);
-	_targetX = 0.0f;
-	_targetY = 0.0f;
-	_moveDistancePerTimeX = 0.0f;
-	_moveDistancePerTimeY = 0.0f;
-
-	_deltaX = _deltaY = 0.0f;
 }
 void Character::MoveStart(int newTileX, int newTileY)
 {
@@ -155,29 +166,23 @@ void Character::MoveStart(int newTileX, int newTileY)
 		_moveDistancePerTimeX = distanceX / _moveTime;
 		_moveDistancePerTimeY = distanceY / _moveTime;
 	}
+	_isMoving = true;
 }
-void Character::UpdateMove(float deltaTime)
+void Character::MoveStop()
 {
-	if (_moveTime <= _state->GetMovingDuration())
-	{
-		_state->Stop();
-		_moveDistancePerTimeX = 0.0f;
-		_moveDistancePerTimeY = 0.0f;
-		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
-		_x = map->GetPositionX(_tileX, _tileY);
-		_y = map->GetPositionY(_tileX, _tileY);
-	}
-	else
-	{
-		_state->UpdateMove(deltaTime);
-		float moveDistanceX = _moveDistancePerTimeX * deltaTime;
-		float moveDistanceY = _moveDistancePerTimeY * deltaTime;
-		_x += moveDistanceX;
-		_y += moveDistanceY;
-		/*wchar_t distanceXCheck[256];
-		swprintf(distanceXCheck, L"char deltaTime %f\n", _x);
-		OutputDebugString(distanceXCheck);*/
-	}
+	_isMoving = false;
+	Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	_x = map->GetPositionX(_tileX, _tileY);
+	_y = map->GetPositionY(_tileX, _tileY);
+	_moveDistancePerTimeX = 0.0f;
+	_moveDistancePerTimeY = 0.0f;
+}
+void Character::Moving(float deltaTime)
+{
+	float moveDistanceX = _moveDistancePerTimeX * deltaTime;
+	float moveDistanceY = _moveDistancePerTimeY * deltaTime;
+	_x += moveDistanceX;
+	_y += moveDistanceY;
 }
 void Character::Collision(std::list<Component*>& collisionList)
 {
