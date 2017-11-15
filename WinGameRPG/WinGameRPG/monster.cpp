@@ -15,33 +15,32 @@ Monster::~Monster()
 }
 void Monster::UpdateAI()
 {
-	if (false == _state->IsMoving())
+	Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	std::vector<eComponentType> compareTypeList;
+	compareTypeList.push_back(eComponentType::CT_NPC);
+	compareTypeList.push_back(eComponentType::CT_PLAYER);
+	Component* findEnemy = ComponentSystem::GetInstance()->FindComponentInRange(this, 4, compareTypeList);
+	if (NULL != findEnemy)
 	{
-		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
-		std::vector<eComponentType> compareTypeList;
-		compareTypeList.push_back(eComponentType::CT_NPC);
-		compareTypeList.push_back(eComponentType::CT_PLAYER);
-		Component* findEnemy = ComponentSystem::GetInstance()->FindComponentInRange(this, 4, compareTypeList);
-		if (NULL != findEnemy)
-		{
-			//_moveTime = 0.5f;
-			//추격
-			eDirection direction = eDirection::NONE;
-			if (findEnemy->GetTileX() < _tileX)
-				direction = eDirection::LEFT;
-			if (findEnemy->GetTileX() > _tileX)
-				direction = eDirection::RIGHT;
-			if (findEnemy->GetTileY() < _tileY)
-				direction = eDirection::UP;
-			if (findEnemy->GetTileY() > _tileY)
-				direction = eDirection::DOWN;
-			_currentDirection = direction;
-			_state->Start();
-		}
-		else
-		{
-			Character::UpdateAI();
-		}
+		//_moveTime = 0.5f;
+		//추격
+		eDirection direction = eDirection::NONE;
+		if (findEnemy->GetTileX() < _tileX)
+			direction = eDirection::LEFT;
+		if (findEnemy->GetTileX() > _tileX)
+			direction = eDirection::RIGHT;
+		if (findEnemy->GetTileY() < _tileY)
+			direction = eDirection::UP;
+		if (findEnemy->GetTileY() > _tileY)
+			direction = eDirection::DOWN;
+		_currentDirection = direction;
+		//_state->Start();
+		ChangeState(ET_MOVE);
+	}
+	else
+	{
+		_currentDirection = (eDirection)(rand() % 4);
+		Character::UpdateAI();
 	}
 }
 void Monster::Collision(std::list<Component*>& collisionList)

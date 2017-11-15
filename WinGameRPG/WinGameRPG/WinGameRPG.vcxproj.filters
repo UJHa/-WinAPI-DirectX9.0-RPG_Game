@@ -87,6 +87,12 @@
     <ClCompile Include="MoveState.cpp">
       <Filter>소스 파일\Game\Character\State</Filter>
     </ClCompile>
+    <ClCompile Include="IdleState.cpp">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -138,6 +144,12 @@
       <Filter>소스 파일\System</Filter>
     </ClInclude>
     <ClInclude Include="MoveState.h">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
       <Filter>소스 파일\Game\Character\State</Filter>
     </ClInclude>
   </ItemGroup>
