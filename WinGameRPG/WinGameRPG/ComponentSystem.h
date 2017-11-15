@@ -2,8 +2,12 @@
 #include<Windows.h>
 #include<string>
 #include<map>
+#include<queue>
+#include<vector>
+#include"sComponentMsgParam.h"
 using namespace std;
-struct Component;
+class Component;
+enum eComponentType;
 class ComponentSystem
 {
 	//Sington Pattern
@@ -20,7 +24,12 @@ public:
 	void AddComponent(wstring name, Component* component);
 	void RemoveAllComponents();
 	Component* FindComponent(LPCWSTR name);
+	Component* FindComponentInRange(Component* component, int range, std::vector<eComponentType> compareTypeList);
+	void Update(float deltaTime);
 //message
+private:
+	std::queue<sComponentMsgParam> _msgQueue;
 public:
-	void SendMessage(Component* sender, Component* receiver, std::wstring message);
+	void SendMsg(sComponentMsgParam& msgParam);
+	void ProcessMessageQueue();
 };

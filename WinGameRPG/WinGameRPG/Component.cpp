@@ -1,5 +1,6 @@
 #include "Component.h"
 #include "ComponentSystem.h"
+#include"sComponentMsgParam.h"
 Component::Component(LPCWSTR name)
 {
 	_name = name;
@@ -7,16 +8,16 @@ Component::Component(LPCWSTR name)
 	_canMove = false;
 	_moveDistancePerTimeX = _moveDistancePerTimeY = 0.0f;
 	_componentType = eComponentType::CT_NONE;
+	_isLive = true;
 }
 
 Component::~Component()
 {
 
 }
-void Component::ReceiveMessage(Component* sender, std::wstring message)
+void Component::ReceiveMessage(const sComponentMsgParam msgParam)
 {
-	if (L"Collision" == message)
+	if (L"Collision" == msgParam.message)
 	{
-
 	}
 }

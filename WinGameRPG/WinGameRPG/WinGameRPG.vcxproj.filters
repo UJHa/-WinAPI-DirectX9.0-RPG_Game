@@ -31,6 +31,9 @@
     <Filter Include="소스 파일\Game\Character">
       <UniqueIdentifier>{3f924160-3648-486b-b61c-c4ded34a0497}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Game\Character\State">
+      <UniqueIdentifier>{b8856d68-95cc-4664-86ce-682f55ecc74b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +84,15 @@
     <ClCompile Include="monster.cpp">
       <Filter>소스 파일\Game\Character</Filter>
     </ClCompile>
+    <ClCompile Include="MoveState.cpp">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleState.cpp">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -127,6 +139,18 @@
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>소스 파일\Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="sComponentMsgParam.h">
+      <Filter>소스 파일\System</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveState.h">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>소스 파일\Game\Character\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

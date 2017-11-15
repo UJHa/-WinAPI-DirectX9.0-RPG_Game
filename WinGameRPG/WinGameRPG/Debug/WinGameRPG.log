@@ -1,28 +1,14 @@
-﻿  Map.cpp
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(48): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(54): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(56): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(78): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(101): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(126): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(241): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(245): warning C4244: 'return': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(296): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\map.cpp(297): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  GameSystem.cpp
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\componentsystem.h(6): warning C4099: 'Component': 처음에는 'class'을(를) 사용하여 형식 이름을 표시했는데 이제는 'struct'을(를) 사용하여 표시합니다.
-  c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\component.h(13): note: 'Component' 선언을 참조하십시오.
-  코드를 생성하고 있습니다...
-  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  monster.cpp
-  Player.cpp
-  NPC.cpp
-  Character.cpp
-  WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\git-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\WinGameRPG.exe
-  WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\git-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)
+﻿  Character.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(69): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(70): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(76): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(94): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(101): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(150): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(151): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(159): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(160): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(175): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(176): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
+  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)
