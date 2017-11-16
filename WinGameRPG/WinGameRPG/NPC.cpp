@@ -22,7 +22,6 @@ void NPC::UpdateAI()
 	if (NULL != findEnemy)
 	{
 		//_moveTime = 0.3f;
-		//Ãß°Ý
 		eDirection direction = eDirection::NONE;
 		for (int findDir = 0; findDir < 4; findDir++)
 		{
