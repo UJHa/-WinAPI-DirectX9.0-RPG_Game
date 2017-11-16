@@ -49,12 +49,16 @@ void Monster::Collision(std::list<Component*>& collisionList)
 		if ((*it)->GetType() == eComponentType::CT_NPC ||
 			(*it)->GetType() == eComponentType::CT_PLAYER)
 		{
-			sComponentMsgParam msgParam;
+			/*sComponentMsgParam msgParam;
 			msgParam.sender = this;
 			msgParam.attackPoint = _attackPoint;
 			msgParam.receiver = (*it);
 			msgParam.message = L"Attack";
-			ComponentSystem::GetInstance()->SendMsg(msgParam);
+			ComponentSystem::GetInstance()->SendMsg(msgParam);*/
+			_targetComponent = (*it);
+			ChangeState(eStateType::ET_ATTACK);
+			return;
 		}
 	}
+	ChangeState(eStateType::ET_IDLE);
 }

@@ -1,8 +1,8 @@
 #pragma once
 #include<D3DX9.h>
 #include<vector>
-struct Frame;
-struct Texture;
+class Frame;
+class Texture;
 class Sprite
 {
 //DirectX

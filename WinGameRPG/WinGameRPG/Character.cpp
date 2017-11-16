@@ -5,11 +5,12 @@
 #include "sComponentMsgParam.h"
 #include "MoveState.h"
 #include "IdleState.h"
+#include "AttackState.h"
 Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Component(name)
 {
-	_state = new IdleState();
+	_state = NULL;
 	_moveTime = 1.0f;
-	_spriteList.clear();
+	//_spriteList.clear();
 	_scrpitName = scriptName;
 	_pngName = pngName;
 	_attackPoint = 10;
@@ -24,37 +25,10 @@ Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Compon
 
 Character::~Character()
 {
-	delete _state;
+	
 }
 void Character::Init()
 {
-	WCHAR textureFileName[256];
-	wsprintf(textureFileName, L"%s.png", _pngName.c_str());
-	WCHAR scriptFileName[256];
-	{
-		wsprintf(scriptFileName, L"%s_left.json", _scrpitName.c_str());
-		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
-		sprite->Init();
-		_spriteList.push_back(sprite);
-	}
-	{
-		wsprintf(scriptFileName, L"%s_right.json", _scrpitName.c_str());
-		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
-		sprite->Init();
-		_spriteList.push_back(sprite);
-	}
-	{
-		wsprintf(scriptFileName, L"%s_up.json", _scrpitName.c_str());
-		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
-		sprite->Init();
-		_spriteList.push_back(sprite);
-	}
-	{
-		wsprintf(scriptFileName, L"%s_down.json", _scrpitName.c_str());
-		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
-		sprite->Init();
-		_spriteList.push_back(sprite);
-	}
 	{
 		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		_tileX = rand() % map->GetWidth();
@@ -68,41 +42,62 @@ void Character::Init()
 		_y = map->GetPositionY(_tileX, _tileY);
 		map->setTileComponent(_tileX, _tileY, this, true);
 	}
-	_state->Init(this);
 	InitMove();
+	{
+		State* state = new IdleState();
+		state->Init(this);
+		_stateMap[eStateType::ET_IDLE] = state;
+	}
+	{
+		State* state = new MoveState();
+		state->Init(this);
+		_stateMap[eStateType::ET_MOVE] = state;
+	}
+	{
+		State* state = new AttackState();
+		state->Init(this);
+		_stateMap[eStateType::ET_ATTACK] = state;
+	}
+	ChangeState(eStateType::ET_IDLE);
 }
 void Character::DInit()
 {
-	for (int i = 0; i < _spriteList.size(); i++)
+	std::map<eStateType, State*>::iterator it = _stateMap.begin();
+	while(it != _stateMap.end())
 	{
-		_spriteList[i]->DInit();
-		delete _spriteList[i];
+		State* state = it->second;
+		delete state;
+		it++;
 	}
+	_stateMap.clear();
+	//_state->DInit();
 }
 void Character::Update(float deltaTime)
 {
-	_isMoving;
-	_spriteList[(int)_currentDirection]->Update(deltaTime);
+	//_spriteList[(int)_currentDirection]->Update(deltaTime);
 	_state->Update(deltaTime);
 }
 void Character::Render()
 {
-	_spriteList[(int)_currentDirection]->SetPosition(_x, _y);
-	_spriteList[(int)_currentDirection]->Render();
+	/*_spriteList[(int)_currentDirection]->SetPosition(_x, _y);
+	_spriteList[(int)_currentDirection]->Render();*/
+	_state->Render();
 }
 void Character::Release()
 {
-	for (int i = 0; i < _spriteList.size(); i++)
+	/*for (int i = 0; i < _spriteList.size(); i++)
 	{
 		_spriteList[i]->Release();
-	}
+	}*/
+	_state->Release();
 }
 void Character::Reset()
 {
-	for (int i = 0; i < _spriteList.size(); i++)
+	/*for (int i = 0; i < _spriteList.size(); i++)
 	{
 		_spriteList[i]->Reset();
-	}
+	}*/
+	_state->Reset();
 }
 void Character::MoveDeltaPosition(float deltaX, float deltaY)
 {
@@ -124,21 +119,11 @@ void Character::ChangeState(eStateType stateType)
 	if (NULL != _state)
 	{
 		_state->Stop();
-		delete _state;
 	}
-	switch (stateType)
-	{
-	case ET_IDLE:
-		_state = new IdleState();
-		break;
-	case ET_MOVE:
-		_state = new MoveState();
-		break;
-	default:
-		break;
-	}
-	_state->Init(this);
+	_state = _stateMap[stateType];
 	_state->Start();
+	/*_state->Init(this);
+	_state->Start();*/
 }
 void Character::InitMove()
 {

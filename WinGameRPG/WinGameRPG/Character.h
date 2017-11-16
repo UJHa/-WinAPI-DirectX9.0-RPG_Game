@@ -1,5 +1,5 @@
 #pragma once
-#include<Windows.h>
+#include<map>
 #include<vector>
 #include<list>
 #include<string>
@@ -9,7 +9,7 @@ enum eDirection {
 };
 enum eStateType
 {
-	ET_IDLE, ET_MOVE,
+	ET_IDLE, ET_MOVE, ET_ATTACK
 };
 class Sprite;
 class State;
@@ -21,11 +21,9 @@ protected:
 	std::wstring _scrpitName;
 	std::wstring _pngName;
 
-	int _attackPoint;
 	int _hp;
 private:
-	std::vector<Sprite*> _spriteList;
-
+	//std::vector<Sprite*> _spriteList;
 	float _deltaX;
 	float _deltaY;
 public:
@@ -42,16 +40,22 @@ public:
 public:
 	virtual void MoveDeltaPosition(float deltaX, float deltaY);
 	void SetPosition(float posX, float posY);
+	std::wstring GetScriptFileName() { return _scrpitName; }
+	std::wstring GetTextureFileName() { return _pngName; }
+	float GetX() { return _x; }
+	float GetY() { return _y; }
 	//AI
 public:
 	virtual void UpdateAI();
 	void ChangeState(eStateType stateType);
+	//State
+protected:
+	State* _state;
+	std::map<eStateType, State*> _stateMap;
 	//Move
 protected:
 	float _moveTime;
 	bool _isMoving;
-	//float _movingDuration;
-	State* _state;
 
 	eDirection _currentDirection;
 	float _targetX;
@@ -64,7 +68,15 @@ public:
 	float GetMoveTime() { return _moveTime; }
 	eDirection GetDirection() { return _currentDirection; }
 	bool IsMoving() { return _isMoving; }
-
+	//Attack
+protected:
+	Component* _targetComponent;
+	int _attackPoint;
+public:
+	int GetAttackPoint() { return _attackPoint; }
+	Component* GetTarget() { return _targetComponent; }
+	void ResetTarget() { _targetComponent = NULL; }
+public:
 	virtual void Collision(std::list<Component*>& collisionList);
 	void ReceiveMessage(const sComponentMsgParam msgParam);
 };

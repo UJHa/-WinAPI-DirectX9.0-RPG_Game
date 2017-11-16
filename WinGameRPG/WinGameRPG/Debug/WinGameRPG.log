@@ -1,6 +1,25 @@
-﻿  NPC.cpp
-  ComponentSystem.cpp
-c:\users\mrt\documents\visual studio 2017\projects\git-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\componentsystem.cpp(84): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+﻿  monster.cpp
+  Character.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(41): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(42): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(137): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(138): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(146): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(147): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(162): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\character.cpp(163): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  AttackState.cpp
   코드를 생성하고 있습니다...
-  WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\git-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\WinGameRPG.exe
-  WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\git-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)
+  컴파일하고 있습니다...
+  State.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\state.cpp(10): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\state.cpp(73): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\state.cpp(80): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Player.cpp
+  NPC.cpp
+  MoveState.cpp
+  IdleState.cpp
+  GameSystem.cpp
+  코드를 생성하고 있습니다...
+  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
+  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)

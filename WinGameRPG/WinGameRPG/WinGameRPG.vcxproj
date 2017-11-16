@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AttackState.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
@@ -164,6 +165,7 @@
     <ClCompile Include="TileObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AttackState.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentSystem.h" />

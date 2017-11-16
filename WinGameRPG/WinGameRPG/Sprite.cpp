@@ -20,6 +20,7 @@ Sprite::~Sprite()
 		delete _srcTexture;
 		_srcTexture = NULL;
 	}
+
 }
 void Sprite::Init()
 {
