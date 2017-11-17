@@ -40,6 +40,7 @@ void AttackState::Reset()
 
 void AttackState::Start()
 {
+	State::Start();
 	sComponentMsgParam msgParam;
 	msgParam.sender = (Component*)_character;
 	msgParam.attackPoint = _character->GetAttackPoint();

@@ -6,6 +6,8 @@
 #include "MoveState.h"
 #include "IdleState.h"
 #include "AttackState.h"
+#include "DefenseState.h"
+#include "DeadState.h"
 Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Component(name)
 {
 	_state = NULL;
@@ -57,6 +59,16 @@ void Character::Init()
 		State* state = new AttackState();
 		state->Init(this);
 		_stateMap[eStateType::ET_ATTACK] = state;
+	}
+	{
+		State* state = new DefenseState();
+		state->Init(this);
+		_stateMap[eStateType::ET_DEFENSE] = state;
+	}
+	{
+		State* state = new DeadState();
+		state->Init(this);
+		_stateMap[eStateType::ET_DEAD] = state;
 	}
 	ChangeState(eStateType::ET_IDLE);
 }
@@ -171,33 +183,44 @@ void Character::Moving(float deltaTime)
 	_x += moveDistanceX;
 	_y += moveDistanceY;
 }
-void Character::Collision(std::list<Component*>& collisionList)
+Component* Character::Collision(std::list<Component*>& collisionList)
 {
-	for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
+	/*for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
 	{
 		sComponentMsgParam msgParam;
 		msgParam.sender = this;
 		msgParam.receiver = (*it);
 		msgParam.message = L"Comunity";
 		ComponentSystem::GetInstance()->SendMsg(msgParam);
-	}
+	}*/
+	return NULL;
 }
 
+void Character::DecreaseHP(int decreaseHPpont)
+{
+	_hp -= decreaseHPpont;
+	if (_hp < 0)
+	{
+		_isLive = false;
+	}
+}
 void Character::ReceiveMessage(const sComponentMsgParam msgParam)
 {
 	if (L"Attack" == msgParam.message)
 	{
-		int attackPoint = msgParam.attackPoint;
-		_hp -= attackPoint;
-		if (_hp < 0)
-		{
-			// dead
-			_isLive = false;
-			SetCanMove(true);
+		_attackedPoint = msgParam.attackPoint;
+		ChangeState(eStateType::ET_DEFENSE);
+		//int attackPoint = msgParam.attackPoint;
+		//_hp -= attackPoint;
+		//if (_hp < 0)
+		//{
+		//	// dead
+		//	_isLive = false;
+		//	SetCanMove(true);
 
-			//stop
-			_moveDistancePerTimeX = 0.0f;
-			_moveDistancePerTimeY = 0.0f;
-		}
+		//	//stop
+		//	_moveDistancePerTimeX = 0.0f;
+		//	_moveDistancePerTimeY = 0.0f;
+		//}
 	}
 }

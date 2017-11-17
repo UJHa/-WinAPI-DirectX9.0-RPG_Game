@@ -17,6 +17,11 @@ void MoveState::Init(Character* character)
 void MoveState::Update(float deltaTime)
 {
 	State::Update(deltaTime);
+	if (eStateType::ET_NONE != _nextState)
+	{
+		_character->ChangeState(_nextState);
+		return;
+	}
 	if (false == _character->IsLive())
 		return;
 	if (false == _character->IsMoving())
@@ -25,7 +30,8 @@ void MoveState::Update(float deltaTime)
 	{
 		_movingDuration = 0.0f;
 		_character->MoveStop();
-		_character->ChangeState(eStateType::ET_IDLE);
+		//_character->ChangeState(eStateType::ET_IDLE);
+		_nextState = eStateType::ET_IDLE;
 	}
 	else
 	{
@@ -62,8 +68,18 @@ void MoveState::Start()
 	bool canMove = map->GetTileCollisionList(newTileX, newTileY, collisionList);
 	if (false == canMove)
 	{
-		_character->Collision(collisionList);
-		_character->ChangeState(eStateType::ET_IDLE);
+		/*_character->Collision(collisionList);
+		_character->ChangeState(eStateType::ET_IDLE);*/
+		Component* target = _character->Collision(collisionList);
+		if (NULL != target)
+		{
+			_character->SetTarget(target);
+			_nextState = eStateType::ET_ATTACK;
+		}
+		else
+		{
+			_nextState = eStateType::ET_IDLE;
+		}
 	}
 	else
 	{

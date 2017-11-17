@@ -6,9 +6,10 @@
 #include"Frame.h"
 #include"Texture.h"
 #include"ResourceManager.h"
-Sprite::Sprite(LPCWSTR textureFileName, LPCWSTR scriptFileName)
+Sprite::Sprite(LPCWSTR textureFileName, LPCWSTR scriptFileName, float rotate)
 	: _currentFrame(0), _frameTime(0.0f), _srcTexture(NULL),
-	_textureFileName(textureFileName), _scriptFileName(scriptFileName)
+	_textureFileName(textureFileName), _scriptFileName(scriptFileName),
+	_rotate(rotate)
 {
 }
 
@@ -50,7 +51,7 @@ void Sprite::Init()
 				_delay = root["frameDelay"].asDouble();
 
 				Frame* frame = new Frame();
-				frame->Init(_srcTexture, _initX, _initY, _width, _height, _delay);
+				frame->Init(_srcTexture, _initX, _initY, _width, _height, _rotate, _delay);
 				_frameList.push_back(frame);
 			}
 		}
@@ -62,7 +63,7 @@ void Sprite::Init(int x, int y, int width, int height, float delay)
 {
 	_srcTexture = ResourceManager::GetInstance()->LoadTexture(_textureFileName);
 	Frame* frame = new Frame();
-	frame->Init(_srcTexture, x, y, width, height, delay);
+	frame->Init(_srcTexture, x, y, width, height, _rotate, delay);
 	_frameList.push_back(frame);
 	_currentFrame = 0;
 	_frameTime = 0.0f;
@@ -110,7 +111,7 @@ void Sprite::Reset()
 	for (std::vector<Frame*>::iterator it = _frameList.begin(); it != _frameList.end(); it++)
 	{
 		Frame* frame = *it;
-		frame->Reset(_srcTexture, _initX, _initY, _width, _height, _delay);
+		frame->Reset(_srcTexture, _initX, _initY, _width, _height, _rotate, _delay);
 	}
 }
 void Sprite::SetPosition(float x, float y)

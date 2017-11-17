@@ -42,7 +42,7 @@ void Monster::UpdateAI()
 		Character::UpdateAI();
 	}
 }
-void Monster::Collision(std::list<Component*>& collisionList)
+Component* Monster::Collision(std::list<Component*>& collisionList)
 {
 	for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
 	{
@@ -57,8 +57,9 @@ void Monster::Collision(std::list<Component*>& collisionList)
 			ComponentSystem::GetInstance()->SendMsg(msgParam);*/
 			_targetComponent = (*it);
 			ChangeState(eStateType::ET_ATTACK);
-			return;
+			return (*it);
 		}
 	}
-	ChangeState(eStateType::ET_IDLE);
+	//ChangeState(eStateType::ET_IDLE);
+	return NULL;
 }
