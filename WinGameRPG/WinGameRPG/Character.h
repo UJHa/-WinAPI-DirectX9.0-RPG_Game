@@ -9,7 +9,7 @@ enum eDirection {
 };
 enum eStateType
 {
-	ET_IDLE, ET_MOVE, ET_ATTACK
+	ET_IDLE, ET_MOVE, ET_ATTACK, ET_DEFENSE, ET_DEAD, ET_NONE,
 };
 class Sprite;
 class State;
@@ -75,8 +75,19 @@ protected:
 public:
 	int GetAttackPoint() { return _attackPoint; }
 	Component* GetTarget() { return _targetComponent; }
+	void SetTarget(Component* target) { _targetComponent = target; }
 	void ResetTarget() { _targetComponent = NULL; }
+	//defense
+protected:
+	int _attackedPoint;
 public:
-	virtual void Collision(std::list<Component*>& collisionList);
+	int GetRecevieAttackPoint() { return _attackedPoint; }
+public:
+	virtual Component* Collision(std::list<Component*>& collisionList);
+	//common
+public:
+	void DecreaseHP(int decreaseHPpont);
+	//message
+public:
 	void ReceiveMessage(const sComponentMsgParam msgParam);
 };

@@ -3,6 +3,7 @@
 #include<vector>
 class Character;
 class Sprite;
+enum eStateType;
 class State
 {
 public:
@@ -11,6 +12,7 @@ public:
 protected:
 	Character* _character;
 	std::vector<Sprite*> _spriteList;
+	eStateType _nextState;
 public:
 	virtual void Init(Character* character);
 	virtual void DInit();
@@ -21,4 +23,6 @@ public:
 
 	virtual void Start();
 	virtual void Stop();
+public:
+	virtual void CreateSprite();
 };

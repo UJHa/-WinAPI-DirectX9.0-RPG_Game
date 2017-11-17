@@ -150,7 +150,7 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 
 	WCHAR name[256];
 	wsprintf(name, L"player");
-	Player* player = new Player(name, L"npc", L"player");
+	Player* player = new Player(name, L"player", L"player");
 	_componentList.push_back(player);
 
 	for (int i = 0; i < 1; i++)

@@ -8,13 +8,14 @@ Frame::Frame() :_frameDelay(0.0f)
 Frame::~Frame()
 {
 }
-void Frame::Init(Texture* texture, int left, int top, int width, int height, float frameDelay)
+void Frame::Init(Texture* texture, int left, int top, int width, int height, float rotate, float frameDelay)
 {
 	_texture = texture;
 	_sprite = GameSystem::GetInstance()->GetSprite();
 
 	_width = width;
 	_height = height;
+	_rotate = rotate;
 	_srcTextureRect.left = left;
 	_srcTextureRect.top = top;
 	_srcTextureRect.right = left + _width;
@@ -42,7 +43,7 @@ void Frame::Render()
 		0.0f, 
 		&scaling, 
 		&spriteCenter, 
-		0.0f, 
+		_rotate, 
 		&translate);
 
 	_sprite->SetTransform(&matrix);
@@ -53,9 +54,9 @@ void Frame::Release()
 {
 	RELEASE_COM(_texture);
 }
-void Frame::Reset(Texture* texture, int left, int top, int width, int height, float frameDelay)
+void Frame::Reset(Texture* texture, int left, int top, int width, int height, float rotate, float frameDelay)
 {
-	Init(texture,left,top, width, height, frameDelay);
+	Init(texture,left,top, width, height, rotate, frameDelay);
 }
 float Frame::GetFrameDelay()
 {

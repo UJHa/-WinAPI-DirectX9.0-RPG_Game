@@ -4,6 +4,7 @@
 State::State()
 {
 	//_spriteList.clear();
+	_nextState = eStateType::ET_NONE;
 }
 State::~State()
 {
@@ -16,33 +17,7 @@ State::~State()
 void State::Init(Character* character)
 {
 	_character = character;
-	WCHAR textureFileName[256];
-	wsprintf(textureFileName, L"%s.png", _character->GetTextureFileName().c_str());
-	WCHAR scriptFileName[256];
-	{
-		wsprintf(scriptFileName, L"%s_left.json", _character->GetScriptFileName().c_str());
-		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
-		sprite->Init();
-		_spriteList.push_back(sprite);
-	}
-	{
-		wsprintf(scriptFileName, L"%s_right.json", _character->GetScriptFileName().c_str());
-		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
-		sprite->Init();
-		_spriteList.push_back(sprite);
-	}
-	{
-		wsprintf(scriptFileName, L"%s_up.json", _character->GetScriptFileName().c_str());
-		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
-		sprite->Init();
-		_spriteList.push_back(sprite);
-	}
-	{
-		wsprintf(scriptFileName, L"%s_down.json", _character->GetScriptFileName().c_str());
-		Sprite* sprite = new Sprite(textureFileName, scriptFileName);
-		sprite->Init();
-		_spriteList.push_back(sprite);
-	}
+	CreateSprite();
 }
 void State::DInit()
 {
@@ -55,13 +30,6 @@ void State::DInit()
 void State::Update(float deltaTime)
 {
 	_spriteList[(int)_character->GetDirection()]->Update(deltaTime);
-}
-void State::Start()
-{
-}
-void State::Stop()
-{
-
 }
 void State::Render()
 {
@@ -80,5 +48,44 @@ void State::Reset()
 	for (int i = 0; i < _spriteList.size(); i++)
 	{
 		_spriteList[i]->Reset();
+	}
+}
+void State::Start()
+{
+}
+void State::Stop()
+{
+
+
+}
+void State::CreateSprite()
+{
+	_spriteList.clear();
+	WCHAR textureFileName[256];
+	wsprintf(textureFileName, L"%s.png", _character->GetTextureFileName().c_str());
+	WCHAR scriptFileName[256];
+	{
+	wsprintf(scriptFileName, L"%s_left.json", _character->GetScriptFileName().c_str());
+	Sprite* sprite = new Sprite(textureFileName, scriptFileName);
+	sprite->Init();
+	_spriteList.push_back(sprite);
+	}
+	{
+	wsprintf(scriptFileName, L"%s_right.json", _character->GetScriptFileName().c_str());
+	Sprite* sprite = new Sprite(textureFileName, scriptFileName);
+	sprite->Init();
+	_spriteList.push_back(sprite);
+	}
+	{
+	wsprintf(scriptFileName, L"%s_up.json", _character->GetScriptFileName().c_str());
+	Sprite* sprite = new Sprite(textureFileName, scriptFileName);
+	sprite->Init();
+	_spriteList.push_back(sprite);
+	}
+	{
+	wsprintf(scriptFileName, L"%s_down.json", _character->GetScriptFileName().c_str());
+	Sprite* sprite = new Sprite(textureFileName, scriptFileName);
+	sprite->Init();
+	_spriteList.push_back(sprite);
 	}
 }
