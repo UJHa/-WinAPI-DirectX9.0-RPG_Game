@@ -18,11 +18,6 @@ void DefenseState::DInit()
 void DefenseState::Update(float deltaTime)
 {
 	State::Update(deltaTime);
-	if (eStateType::ET_NONE != _nextState)
-	{
-		_character->ChangeState(_nextState);
-		return;
-	}
 }
 void DefenseState::Render()
 {
@@ -41,6 +36,9 @@ void DefenseState::Start()
 {
 	State::Start();
 	int attackPoint = _character->GetRecevieAttackPoint();
+	/*wchar_t timeCheck[256];
+	swprintf(timeCheck, L"attackPoint %d\n", attackPoint);
+	OutputDebugString(timeCheck);*/
 	_character->DecreaseHP(attackPoint);
 	if (false == _character->IsLive())
 	{
@@ -53,6 +51,7 @@ void DefenseState::Start()
 	{
 		//_character->ChangeState(eStateType::ET_IDLE);
 		_nextState = eStateType::ET_IDLE;
+		//_nextState = eStateType::ET_MOVE;
 	}
 }
 void DefenseState::Stop()

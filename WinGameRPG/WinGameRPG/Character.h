@@ -72,7 +72,13 @@ public:
 protected:
 	Component* _targetComponent;
 	int _attackPoint;
+	float _attackCoolTimeDuration;
+	float  _attackCoolTime;
 public:
+	void UpdateAttackCoolTime(float deltaTime);
+	bool IsAttackCoolTime();
+	void ResetAttackCoolTime();
+	float GetCoolTime() {return _attackCoolTimeDuration; }
 	int GetAttackPoint() { return _attackPoint; }
 	Component* GetTarget() { return _targetComponent; }
 	void SetTarget(Component* target) { _targetComponent = target; }

@@ -9,5 +9,6 @@ public:
 	//AI
 public:
 	void UpdateAI();
+	Component* Collision(std::list<Component*>& collisionList);
 };
 

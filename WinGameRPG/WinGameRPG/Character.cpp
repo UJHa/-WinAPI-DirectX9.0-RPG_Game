@@ -23,6 +23,9 @@ Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Compon
 	_moveDistancePerTimeX = 0.0f;
 	_moveDistancePerTimeY = 0.0f;
 	_deltaX = _deltaY = 0.0f;
+
+	_attackCoolTimeDuration = 0.0f;
+	_attackCoolTime = 2.0f;
 }
 
 Character::~Character()
@@ -82,33 +85,22 @@ void Character::DInit()
 		it++;
 	}
 	_stateMap.clear();
-	//_state->DInit();
 }
 void Character::Update(float deltaTime)
 {
-	//_spriteList[(int)_currentDirection]->Update(deltaTime);
+	UpdateAttackCoolTime(deltaTime);
 	_state->Update(deltaTime);
 }
 void Character::Render()
 {
-	/*_spriteList[(int)_currentDirection]->SetPosition(_x, _y);
-	_spriteList[(int)_currentDirection]->Render();*/
 	_state->Render();
 }
 void Character::Release()
 {
-	/*for (int i = 0; i < _spriteList.size(); i++)
-	{
-		_spriteList[i]->Release();
-	}*/
 	_state->Release();
 }
 void Character::Reset()
 {
-	/*for (int i = 0; i < _spriteList.size(); i++)
-	{
-		_spriteList[i]->Reset();
-	}*/
 	_state->Reset();
 }
 void Character::MoveDeltaPosition(float deltaX, float deltaY)
@@ -124,7 +116,8 @@ void Character::SetPosition(float posX, float posY)
 void Character::UpdateAI()
 {
 	_currentDirection = (eDirection)(rand() % 4);
-	ChangeState(eStateType::ET_MOVE);
+	//ChangeState(eStateType::ET_MOVE);
+	_state->NextState(eStateType::ET_MOVE);
 }
 void Character::ChangeState(eStateType stateType)
 {
@@ -134,8 +127,6 @@ void Character::ChangeState(eStateType stateType)
 	}
 	_state = _stateMap[stateType];
 	_state->Start();
-	/*_state->Init(this);
-	_state->Start();*/
 }
 void Character::InitMove()
 {
@@ -183,16 +174,25 @@ void Character::Moving(float deltaTime)
 	_x += moveDistanceX;
 	_y += moveDistanceY;
 }
+void Character::UpdateAttackCoolTime(float deltaTime)
+{
+	if (_attackCoolTimeDuration < _attackCoolTime)
+	{
+		_attackCoolTimeDuration += deltaTime;
+	}
+}
+bool Character::IsAttackCoolTime()
+{
+	if (_attackCoolTimeDuration <= _attackCoolTime)
+		return true;
+	return false;
+}
+void Character::ResetAttackCoolTime()
+{
+	_attackCoolTimeDuration = 0.0f;
+}
 Component* Character::Collision(std::list<Component*>& collisionList)
 {
-	/*for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
-	{
-		sComponentMsgParam msgParam;
-		msgParam.sender = this;
-		msgParam.receiver = (*it);
-		msgParam.message = L"Comunity";
-		ComponentSystem::GetInstance()->SendMsg(msgParam);
-	}*/
 	return NULL;
 }
 
@@ -210,17 +210,5 @@ void Character::ReceiveMessage(const sComponentMsgParam msgParam)
 	{
 		_attackedPoint = msgParam.attackPoint;
 		ChangeState(eStateType::ET_DEFENSE);
-		//int attackPoint = msgParam.attackPoint;
-		//_hp -= attackPoint;
-		//if (_hp < 0)
-		//{
-		//	// dead
-		//	_isLive = false;
-		//	SetCanMove(true);
-
-		//	//stop
-		//	_moveDistancePerTimeX = 0.0f;
-		//	_moveDistancePerTimeY = 0.0f;
-		//}
 	}
 }

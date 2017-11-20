@@ -14,6 +14,7 @@ void IdleState::Init(Character* character)
 }
 void IdleState::Update(float deltaTime)
 {
+	State::Update(deltaTime);
 	if (false == _character->IsLive())
 		return;
 	if (false == _character->IsMoving())

@@ -23,7 +23,7 @@ void AttackState::Update(float deltaTime)
 {
 	State::Update(deltaTime);
 	_character->ResetTarget();
-	_character->ChangeState(eStateType::ET_IDLE);
+	_nextState = eStateType::ET_IDLE;
 }
 void AttackState::Render()
 {
@@ -47,6 +47,9 @@ void AttackState::Start()
 	msgParam.receiver = _character->GetTarget();
 	msgParam.message = L"Attack";
 	ComponentSystem::GetInstance()->SendMsg(msgParam);
+	wchar_t timeCheck[256];
+	swprintf(timeCheck, L"GetCoolTimeDur %f\n", _character->GetCoolTime());
+	OutputDebugString(timeCheck);
 }
 void AttackState::Stop()
 {

@@ -31,3 +31,17 @@ void Player::UpdateAI()
 		ChangeState(ET_MOVE);
 	}
 }
+Component* Player::Collision(std::list<Component*>& collisionList)
+{
+	for (std::list<Component*>::iterator it = collisionList.begin(); it != collisionList.end(); it++)
+	{
+		if ((*it)->GetType() == eComponentType::CT_NPC ||
+			(*it)->GetType() == eComponentType::CT_MONSTER)
+		{
+			_targetComponent = (*it);
+			ChangeState(eStateType::ET_ATTACK);
+			return (*it);
+		}
+	}
+	return NULL;
+}
