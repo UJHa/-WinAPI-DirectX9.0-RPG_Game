@@ -3,6 +3,7 @@
 #include "Sprite.h"
 DeadState::DeadState()
 {
+	_nowState = eStateType::ET_DEAD;
 }
 
 DeadState::~DeadState()

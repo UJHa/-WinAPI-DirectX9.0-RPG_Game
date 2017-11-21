@@ -11,6 +11,7 @@ class GameTimer;
 class Map;
 class Character;
 class Component;
+//class Font;
 class GameSystem
 {
 private:
@@ -62,4 +63,8 @@ public:
 	void KeyDown(unsigned int keyCode);
 	void KeyUp(unsigned int keyCode);
 	bool IsKeyDown(int keyCode);
+	//font
+private:
+	//ID3DXFont* _dxTestFont;
+	//Font* _font;
 };

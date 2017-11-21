@@ -4,6 +4,7 @@
 #include"ComponentSystem.h"
 MoveState::MoveState()
 {
+	_nowState = eStateType::ET_MOVE;
 }
 
 MoveState::~MoveState()
@@ -25,7 +26,6 @@ void MoveState::Update(float deltaTime)
 	{
 		_movingDuration = 0.0f;
 		_character->MoveStop();
-		//_character->ChangeState(eStateType::ET_IDLE);
 		_nextState = eStateType::ET_IDLE;
 	}
 	else
@@ -64,7 +64,7 @@ void MoveState::Start()
 	if (false == canMove)
 	{
 		Component* target = _character->Collision(collisionList);
-		if (NULL != target && _character->IsAttackCoolTime())
+		if (NULL != target && _character->IsAttackCoolTime()) // 여기 수정하기
 		{
 			_character->ResetAttackCoolTime();
 			_character->SetTarget(target);

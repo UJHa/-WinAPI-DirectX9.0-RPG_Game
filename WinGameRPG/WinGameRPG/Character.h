@@ -13,6 +13,7 @@ enum eStateType
 };
 class Sprite;
 class State;
+class Font;
 class Character : public Component
 {
 protected:
@@ -96,4 +97,9 @@ public:
 	//message
 public:
 	void ReceiveMessage(const sComponentMsgParam msgParam);
+	//UI
+protected:
+	Font* _font;
+public:
+	void UpdateText();
 };

@@ -34,7 +34,6 @@ void Monster::UpdateAI()
 		if (findEnemy->GetTileY() > _tileY)
 			direction = eDirection::DOWN;
 		_currentDirection = direction;
-		//ChangeState(ET_MOVE);
 		_state->NextState(eStateType::ET_MOVE);
 	}
 	else
@@ -51,7 +50,7 @@ Component* Monster::Collision(std::list<Component*>& collisionList)
 			(*it)->GetType() == eComponentType::CT_PLAYER)
 		{
 			_targetComponent = (*it);
-			ChangeState(eStateType::ET_ATTACK);
+			_state->NextState(eStateType::ET_ATTACK);
 			return (*it);
 		}
 	}

@@ -2,6 +2,7 @@
 #include "Character.h"
 DefenseState::DefenseState()
 {
+	_nowState = eStateType::ET_DEFENSE;
 }
 
 DefenseState::~DefenseState()
@@ -36,20 +37,18 @@ void DefenseState::Start()
 {
 	State::Start();
 	int attackPoint = _character->GetRecevieAttackPoint();
-	/*wchar_t timeCheck[256];
+	wchar_t timeCheck[256];
 	swprintf(timeCheck, L"attackPoint %d\n", attackPoint);
-	OutputDebugString(timeCheck);*/
+	OutputDebugString(timeCheck);
 	_character->DecreaseHP(attackPoint);
 	if (false == _character->IsLive())
 	{
 		_character->SetCanMove(true);
 		_character->MoveStop();
-		//_character->ChangeState(eStateType::ET_DEAD);
 		_nextState = eStateType::ET_DEAD;
 	}
 	else
 	{
-		//_character->ChangeState(eStateType::ET_IDLE);
 		_nextState = eStateType::ET_IDLE;
 		//_nextState = eStateType::ET_MOVE;
 	}

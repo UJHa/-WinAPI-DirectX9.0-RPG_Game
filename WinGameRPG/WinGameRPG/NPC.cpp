@@ -46,8 +46,6 @@ void NPC::UpdateAI()
 			{
 				direction = (eDirection)findDir;
 				_currentDirection = direction;
-				//_state->Start();
-				//ChangeState(eStateType::ET_MOVE);
 				_state->NextState(eStateType::ET_MOVE);
 				break;
 			}

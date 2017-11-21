@@ -27,8 +27,7 @@ void Player::UpdateAI()
 	if (eDirection::NONE != direction)
 	{
 		_currentDirection = direction;
-		//_state->Start();
-		ChangeState(ET_MOVE);
+		_state->NextState(eStateType::ET_MOVE);
 	}
 }
 Component* Player::Collision(std::list<Component*>& collisionList)
@@ -39,7 +38,7 @@ Component* Player::Collision(std::list<Component*>& collisionList)
 			(*it)->GetType() == eComponentType::CT_MONSTER)
 		{
 			_targetComponent = (*it);
-			ChangeState(eStateType::ET_ATTACK);
+			_state->NextState(eStateType::ET_ATTACK);
 			return (*it);
 		}
 	}

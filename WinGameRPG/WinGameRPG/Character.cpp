@@ -8,6 +8,7 @@
 #include "AttackState.h"
 #include "DefenseState.h"
 #include "DeadState.h"
+#include "Font.h"
 Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Component(name)
 {
 	_state = NULL;
@@ -15,7 +16,7 @@ Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Compon
 	//_spriteList.clear();
 	_scrpitName = scriptName;
 	_pngName = pngName;
-	_attackPoint = 10;
+	_attackPoint = 50;
 	_hp = 100;
 
 	_targetX = 0.0f;
@@ -74,6 +75,15 @@ void Character::Init()
 		_stateMap[eStateType::ET_DEAD] = state;
 	}
 	ChangeState(eStateType::ET_IDLE);
+	//_state->NextState(eStateType::ET_IDLE);
+	{
+		D3DCOLOR color = D3DCOLOR_ARGB(255, 0, 0, 0);
+		_font = new Font(L"Arial", 15, color);
+
+
+		_font->SetRect(100, 100, 400, 400);
+		UpdateText();
+	}
 }
 void Character::DInit()
 {
@@ -85,15 +95,19 @@ void Character::DInit()
 		it++;
 	}
 	_stateMap.clear();
+	delete _font;
 }
 void Character::Update(float deltaTime)
 {
 	UpdateAttackCoolTime(deltaTime);
+	UpdateText();
 	_state->Update(deltaTime);
 }
 void Character::Render()
 {
 	_state->Render();
+	_font->SetPosition(_x - 200, _y);
+	_font->Render();
 }
 void Character::Release()
 {
@@ -116,7 +130,6 @@ void Character::SetPosition(float posX, float posY)
 void Character::UpdateAI()
 {
 	_currentDirection = (eDirection)(rand() % 4);
-	//ChangeState(eStateType::ET_MOVE);
 	_state->NextState(eStateType::ET_MOVE);
 }
 void Character::ChangeState(eStateType stateType)
@@ -180,10 +193,14 @@ void Character::UpdateAttackCoolTime(float deltaTime)
 	{
 		_attackCoolTimeDuration += deltaTime;
 	}
+	else
+	{
+		_attackCoolTimeDuration = _attackCoolTime;
+	}
 }
 bool Character::IsAttackCoolTime()
 {
-	if (_attackCoolTimeDuration <= _attackCoolTime)
+	if (_attackCoolTime<= _attackCoolTimeDuration)
 		return true;
 	return false;
 }
@@ -209,6 +226,36 @@ void Character::ReceiveMessage(const sComponentMsgParam msgParam)
 	if (L"Attack" == msgParam.message)
 	{
 		_attackedPoint = msgParam.attackPoint;
-		ChangeState(eStateType::ET_DEFENSE);
+		_state->NextState(eStateType::ET_DEFENSE);
 	}
+}
+void Character::UpdateText()
+{
+	int coolTime = (int)(_attackCoolTime * 100.f);
+	
+	WCHAR text[256];
+	switch (_state->GetState())
+	{
+	case eStateType::ET_IDLE:
+		wsprintf(text, L"HP %d\nCT %d\nIDLE", _hp, coolTime);
+		break;
+	case eStateType::ET_MOVE:
+		wsprintf(text, L"HP %d\nCT %d\nMOVE", _hp, coolTime);
+		break;
+	case eStateType::ET_ATTACK:
+		wsprintf(text, L"HP %d\nCT %d\nATTACK", _hp, coolTime);
+		break;
+	case eStateType::ET_DEFENSE:
+		wsprintf(text, L"HP %d\nCT %d\nDEFENSE", _hp, coolTime);
+		break;
+	case eStateType::ET_DEAD:
+		wsprintf(text, L"HP %d\nCT %d\nDEAD", _hp, coolTime);
+		break;
+	case eStateType::ET_NONE:
+		wsprintf(text, L"HP %d\nCT %d\nNONE", _hp, coolTime);
+		break;
+	default:
+		break;
+	}
+	_font->SetText(text);
 }

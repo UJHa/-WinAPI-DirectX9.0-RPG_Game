@@ -4,7 +4,7 @@
 #include"Character.h"
 AttackState::AttackState()
 {
-
+	_nowState = eStateType::ET_ATTACK;
 }
 AttackState::~AttackState()
 {
@@ -44,12 +44,12 @@ void AttackState::Start()
 	sComponentMsgParam msgParam;
 	msgParam.sender = (Component*)_character;
 	msgParam.attackPoint = _character->GetAttackPoint();
+	wchar_t timeCheck[256];
+	swprintf(timeCheck, L"GetAttackPoint %d\n", _character->GetAttackPoint());
+	OutputDebugString(timeCheck);
 	msgParam.receiver = _character->GetTarget();
 	msgParam.message = L"Attack";
 	ComponentSystem::GetInstance()->SendMsg(msgParam);
-	wchar_t timeCheck[256];
-	swprintf(timeCheck, L"GetCoolTimeDur %f\n", _character->GetCoolTime());
-	OutputDebugString(timeCheck);
 }
 void AttackState::Stop()
 {

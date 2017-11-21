@@ -2,7 +2,7 @@
 #include "Character.h"
 IdleState::IdleState()
 {
-
+	_nowState = eStateType::ET_IDLE;
 }
 IdleState::~IdleState()
 {

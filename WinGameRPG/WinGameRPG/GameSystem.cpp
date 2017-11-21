@@ -2,11 +2,11 @@
 #include <Windows.h>
 #include "GameTimer.h"
 #include "Map.h"
-//#include "Character.h"
 #include "NPC.h"
 #include "Player.h"
 #include"Monster.h"
 #include "ComponentSystem.h"
+#include"Font.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
 	{
@@ -17,27 +17,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 			ComponentSystem::GetInstance()->RemoveAllComponents();
 			DestroyWindow(hWnd);
 		}
-		//sroll test
-		/*if (VK_UP == wParam)
-		{
-			GameSystem::GetInstance()->MapScrollTest(0.0f, -3.0f);
-		}
-		if (VK_DOWN == wParam)
-		{
-			GameSystem::GetInstance()->MapScrollTest(0.0f, 3.0f);
-		}
-		if (VK_RIGHT == wParam)
-		{
-			GameSystem::GetInstance()->MapScrollTest(3.0f, 0.0f);
-		}
-		if (VK_LEFT == wParam)
-		{
-			GameSystem::GetInstance()->MapScrollTest(-3.0f, 0.0f);
-		}*/
 		return 0;
 	case WM_KEYUP:
 		GameSystem::GetInstance()->KeyUp(wParam);
-		//GameSystem::GetInstance()->MapScrollTest(0.0f, 0.0f);
 		return 0;
 	case WM_DESTROY:
 		PostQuitMessage(0);
@@ -63,9 +45,6 @@ GameSystem::GameSystem()
 		_WindowHeight = 800;
 	}
 	_componentList.clear();
-	/*_map = NULL;
-	_player = NULL;
-	_npc = NULL;*/
 }
 GameSystem::~GameSystem()
 {
@@ -73,6 +52,7 @@ GameSystem::~GameSystem()
 	{
 		(*it)->DInit();
 	}
+
 	RELEASE_COM(_sprite);
 	RELEASE_COM(_device3d);
 }
@@ -174,7 +154,6 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	}
 
 	map->InitViewer(player);
-
 	return true;
 }
 int GameSystem::Update()
@@ -217,14 +196,11 @@ int GameSystem::Update()
 
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
+				// sprite test
 				for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 				{
 					(*it)->Render();
 				}
-				/*_map->Render();
-				_player->Render();
-				_npc->Render();
-				_monster->Render();*/
 								
 				_sprite->End();
 
@@ -320,10 +296,6 @@ void GameSystem::CheckDeviceLost()
 			{
 				(*it)->Release();
 			}
-			/*_map->Release();
-			_player->Release();
-			_npc->Release();
-			_monster->Release();*/
 
 			hr = _device3d->Reset(&_d3dpp);
 			InitDirect3D();
@@ -332,10 +304,6 @@ void GameSystem::CheckDeviceLost()
 			{
 				(*it)->Release();
 			}
-			/*_map->Reset();
-			_player->Reset();
-			_npc->Reset();
-			_monster->Reset();*/
 		}
 	}
 }
