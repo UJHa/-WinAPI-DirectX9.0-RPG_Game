@@ -29,5 +29,5 @@ protected:
 	eStateType _nowState;
 public:
 	void NextState(eStateType  stateType);
-	virtual eStateType GetState() { return _nowState; }
+	eStateType GetState() { return _nowState; }
 };

@@ -4,9 +4,10 @@
 #include "Map.h"
 #include "NPC.h"
 #include "Player.h"
-#include"Monster.h"
+#include "Monster.h"
 #include "ComponentSystem.h"
-#include"Font.h"
+#include "Font.h"
+#include "RecoveryItem.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
 	{
@@ -128,6 +129,14 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	Map* map = new Map(L"tileMap");
 	_componentList.push_back(map);
 
+	for (int i = 0; i < 1; i++)
+	{
+		WCHAR name[256];
+		wsprintf(name, L"monster_%d", i);
+		RecoveryItem* recoveryItem = new RecoveryItem(name, L"recovery_item", L"item_sprites");
+		_componentList.push_back(recoveryItem);
+	}
+
 	WCHAR name[256];
 	wsprintf(name, L"player");
 	Player* player = new Player(name, L"player", L"player");
@@ -140,7 +149,7 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 		NPC* npc = new NPC(name, L"npc", L"npc");
 		_componentList.push_back(npc);
 	}
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 0; i++)
 	{
 		WCHAR name[256];
 		wsprintf(name, L"monster_%d", i);

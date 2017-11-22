@@ -23,7 +23,10 @@ void AttackState::Update(float deltaTime)
 {
 	State::Update(deltaTime);
 	_character->ResetTarget();
-	_nextState = eStateType::ET_IDLE;
+	if (eStateType::ET_NONE != _nextState)
+	{
+		_nextState = eStateType::ET_IDLE;
+	}
 }
 void AttackState::Render()
 {

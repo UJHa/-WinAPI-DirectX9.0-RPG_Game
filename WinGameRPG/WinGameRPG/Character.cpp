@@ -78,7 +78,7 @@ void Character::Init()
 	//_state->NextState(eStateType::ET_IDLE);
 	{
 		D3DCOLOR color = D3DCOLOR_ARGB(255, 0, 0, 0);
-		_font = new Font(L"Arial", 15, color);
+		_font = new Font(L"Arial", 35, color);
 
 
 		_font->SetRect(100, 100, 400, 400);
@@ -106,7 +106,7 @@ void Character::Update(float deltaTime)
 void Character::Render()
 {
 	_state->Render();
-	_font->SetPosition(_x - 200, _y);
+	_font->SetPosition(_x - 200, _y-300);
 	_font->Render();
 }
 void Character::Release()
@@ -216,7 +216,7 @@ Component* Character::Collision(std::list<Component*>& collisionList)
 void Character::DecreaseHP(int decreaseHPpont)
 {
 	_hp -= decreaseHPpont;
-	if (_hp < 0)
+	if (_hp <= 0)
 	{
 		_isLive = false;
 	}
