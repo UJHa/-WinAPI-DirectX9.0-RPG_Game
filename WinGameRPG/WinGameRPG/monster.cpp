@@ -50,7 +50,7 @@ Component* Monster::Collision(std::list<Component*>& collisionList)
 			(*it)->GetType() == eComponentType::CT_PLAYER)
 		{
 			_targetComponent = (*it);
-			_state->NextState(eStateType::ET_ATTACK);
+			//_state->NextState(eStateType::ET_ATTACK);
 			return (*it);
 		}
 	}

@@ -1,5 +1,19 @@
-﻿  RecoveryItem.cpp
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\recoveryitem.cpp(30): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\recoveryitem.cpp(31): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
-  WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)
+﻿  Character.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(54): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(55): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(116): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(160): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(161): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(169): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(170): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(185): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(186): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(267): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'WCHAR *'입니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(267): note: 서식 문자열에서 '%ls'을(를) 사용하는 것이 좋습니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(267): note: 서식 문자열에서 '%lls'을(를) 사용하는 것이 좋습니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(267): note: 서식 문자열에서 '%Ls'을(를) 사용하는 것이 좋습니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\-winapi-directx9.0-rpg_game\wingamerpg\wingamerpg\character.cpp(267): note: 서식 문자열에서 '%ws'을(를) 사용하는 것이 좋습니다.
+json_vc71_libmtd.lib(json_reader.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_reader.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+json_vc71_libmtd.lib(json_value.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_value.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+json_vc71_libmtd.lib(json_writer.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_writer.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+  WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\-WinAPI-DirectX9.0-RPG_Game\WinGameRPG\Debug\WinGameRPG.exe
