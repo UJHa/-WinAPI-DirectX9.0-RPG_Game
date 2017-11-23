@@ -44,6 +44,13 @@ void Character::Init()
 			_tileX = rand() % map->GetWidth();
 			_tileY = rand() % map->GetHeight();
 		}
+		/*_tileX = 3;
+		_tileY = 3;
+		while (!map->CanMoveTileMap(_tileX, _tileY))
+		{
+			_tileX = 3;
+			_tileY = 5;
+		}*/
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
 		map->setTileComponent(_tileX, _tileY, this, true);
@@ -78,10 +85,10 @@ void Character::Init()
 	//_state->NextState(eStateType::ET_IDLE);
 	{
 		D3DCOLOR color = D3DCOLOR_ARGB(255, 0, 0, 0);
-		_font = new Font(L"Arial", 35, color);
+		_font = new Font(L"Arial", 15, color);
 
 
-		_font->SetRect(100, 100, 400, 400);
+		_font->SetRect(0, 0, 100, 100);
 		UpdateText();
 	}
 }
@@ -106,7 +113,7 @@ void Character::Update(float deltaTime)
 void Character::Render()
 {
 	_state->Render();
-	_font->SetPosition(_x - 200, _y-300);
+	_font->SetPosition(_x - 50, _y - 50);
 	_font->Render();
 }
 void Character::Release()
@@ -231,7 +238,7 @@ void Character::ReceiveMessage(const sComponentMsgParam msgParam)
 }
 void Character::UpdateText()
 {
-	int coolTime = (int)(_attackCoolTime * 100.f);
+	int coolTime = (int)(_attackCoolTimeDuration * 1000.f);
 	
 	WCHAR text[256];
 	switch (_state->GetState())
@@ -257,5 +264,6 @@ void Character::UpdateText()
 	default:
 		break;
 	}
+	printf("%s", text);
 	_font->SetText(text);
 }

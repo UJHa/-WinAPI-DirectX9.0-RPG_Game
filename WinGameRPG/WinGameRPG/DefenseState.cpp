@@ -38,7 +38,7 @@ void DefenseState::Start()
 	State::Start();
 	int attackPoint = _character->GetRecevieAttackPoint();
 	wchar_t timeCheck[256];
-	swprintf(timeCheck, L"attackPoint %d\n", attackPoint);
+	swprintf(timeCheck, L"DefenseState attacked %d, type : %d\n", attackPoint, _character->GetType());
 	OutputDebugString(timeCheck);
 	_character->DecreaseHP(attackPoint);
 	if (false == _character->IsLive())
@@ -49,8 +49,8 @@ void DefenseState::Start()
 	}
 	else
 	{
-		_nextState = eStateType::ET_IDLE;
-		//_nextState = eStateType::ET_MOVE;
+		//_nextState = eStateType::ET_IDLE;
+		_nextState = eStateType::ET_MOVE;
 	}
 }
 void DefenseState::Stop()
