@@ -89,7 +89,8 @@ void RecoveryItem::ReceiveMessage(const sComponentMsgParam msgParam)
 		case eComponentType::CT_NPC:
 		case eComponentType::CT_MONSTER:
 		case eComponentType::CT_PLAYER:
-			((Character*)sender)->DecreaseHP(50);
+			((Character*)sender)->IncreaseHP(50);
+			//((Character*)sender)->DecreaseHP(50);
 			map->ResetTileComponent(msgParam.sender->GetTileX(), sender->GetTileY(), msgParam.receiver);
 			_isLive = false;
 			break;
