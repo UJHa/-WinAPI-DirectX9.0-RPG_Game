@@ -79,7 +79,7 @@ public:
 	void UpdateAttackCoolTime(float deltaTime);
 	bool IsAttackCoolTime();
 	void ResetAttackCoolTime();
-	float GetCoolTime() {return _attackCoolTimeDuration; }
+	float GetCoolTime() { return _attackCoolTimeDuration; }
 	int GetAttackPoint() { return _attackPoint; }
 	Component* GetTarget() { return _targetComponent; }
 	void SetTarget(Component* target) { _targetComponent = target; }
@@ -93,7 +93,8 @@ public:
 	virtual Component* Collision(std::list<Component*>& collisionList);
 	//common
 public:
-	void DecreaseHP(int decreaseHPpont);
+	void IncreaseHP(int increaseHpPoint);
+	void DecreaseHP(int decreaseHpPoint);
 	//message
 public:
 	void ReceiveMessage(const sComponentMsgParam msgParam);

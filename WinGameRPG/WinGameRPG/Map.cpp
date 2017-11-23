@@ -257,7 +257,10 @@ bool Map::GetTileCollisionList(int tileX, int tileY, std::list<Component*>& coll
 		return false;
 	return _tileMap[tileY][tileX]->GetCollisionList(collisionList);
 }
-
+std::list<Component*>  Map::GetTileComponentList(int tileX, int tileY)
+{
+	return _tileMap[tileY][tileX]->GetComponentList();
+}
 void Map::setTileComponent(int tileX, int tileY, Component* component, bool isRender)
 {
 	_tileMap[tileY][tileX]->AddComponent(component, isRender);

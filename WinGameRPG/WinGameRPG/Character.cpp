@@ -220,11 +220,20 @@ Component* Character::Collision(std::list<Component*>& collisionList)
 	return NULL;
 }
 
-void Character::DecreaseHP(int decreaseHPpont)
+void Character::IncreaseHP(int increaseHpPoint)
 {
-	_hp -= decreaseHPpont;
+	_hp += increaseHpPoint;
+	if (_hp >= 100)
+	{
+		_hp = 100;
+	}
+}
+void Character::DecreaseHP(int decreaseHpPoint)
+{
+	_hp -= decreaseHpPoint;
 	if (_hp <= 0)
 	{
+		_state->NextState(eStateType::ET_DEAD);
 		_isLive = false;
 	}
 }
