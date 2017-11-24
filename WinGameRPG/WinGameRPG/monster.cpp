@@ -3,6 +3,8 @@
 #include"Map.h"
 #include "sComponentMsgParam.h"
 #include "MoveState.h"
+#include "GameSystem.h"
+#include "Stage.h"
 Monster::Monster(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
 {
 	_componentType = eComponentType::CT_MONSTER;
@@ -15,11 +17,11 @@ Monster::~Monster()
 }
 void Monster::UpdateAI()
 {
-	Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 	std::vector<eComponentType> compareTypeList;
 	compareTypeList.push_back(eComponentType::CT_NPC);
 	compareTypeList.push_back(eComponentType::CT_PLAYER);
-	Component* findEnemy = ComponentSystem::GetInstance()->FindComponentInRange(this, 4, compareTypeList);
+	Component* findEnemy = ComponentSystem::GetInstance()->FindComponentInRange(map, this, 4, compareTypeList);
 	if (NULL != findEnemy)
 	{
 		//_moveTime = 0.5f;

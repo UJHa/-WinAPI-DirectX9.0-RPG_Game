@@ -3,6 +3,7 @@
 #include"ComponentSystem.h"
 #include"Map.h"
 #include"MoveState.h"
+#include"Stage.h"
 Player::Player(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
 {
 	_moveTime = 0.1f;
@@ -28,6 +29,24 @@ void Player::UpdateAI()
 	{
 		_currentDirection = direction;
 		_state->NextState(eStateType::ET_MOVE);
+	}
+	if (GameSystem::GetInstance()->IsKeyDown(VK_SPACE))
+	{
+		//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
+		std::list<Component*> componentList = map->GetTileComponentList(_tileX,_tileY);
+		for (std::list<Component*>::iterator it = componentList.begin(); it != componentList.end(); it++)
+		{
+			Component* component = (*it);
+			if (eComponentType::CT_ITEM == component->GetType())
+			{
+				sComponentMsgParam msgParam;
+				msgParam.sender = (Component*)this;
+				msgParam.receiver = component;
+				msgParam.message = L"Use";
+				ComponentSystem::GetInstance()->SendMsg(msgParam);
+			}
+		}
 	}
 }
 Component* Player::Collision(std::list<Component*>& collisionList)

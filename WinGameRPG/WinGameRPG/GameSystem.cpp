@@ -1,13 +1,9 @@
 #include "GameSystem.h"
 #include <Windows.h>
 #include "GameTimer.h"
-#include "Map.h"
-#include "NPC.h"
-#include "Player.h"
-#include "Monster.h"
 #include "ComponentSystem.h"
-#include "Font.h"
 #include "RecoveryItem.h"
+#include "Stage.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 	switch (msg)
 	{
@@ -45,14 +41,11 @@ GameSystem::GameSystem()
 		_WindowWidth = 1280;
 		_WindowHeight = 800;
 	}
-	_componentList.clear();
 }
 GameSystem::~GameSystem()
 {
-	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
-	{
-		(*it)->DInit();
-	}
+	_stage->DInit();
+	delete _stage;
 
 	RELEASE_COM(_sprite);
 	RELEASE_COM(_device3d);
@@ -125,44 +118,8 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 	}
 
 	InitInput();
-	_componentList.clear();
-	Map* map = new Map(L"tileMap");
-	_componentList.push_back(map);
-
-	for (int i = 0; i < 1; i++)
-	{
-		WCHAR name[256];
-		wsprintf(name, L"monster_%d", i);
-		RecoveryItem* recoveryItem = new RecoveryItem(name, L"recovery_item", L"item_sprites");
-		_componentList.push_back(recoveryItem);
-	}
-
-	WCHAR name[256];
-	wsprintf(name, L"player");
-	Player* player = new Player(name, L"player", L"player");
-	_componentList.push_back(player);
-
-	for (int i = 0; i < 20; i++)
-	{
-		WCHAR name[256];
-		wsprintf(name, L"npc_%d", i);
-		NPC* npc = new NPC(name, L"npc", L"npc");
-		_componentList.push_back(npc);
-	}
-	for (int i = 0; i < 20; i++)
-	{
-		WCHAR name[256];
-		wsprintf(name, L"monster_%d", i);
-		Monster* monster = new Monster(name, L"monster", L"monster");
-		_componentList.push_back(monster);
-	}
-
-	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
-	{
-		(*it)->Init();
-	}
-
-	map->InitViewer(player);
+	_stage = new Stage();
+	_stage->Init(L"Map1");
 	return true;
 }
 int GameSystem::Update()
@@ -190,10 +147,7 @@ int GameSystem::Update()
 
 			ComponentSystem::GetInstance()->Update(deltaTime);
 
-			for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
-			{
-				(*it)->Update(deltaTime);
-			}
+			_stage->Update(deltaTime);
 			if (frameTime <= frameDuration)
 			{
 
@@ -206,10 +160,7 @@ int GameSystem::Update()
 				_sprite->Begin(D3DXSPRITE_ALPHABLEND);
 
 				// sprite test
-				for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
-				{
-					(*it)->Render();
-				}
+				_stage->Render();
 								
 				_sprite->End();
 
@@ -218,6 +169,16 @@ int GameSystem::Update()
 				CheckDeviceLost();
 
 				_device3d->Present(NULL, NULL, NULL, NULL);
+			}
+			//stage change test
+			{
+				if (IsKeyDown(VK_F1))
+				{
+					ComponentSystem::GetInstance()->ClearMessageQueue();
+					delete _stage;
+					_stage = new Stage();
+					_stage->Init(L"Map2");
+				}
 			}
 
 			/*wchar_t timeCheck[256];
@@ -301,18 +262,11 @@ void GameSystem::CheckDeviceLost()
 		}
 		else if (D3DERR_DEVICENOTRESET == hr)
 		{
-			for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
-			{
-				(*it)->Release();
-			}
+			_stage->Release();
 
 			hr = _device3d->Reset(&_d3dpp);
 			InitDirect3D();
-
-			for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
-			{
-				(*it)->Release();
-			}
+			_stage->Reset();
 		}
 	}
 }

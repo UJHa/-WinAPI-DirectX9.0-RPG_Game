@@ -24,4 +24,6 @@ public:
 
 	void MoveDeltaPosition(float deltaX, float deltaY);
 	void SetPosition(float posX, float posY);
+
+	void ReceiveMessage(const sComponentMsgParam msgParam);
 };

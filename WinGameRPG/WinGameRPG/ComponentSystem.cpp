@@ -46,9 +46,10 @@ Component* ComponentSystem::FindComponent(LPCWSTR name)
 	}
 	return 0;
 }
-Component* ComponentSystem::FindComponentInRange(Component* component, int range, std::vector<eComponentType> compareTypeList)
+Component* ComponentSystem::FindComponentInRange(Component* mapComponent,  Component* component, int range, std::vector<eComponentType> compareTypeList)
 {
-	Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	Map* map = (Map*)mapComponent;
 
 	int minX = component->GetTileX() - range;
 	int minY = component->GetTileY() - range;
@@ -113,5 +114,12 @@ void ComponentSystem::ProcessMessageQueue()
 		sComponentMsgParam msgParam = _msgQueue.front();
 		_msgQueue.pop();
 		msgParam.receiver->ReceiveMessage(msgParam);
+	}
+}
+void ComponentSystem::ClearMessageQueue()
+{
+	while (0 < _msgQueue.size())
+	{
+		_msgQueue.pop();
 	}
 }

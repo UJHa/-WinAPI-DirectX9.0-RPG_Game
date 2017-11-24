@@ -34,13 +34,19 @@ void Map::Init()
 		srcX = 0;
 		srcY += 32;
 	}
-
+	std::wstring wname = _name;
+	std::string name = "";
+	name.assign(wname.begin(), wname.end());
+	char layer01Name[256];
+	sprintf(layer01Name, "%sData_layer1.csv", name.c_str());
+	char layer02Name[256];
+	sprintf(layer02Name, "%sData_layer2.csv", name.c_str());
 	//Load Script Script 1Ãþ
 	{
 		char record[1024];
 		int line = 0;
 		int index = 0;
-		ifstream infile("MapData_layer1.csv");
+		ifstream infile(layer01Name);
 		while (!infile.eof())
 		{
 			infile.getline(record, 1024);
@@ -93,7 +99,7 @@ void Map::Init()
 		int line = 0;
 		int row = 0;
 		int index = 0;
-		ifstream infile("MapData_layer2.csv");
+		ifstream infile(layer02Name);
 		while (!infile.eof())
 		{
 			infile.getline(record, 1024);
@@ -174,15 +180,6 @@ void Map::Update(float deltaTime)
 			_tileMap[y][x]->Update(deltaTime);
 		}
 	}
-	if (NULL != _viewer)
-	{
-		float deltaX = _viewer->GetMoveDeltaX() * deltaTime;
-		float deltaY = _viewer->GetMoveDeltaY() * deltaTime;
-		Scroll(-deltaX, -deltaY);
-		/*wchar_t distanceXCheck[256];
-		swprintf(distanceXCheck, L"map deltaTime %f\n", deltaX);
-		OutputDebugString(distanceXCheck);*/
-	}
 }
 void Map::Render()
 {
@@ -257,7 +254,10 @@ bool Map::GetTileCollisionList(int tileX, int tileY, std::list<Component*>& coll
 		return false;
 	return _tileMap[tileY][tileX]->GetCollisionList(collisionList);
 }
-
+std::list<Component*>  Map::GetTileComponentList(int tileX, int tileY)
+{
+	return _tileMap[tileY][tileX]->GetComponentList();
+}
 void Map::setTileComponent(int tileX, int tileY, Component* component, bool isRender)
 {
 	_tileMap[tileY][tileX]->AddComponent(component, isRender);
@@ -307,4 +307,20 @@ void Map::InitViewer(Component* viewer)
 		posX = _startX;
 		posY += _tileSize;
 	}
+}
+void Map::ViewScroll(Component* viewer, float deltaTime)
+{
+	if (NULL != _viewer)
+	{
+		if (_viewer->GetType() == viewer->GetType())
+		{
+			float deltaX = _viewer->GetMoveDeltaX() * deltaTime;
+			float deltaY = _viewer->GetMoveDeltaY() * deltaTime;
+			Scroll(-deltaX, -deltaY);
+			wchar_t distanceXCheck[256];
+			swprintf(distanceXCheck, L"map deltaTime %f\n", deltaX);
+			OutputDebugString(distanceXCheck);
+		}
+	}
+
 }

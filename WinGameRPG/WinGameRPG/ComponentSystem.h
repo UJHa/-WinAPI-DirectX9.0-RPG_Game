@@ -24,7 +24,7 @@ public:
 	void AddComponent(wstring name, Component* component);
 	void RemoveAllComponents();
 	Component* FindComponent(LPCWSTR name);
-	Component* FindComponentInRange(Component* component, int range, std::vector<eComponentType> compareTypeList);
+	Component* FindComponentInRange(Component* map, Component* component, int range, std::vector<eComponentType> compareTypeList);
 	void Update(float deltaTime);
 //message
 private:
@@ -32,4 +32,5 @@ private:
 public:
 	void SendMsg(sComponentMsgParam& msgParam);
 	void ProcessMessageQueue();
+	void ClearMessageQueue();
 };

@@ -47,6 +47,7 @@ public:
 	float GetMoveDeltaY() { return _moveDistancePerTimeY; };
 	eComponentType GetType() { return _componentType; }
 	bool IsLive() { return _isLive; }
+	void SetLive(bool isLive) { _isLive = isLive; }
 	//message
 public:
 	virtual void ReceiveMessage(const sComponentMsgParam msgParam);
