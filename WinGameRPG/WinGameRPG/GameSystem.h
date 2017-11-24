@@ -8,9 +8,8 @@
 #define SAVE_DELETE(x) {if(x){delete x;x=NULL;}}
 
 class GameTimer;
-class Map;
-class Character;
 class Component;
+class Stage;
 //class Font;
 class GameSystem
 {
@@ -37,12 +36,6 @@ private:
 	int _WindowWidth;
 	int _WindowHeight;
 	GameTimer* _gameTimer;
-	
-	std::list<Component*> _componentList;
-	/*Map* _map;
-	Character* _player;
-	Character* _npc;
-	Character* _monster;*/
 
 //get System
 public:
@@ -63,8 +56,9 @@ public:
 	void KeyDown(unsigned int keyCode);
 	void KeyUp(unsigned int keyCode);
 	bool IsKeyDown(int keyCode);
-	//font
+	//state
 private:
-	//ID3DXFont* _dxTestFont;
-	//Font* _font;
+	Stage* _stage;
+public:
+	Stage* GetStage() { return _stage; }
 };

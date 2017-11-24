@@ -9,6 +9,8 @@
 #include "DefenseState.h"
 #include "DeadState.h"
 #include "Font.h"
+#include "GameSystem.h"
+#include "Stage.h"
 Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Component(name)
 {
 	_state = NULL;
@@ -36,7 +38,8 @@ Character::~Character()
 void Character::Init()
 {
 	{
-		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 		_tileX = rand() % map->GetWidth();
 		_tileY = rand() % map->GetHeight();
 		while (!map->CanMoveTileMap(_tileX, _tileY))
@@ -155,7 +158,8 @@ void Character::InitMove()
 }
 void Character::MoveStart(int newTileX, int newTileY)
 {
-	Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 	map->ResetTileComponent(_tileX, _tileY, this);
 	_x = map->GetPositionX(_tileX, _tileY);
 	_y = map->GetPositionY(_tileX, _tileY);
@@ -181,11 +185,16 @@ void Character::MoveStart(int newTileX, int newTileY)
 void Character::MoveStop()
 {
 	_isMoving = false;
-	Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
+	//캐릭 위치 보정된 값
+	float correctionX = map->GetPositionX(_tileX, _tileY) - _x;
+	float correctionY = map->GetPositionX(_tileX, _tileY) - _y;
 	_x = map->GetPositionX(_tileX, _tileY);
 	_y = map->GetPositionY(_tileX, _tileY);
 	_moveDistancePerTimeX = 0.0f;
 	_moveDistancePerTimeY = 0.0f;
+	map->ViewScroll(this, 0.0f);
 }
 void Character::Moving(float deltaTime)
 {
@@ -193,7 +202,14 @@ void Character::Moving(float deltaTime)
 	float moveDistanceY = _moveDistancePerTimeY * deltaTime;
 	_x += moveDistanceX;
 	_y += moveDistanceY;
+	wchar_t distanceXCheck[256];
+	swprintf(distanceXCheck, L"char deltaTime %f\n", moveDistanceX);
+	OutputDebugString(distanceXCheck);
+	//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
+	map->ViewScroll(this, deltaTime);
 }
+
 void Character::UpdateAttackCoolTime(float deltaTime)
 {
 	if (_attackCoolTimeDuration < _attackCoolTime)

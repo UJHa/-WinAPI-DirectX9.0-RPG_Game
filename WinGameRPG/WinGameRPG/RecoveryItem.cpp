@@ -3,6 +3,8 @@
 #include"Sprite.h"
 #include"Map.h"
 #include"Character.h"
+#include"GameSystem.h"
+#include"Stage.h"
 RecoveryItem::RecoveryItem(LPCWSTR name, LPCWSTR scriptName, LPCWSTR textureFileName) : Component(name)
 {
 	_componentType = eComponentType::CT_ITEM;
@@ -20,7 +22,8 @@ RecoveryItem::~RecoveryItem()
 void RecoveryItem::Init()
 {
 	{
-		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 		_tileX = rand() % map->GetWidth();
 		_tileY = rand() % map->GetHeight();
 		while (!map->CanMoveTileMap(_tileX, _tileY))
@@ -83,7 +86,8 @@ void RecoveryItem::ReceiveMessage(const sComponentMsgParam msgParam)
 	if (L"Use" == msgParam.message)
 	{
 		Component* sender = msgParam.sender;
-		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 		switch (sender->GetType())
 		{
 		case eComponentType::CT_NPC:

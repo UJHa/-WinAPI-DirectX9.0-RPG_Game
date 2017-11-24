@@ -3,6 +3,7 @@
 #include"ComponentSystem.h"
 #include"Map.h"
 #include"MoveState.h"
+#include"Stage.h"
 Player::Player(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
 {
 	_moveTime = 0.1f;
@@ -31,7 +32,8 @@ void Player::UpdateAI()
 	}
 	if (GameSystem::GetInstance()->IsKeyDown(VK_SPACE))
 	{
-		Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 		std::list<Component*> componentList = map->GetTileComponentList(_tileX,_tileY);
 		for (std::list<Component*>::iterator it = componentList.begin(); it != componentList.end(); it++)
 		{

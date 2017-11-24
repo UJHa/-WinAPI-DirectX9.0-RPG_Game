@@ -2,6 +2,8 @@
 #include"Character.h"
 #include"Map.h"
 #include"ComponentSystem.h"
+#include"GameSystem.h"
+#include"Stage.h"
 MoveState::MoveState()
 {
 	_nowState = eStateType::ET_MOVE;
@@ -39,7 +41,8 @@ void MoveState::Start()
 	State::Start();
 	if (true == _character->IsMoving())
 		return;
-	Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 
 	int newTileX = _character->GetTileX();
 	int newTileY = _character->GetTileY();

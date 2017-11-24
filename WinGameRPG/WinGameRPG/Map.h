@@ -47,4 +47,5 @@ private:
 	Component* _viewer;
 public:
 	void InitViewer(Component* viewer);
+	void ViewScroll(Component* viewer, float deltaTime);
 };
