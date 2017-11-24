@@ -33,8 +33,8 @@ public:
 	void Reset();
 	void Scroll(float moveX, float moveY);
 
-	int GetPositionX(int tileX, int tileY);
-	int GetPositionY(int tileX, int tileY);
+	float GetPositionX(int tileX, int tileY);
+	float GetPositionY(int tileX, int tileY);
 	bool GetTileCollisionList(int tileX, int tileY, std::list<Component*>& collisionList);
 	std::list<Component*> GetTileComponentList(int tileX, int tileY);
 	void setTileComponent(int tileX, int tileY, Component* component, bool isRender);
@@ -47,5 +47,5 @@ private:
 	Component* _viewer;
 public:
 	void InitViewer(Component* viewer);
-	void ViewScroll(Component* viewer, float deltaTime);
+	void ViewerScroll(Component* viewer, float deltaX, float deltaY);
 };
