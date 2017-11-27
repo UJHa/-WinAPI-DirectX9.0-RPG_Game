@@ -189,12 +189,15 @@ void Character::MoveStop()
 	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 	//캐릭 위치 보정된 값
 	float correctionX = map->GetPositionX(_tileX, _tileY) - _x;
-	float correctionY = map->GetPositionX(_tileX, _tileY) - _y;
+	float correctionY = map->GetPositionY(_tileX, _tileY) - _y;
+	/*wchar_t distanceXCheck[256];
+	swprintf(distanceXCheck, L"char stop 보정 %f\n", correctionX);
+	OutputDebugString(distanceXCheck);*/
 	_x = map->GetPositionX(_tileX, _tileY);
 	_y = map->GetPositionY(_tileX, _tileY);
-	_moveDistancePerTimeX = 0.0f;
-	_moveDistancePerTimeY = 0.0f;
-	map->ViewScroll(this, 0.0f);
+	_moveDistancePerTimeX = correctionX;
+	_moveDistancePerTimeY = correctionY;
+	map->ViewerScroll(this, _moveDistancePerTimeX, _moveDistancePerTimeY);
 }
 void Character::Moving(float deltaTime)
 {
@@ -202,12 +205,13 @@ void Character::Moving(float deltaTime)
 	float moveDistanceY = _moveDistancePerTimeY * deltaTime;
 	_x += moveDistanceX;
 	_y += moveDistanceY;
-	wchar_t distanceXCheck[256];
-	swprintf(distanceXCheck, L"char deltaTime %f\n", moveDistanceX);
+	/*wchar_t distanceXCheck[256];
+	swprintf(distanceXCheck, L"char deltaTimeX %f\n", moveDistanceX);
 	OutputDebugString(distanceXCheck);
-	//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+	swprintf(distanceXCheck, L"char moving _x %f\n", _x);
+	OutputDebugString(distanceXCheck);*/
 	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
-	map->ViewScroll(this, deltaTime);
+	map->ViewerScroll(this, moveDistanceX, moveDistanceY);
 }
 
 void Character::UpdateAttackCoolTime(float deltaTime)

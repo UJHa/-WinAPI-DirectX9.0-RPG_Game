@@ -233,11 +233,11 @@ void Map::Scroll(float moveX, float moveY)
 	_deltaX = moveX;
 	_deltaY = moveY;
 }
-int Map::GetPositionX(int tileX, int tileY)
+float Map::GetPositionX(int tileX, int tileY)
 {
 	return _tileMap[tileY][tileX]->GetPositionX();
 }
-int Map::GetPositionY(int tileX, int tileY)
+float Map::GetPositionY(int tileX, int tileY)
 {
 	return _tileMap[tileY][tileX]->GetPositionY();
 }
@@ -308,18 +308,16 @@ void Map::InitViewer(Component* viewer)
 		posY += _tileSize;
 	}
 }
-void Map::ViewScroll(Component* viewer, float deltaTime)
+void Map::ViewerScroll(Component* viewer, float deltaX, float deltaY)
 {
 	if (NULL != _viewer)
 	{
 		if (_viewer->GetType() == viewer->GetType())
 		{
-			float deltaX = _viewer->GetMoveDeltaX() * deltaTime;
-			float deltaY = _viewer->GetMoveDeltaY() * deltaTime;
 			Scroll(-deltaX, -deltaY);
-			wchar_t distanceXCheck[256];
+			/*wchar_t distanceXCheck[256];
 			swprintf(distanceXCheck, L"map deltaTime %f\n", deltaX);
-			OutputDebugString(distanceXCheck);
+			OutputDebugString(distanceXCheck);*/
 		}
 	}
 
