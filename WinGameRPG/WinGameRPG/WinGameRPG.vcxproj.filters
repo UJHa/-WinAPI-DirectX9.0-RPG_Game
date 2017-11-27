@@ -117,6 +117,12 @@
     <ClCompile Include="Stage.cpp">
       <Filter>소스 파일\Game\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="LifeTileObject.cpp">
+      <Filter>소스 파일\Game\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeNPC.cpp">
+      <Filter>소스 파일\Game\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -193,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="Stage.h">
       <Filter>소스 파일\Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeTileObject.h">
+      <Filter>소스 파일\Game\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeNPC.h">
+      <Filter>소스 파일\Game\Character</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

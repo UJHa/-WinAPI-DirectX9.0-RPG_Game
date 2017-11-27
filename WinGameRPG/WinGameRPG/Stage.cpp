@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "RecoveryItem.h"
+#include "LifeNPC.h"
 Stage::Stage()
 {
 }
@@ -19,33 +20,44 @@ void Stage::Init(std::wstring name)
 	_map = new Map(name.c_str());
 	_componentList.push_back(_map);
 
-	for (int i = 0; i < 0; i++)
+	if (L"Map3" == name)
 	{
-		WCHAR name[256];
-		wsprintf(name, L"recovery_item_%d", i);
-		RecoveryItem* recoveryItem = new RecoveryItem(name, L"recovery_item", L"item_sprites");
-		_componentList.push_back(recoveryItem);
+		for (int i = 0; i < 30; i++)
+		{
+			WCHAR name[256];
+			wsprintf(name, L"lifeNpc_%d", i);
+			LifeNPC* npc = new LifeNPC(name, L"npc", L"npc");
+			_componentList.push_back(npc);
+		}
+	}
+	else
+	{
+		for (int i = 0; i < 0; i++)
+		{
+			WCHAR name[256];
+			wsprintf(name, L"recovery_item_%d", i);
+			RecoveryItem* recoveryItem = new RecoveryItem(name, L"recovery_item", L"item_sprites");
+			_componentList.push_back(recoveryItem);
+		}
+		for (int i = 0; i < 0; i++)
+		{
+			WCHAR name[256];
+			wsprintf(name, L"npc_%d", i);
+			NPC* npc = new NPC(name, L"npc", L"npc");
+			_componentList.push_back(npc);
+		}
+		for (int i = 0; i < 0; i++)
+		{
+			WCHAR name[256];
+			wsprintf(name, L"monster_%d", i);
+			Monster* monster = new Monster(name, L"monster", L"monster");
+			_componentList.push_back(monster);
+		}
 	}
 	WCHAR playerName[256];
 	wsprintf(playerName, L"player");
 	Player* player = new Player(playerName, L"player", L"player");
 	_componentList.push_back(player);
-
-	for (int i = 0; i < 0; i++)
-	{
-		WCHAR name[256];
-		wsprintf(name, L"npc_%d", i);
-		NPC* npc = new NPC(name, L"npc", L"npc");
-		_componentList.push_back(npc);
-	}
-	for (int i = 0; i < 0; i++)
-	{
-		WCHAR name[256];
-		wsprintf(name, L"monster_%d", i);
-		Monster* monster = new Monster(name, L"monster", L"monster");
-		_componentList.push_back(monster);
-	}
-
 	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 	{
 		(*it)->Init();
