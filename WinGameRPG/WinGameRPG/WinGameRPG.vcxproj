@@ -154,6 +154,8 @@
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="IdleState.cpp" />
+    <ClCompile Include="LifeNPC.cpp" />
+    <ClCompile Include="LifeTileObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="monster.cpp" />
@@ -181,6 +183,8 @@
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="IdleState.h" />
+    <ClInclude Include="LifeNPC.h" />
+    <ClInclude Include="LifeTileObject.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MoveState.h" />

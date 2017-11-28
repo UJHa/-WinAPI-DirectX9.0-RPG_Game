@@ -9,14 +9,14 @@ private:
 	float _posY;
 public:
 	TileObject(LPCWSTR name, Sprite* sprite);
-	~TileObject();
+	virtual ~TileObject();
 
-	void Init();
-	void DInit();
-	void Update(float deltaTime);
-	void Render();
-	void Release();
-	void Reset();
+	virtual void Init();
+	virtual void DInit();
+	virtual void Update(float deltaTime);
+	virtual void Render();
+	virtual void Release();
+	virtual void Reset();
 
 	void MoveDeltaPosition(float deltaX, float deltaY);
 	void SetPosition(float posX, float posY);

@@ -102,5 +102,5 @@ public:
 protected:
 	Font* _font;
 public:
-	void UpdateText();
+	virtual void UpdateText();
 };

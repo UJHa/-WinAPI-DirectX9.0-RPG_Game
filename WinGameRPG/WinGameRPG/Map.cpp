@@ -3,6 +3,7 @@
 #include"TileCell.h"
 #include"TileObject.h"
 #include"GameSystem.h"
+#include"LifeTileObject.h"
 #include<fstream>
 Map::Map(LPCWSTR name) : Component(name)
 {
@@ -119,15 +120,22 @@ void Map::Init()
 					for (int x = 0; x < _width; x++)
 					{
 						index = atoi(token);
+						TileCell* tileCell = rowList[x];
+						WCHAR componetName[256];
+						wsprintf(componetName, L"map_layer02_%d_%d", line, x);
 						if (0 <= index)
 						{
-							TileCell* tileCell = rowList[x];
-							//tileCell->SetSprite(_spriteList[index]);
-							WCHAR componetName[256];
-							wsprintf(componetName, L"map_layer02_%d_%d", line, x);
-							TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
-							//tileObject->SetCanMove(false);
-							tileCell->AddComponent(tileObject, true);
+							if (100100 == index)
+							{
+								LifeTileObject* tileObject = new LifeTileObject(componetName, _spriteList[17]);
+								tileObject->SetCanMove(true);
+								tileCell->AddComponent(tileObject, true);
+							}
+							else
+							{
+								TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
+								tileCell->AddComponent(tileObject, true);
+							}
 						}
 						token = strtok(NULL, ",");
 					}
@@ -320,5 +328,4 @@ void Map::ViewerScroll(Component* viewer, float deltaX, float deltaY)
 			OutputDebugString(distanceXCheck);*/
 		}
 	}
-
 }
