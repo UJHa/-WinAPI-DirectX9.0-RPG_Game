@@ -95,6 +95,55 @@ void Character::Init()
 		UpdateText();
 	}
 }
+void Character::Init(int tileX, int tileY)
+{
+	{
+		//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
+		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
+		_tileX = tileX;
+		_tileY = tileY;
+
+		_x = map->GetPositionX(_tileX, _tileY);
+		_y = map->GetPositionY(_tileX, _tileY);
+		map->setTileComponent(_tileX, _tileY, this, true);
+	}
+	InitMove();
+	{
+		State* state = new IdleState();
+		state->Init(this);
+		_stateMap[eStateType::ET_IDLE] = state;
+	}
+	{
+		State* state = new MoveState();
+		state->Init(this);
+		_stateMap[eStateType::ET_MOVE] = state;
+	}
+	{
+		State* state = new AttackState();
+		state->Init(this);
+		_stateMap[eStateType::ET_ATTACK] = state;
+	}
+	{
+		State* state = new DefenseState();
+		state->Init(this);
+		_stateMap[eStateType::ET_DEFENSE] = state;
+	}
+	{
+		State* state = new DeadState();
+		state->Init(this);
+		_stateMap[eStateType::ET_DEAD] = state;
+	}
+	ChangeState(eStateType::ET_IDLE);
+	//_state->NextState(eStateType::ET_IDLE);
+	{
+		D3DCOLOR color = D3DCOLOR_ARGB(255, 0, 0, 0);
+		_font = new Font(L"Arial", 15, color);
+
+
+		_font->SetRect(0, 0, 100, 100);
+		UpdateText();
+	}
+}
 void Character::DInit()
 {
 	std::map<eStateType, State*>::iterator it = _stateMap.begin();

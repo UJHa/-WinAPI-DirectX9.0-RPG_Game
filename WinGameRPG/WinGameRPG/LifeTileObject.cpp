@@ -3,9 +3,11 @@
 #include"Map.h"
 #include"Stage.h"
 #include"ComponentSystem.h"
-LifeTileObject::LifeTileObject(LPCWSTR name, Sprite* sprite) :
-	TileObject(name,sprite)
+LifeTileObject::LifeTileObject(int tileX, int tileY, LPCWSTR name, Sprite* sprite) :
+	TileObject(name, sprite)
 {
+	_tileX = tileX;
+	_tileY = tileY;
 }
 
 LifeTileObject::~LifeTileObject()
@@ -18,14 +20,14 @@ void LifeTileObject::Update(float deltaTime)
 	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 	int range = 1;
 	//주변 캐릭터 마리 수를 세기
-	std::vector<eComponentType> compareTypeList;
+	int surroundedCharacter = 0;
 	//FindComponentInRange 내 기능을 통하여 캐릭터 마리 수 가져올 것(자신을 제외한 탐색)
-	Component* findEnemy;
+	Component* tileCharacter = NULL;
 
-	int minX = GetTileX() - range;
-	int minY = GetTileY() - range;
-	int maxX = GetTileX() + range;
-	int maxY = GetTileY() + range;
+	int minX = _tileX - range;
+	int minY = _tileY - range;
+	int maxX = _tileX + range;
+	int maxY = _tileY + range;
 	if (minX < 0) {
 		minX = 0;
 	}
@@ -42,22 +44,53 @@ void LifeTileObject::Update(float deltaTime)
 	{
 		for (int x = minX; x < maxX; x++)
 		{
-			std::list<Component*> collisionList;
-			if (false == map->GetTileCollisionList(x, y, collisionList))
+			if (x != _tileX || y != _tileY)
 			{
-				//collisionList 순환
-				for (std::list<Component*>::iterator itCollision = collisionList.begin();
-					itCollision != collisionList.end();
-					itCollision++)
+				std::list<Component*> collisionList;
+				if (false == map->GetTileCollisionList(x, y, collisionList))
 				{
-					Component* component = (*itCollision);
-					if (component->IsLive())
+					//collisionList 순환
+					for (std::list<Component*>::iterator itCollision = collisionList.begin();
+						itCollision != collisionList.end();
+						itCollision++)
 					{
-						for (int i = 0; i < compareTypeList.size(); i++)
+						Component* component = (*itCollision);
+						if (component->IsLive())
 						{
-							if (component->GetType() == compareTypeList[i])
+							switch (component->GetType())
 							{
-								compareTypeList.push_back(component->GetType());
+							case CT_PLAYER:
+							case CT_NPC:
+								surroundedCharacter++;
+								break;
+							default:
+								break;
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				std::list<Component*> collisionList;
+				if (false == map->GetTileCollisionList(x, y, collisionList))
+				{
+					//collisionList 순환
+					for (std::list<Component*>::iterator itCollision = collisionList.begin();
+						itCollision != collisionList.end();
+						itCollision++)
+					{
+						Component* component = (*itCollision);
+						if (component->IsLive())
+						{
+							switch (component->GetType())
+							{
+							case CT_PLAYER:
+							case CT_NPC:
+								tileCharacter = component;
+								break;
+							default:
+								break;
 							}
 						}
 					}
@@ -65,4 +98,30 @@ void LifeTileObject::Update(float deltaTime)
 			}
 		}
 	}
+	if (3 == surroundedCharacter)
+	{
+		if (NULL == tileCharacter)
+		{
+			GameSystem::GetInstance()->GetStage()->CreateLifeNPC(_tileX, _tileY);
+		}
+	}
+	else if (2 == surroundedCharacter)
+	{
+		//skip
+	}
+	else
+	{
+		//dead
+		if (NULL != tileCharacter)
+		{
+			if (eComponentType::CT_PLAYER != tileCharacter->GetType())
+			{
+				GameSystem::GetInstance()->GetStage()->DestroyLifeNPC(_tileX, _tileY, tileCharacter);
+			}
+		}
+	}
+
+	wchar_t timeCheck[256];
+	swprintf(timeCheck, L"deltaTime %f\n", deltaTime);
+	OutputDebugString(timeCheck);
 }

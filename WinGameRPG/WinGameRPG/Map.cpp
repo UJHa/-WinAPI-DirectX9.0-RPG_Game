@@ -127,7 +127,7 @@ void Map::Init()
 						{
 							if (100100 == index)
 							{
-								LifeTileObject* tileObject = new LifeTileObject(componetName, _spriteList[17]);
+								LifeTileObject* tileObject = new LifeTileObject(x, row, componetName, _spriteList[17]);
 								tileObject->SetCanMove(true);
 								tileCell->AddComponent(tileObject, true);
 							}
@@ -146,21 +146,6 @@ void Map::Init()
 			line++;
 		}
 	}
-
-	/*_startX += _deltaX;
-	_startY += _deltaY;
-	float posX = _startX;
-	float posY = _startY;
-	for (int y = 0; y < _height; y++)
-	{
-		for (int x = 0; x < _width; x++)
-		{
-			_tileMap[y][x]->SetPosition(posX, posY);
-			posX += _tileSize;
-		}
-		posX = _startX;
-		posY += _tileSize;
-	}*/
 }
 void Map::DInit()
 {
