@@ -37,9 +37,6 @@ void DefenseState::Start()
 {
 	State::Start();
 	int attackPoint = _character->GetRecevieAttackPoint();
-	wchar_t timeCheck[256];
-	swprintf(timeCheck, L"DefenseState attacked %d, type : %d\n", attackPoint, _character->GetType());
-	OutputDebugString(timeCheck);
 	_character->DecreaseHP(attackPoint);
 	if (false == _character->IsLive())
 	{

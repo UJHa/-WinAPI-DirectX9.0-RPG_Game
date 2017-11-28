@@ -185,14 +185,11 @@ void Character::MoveStart(int newTileX, int newTileY)
 void Character::MoveStop()
 {
 	_isMoving = false;
-	//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 	//캐릭 위치 보정된 값
 	float correctionX = map->GetPositionX(_tileX, _tileY) - _x;
 	float correctionY = map->GetPositionY(_tileX, _tileY) - _y;
-	/*wchar_t distanceXCheck[256];
-	swprintf(distanceXCheck, L"char stop 보정 %f\n", correctionX);
-	OutputDebugString(distanceXCheck);*/
+
 	_x = map->GetPositionX(_tileX, _tileY);
 	_y = map->GetPositionY(_tileX, _tileY);
 	_moveDistancePerTimeX = correctionX;
@@ -205,11 +202,7 @@ void Character::Moving(float deltaTime)
 	float moveDistanceY = _moveDistancePerTimeY * deltaTime;
 	_x += moveDistanceX;
 	_y += moveDistanceY;
-	/*wchar_t distanceXCheck[256];
-	swprintf(distanceXCheck, L"char deltaTimeX %f\n", moveDistanceX);
-	OutputDebugString(distanceXCheck);
-	swprintf(distanceXCheck, L"char moving _x %f\n", _x);
-	OutputDebugString(distanceXCheck);*/
+
 	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 	map->ViewerScroll(this, moveDistanceX, moveDistanceY);
 }

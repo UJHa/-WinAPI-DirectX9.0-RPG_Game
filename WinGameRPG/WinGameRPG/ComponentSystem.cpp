@@ -48,7 +48,6 @@ Component* ComponentSystem::FindComponent(LPCWSTR name)
 }
 Component* ComponentSystem::FindComponentInRange(Component* mapComponent,  Component* component, int range, std::vector<eComponentType> compareTypeList)
 {
-	//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 	Map* map = (Map*)mapComponent;
 
 	int minX = component->GetTileX() - range;
