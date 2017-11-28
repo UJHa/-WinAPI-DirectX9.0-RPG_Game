@@ -189,7 +189,6 @@ int GameSystem::Update()
 					_stage->Init(L"Map3");
 				}
 			}
-
 			/*wchar_t timeCheck[256];
 			swprintf(timeCheck,L"deltaTime %f\n",deltaTime);
 			OutputDebugString(timeCheck);*/

@@ -5,7 +5,7 @@
 #include"GameSystem.h"
 #include"LifeTileObject.h"
 #include<fstream>
-Map::Map(LPCWSTR name) : Component(name)
+Map::Map(wstring name) : Component(name)
 {
 	_startX = _startY = _deltaX = _deltaY = 0.0f;
 	_tileSize = 32;
@@ -76,9 +76,10 @@ void Map::Init()
 						index = atoi(token);
 
 						TileCell* tileCell = new TileCell();
-						WCHAR componetName[256];
-						wsprintf(componetName, L"map_layer01_%d_%d", line, x);
-						TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
+						WCHAR componetSetName[256];
+						wsprintf(componetSetName, L"map_layer01_%d_%d", line, x);
+						wstring componentName = componetSetName;
+						TileObject* tileObject = new TileObject(componentName, _spriteList[index]);
 						tileObject->SetCanMove(true);
 						tileCell->AddComponent(tileObject, true);
 						rowList.push_back(tileCell);
@@ -128,8 +129,8 @@ void Map::Init()
 							if (100100 == index)
 							{
 								LifeTileObject* tileObject = new LifeTileObject(x, row, componetName, _spriteList[17]);
-								tileObject->SetCanMove(true);
 								tileCell->AddComponent(tileObject, true);
+								tileObject->SetCanMove(true);
 							}
 							else
 							{
@@ -157,11 +158,11 @@ void Map::DInit()
 			delete _tileMap[y][x];
 		}
 	}
-	if (NULL != _viewer)
+	/*if (NULL != _viewer)
 	{
 		delete _viewer;
 		_viewer = NULL;
-	}
+	}*/
 }
 void Map::Update(float deltaTime)
 {
@@ -308,9 +309,6 @@ void Map::ViewerScroll(Component* viewer, float deltaX, float deltaY)
 		if (_viewer->GetType() == viewer->GetType())
 		{
 			Scroll(-deltaX, -deltaY);
-			/*wchar_t distanceXCheck[256];
-			swprintf(distanceXCheck, L"map deltaTime %f\n", deltaX);
-			OutputDebugString(distanceXCheck);*/
 		}
 	}
 }

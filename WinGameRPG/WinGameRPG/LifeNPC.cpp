@@ -1,5 +1,5 @@
 #include"LifeNPC.h"
-LifeNPC::LifeNPC(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : 
+LifeNPC::LifeNPC(wstring name, wstring scriptName, wstring pngName) :
 	Character(name, scriptName, pngName)
 {
 }

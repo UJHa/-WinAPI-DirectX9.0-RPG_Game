@@ -82,9 +82,6 @@ void MoveState::Start()
 	{
 		_character->MoveStart(newTileX, newTileY);
 	}
-	wchar_t distanceXCheck[256];
-	swprintf(distanceXCheck, L"char Start GetX %f\n", _character->GetX());
-	OutputDebugString(distanceXCheck);
 }
 void MoveState::Stop()
 {

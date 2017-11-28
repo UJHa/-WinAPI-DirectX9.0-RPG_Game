@@ -1,5 +1,6 @@
 #pragma once
 #include"Component.h"
+using namespace std;
 class Sprite;
 class TileObject : public Component
 {
@@ -8,7 +9,7 @@ private:
 	float _posX;
 	float _posY;
 public:
-	TileObject(LPCWSTR name, Sprite* sprite);
+	TileObject(wstring name, Sprite* sprite);
 	virtual ~TileObject();
 
 	virtual void Init();

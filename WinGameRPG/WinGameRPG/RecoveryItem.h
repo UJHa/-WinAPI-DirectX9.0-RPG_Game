@@ -1,16 +1,17 @@
 #pragma once
 #include"Component.h"
 #include<string>
+using namespace std;
 class Sprite;
 class RecoveryItem : public Component
 {
 public:
-	RecoveryItem(LPCWSTR name, LPCWSTR scriptName, LPCWSTR textureFileName);
+	RecoveryItem(wstring name, wstring scriptName, wstring textureFileName);
 	~RecoveryItem();
 
 private:
-	std::wstring _scriptName;
-	std::wstring _textureFileName;
+	wstring _scriptName;
+	wstring _textureFileName;
 	Sprite* _sprite;
 	float _posX;
 	float _posY;

@@ -3,7 +3,7 @@
 #include"Map.h"
 #include"Stage.h"
 #include"ComponentSystem.h"
-LifeTileObject::LifeTileObject(int tileX, int tileY, LPCWSTR name, Sprite* sprite) :
+LifeTileObject::LifeTileObject(int tileX, int tileY, wstring name, Sprite* sprite) :
 	TileObject(name, sprite)
 {
 	_tileX = tileX;
@@ -120,8 +120,4 @@ void LifeTileObject::Update(float deltaTime)
 			}
 		}
 	}
-
-	wchar_t timeCheck[256];
-	swprintf(timeCheck, L"deltaTime %f\n", deltaTime);
-	OutputDebugString(timeCheck);
 }

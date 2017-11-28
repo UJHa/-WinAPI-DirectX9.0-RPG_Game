@@ -37,7 +37,7 @@ void ComponentSystem::RemoveAllComponents()
 	}
 	_componentMap.clear();
 }
-Component* ComponentSystem::FindComponent(LPCWSTR name)
+Component* ComponentSystem::FindComponent(wstring name)
 {
 	map<wstring, Component*>::iterator it = _componentMap.find(name);
 	if (it != _componentMap.end())

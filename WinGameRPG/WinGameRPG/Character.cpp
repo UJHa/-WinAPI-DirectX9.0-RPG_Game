@@ -11,7 +11,7 @@
 #include "Font.h"
 #include "GameSystem.h"
 #include "Stage.h"
-Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Component(name)
+Character::Character(wstring name, wstring scriptName, wstring pngName) : Component(name)
 {
 	_state = NULL;
 	_moveTime = 1.0f;
@@ -146,24 +146,27 @@ void Character::Init(int tileX, int tileY)
 }
 void Character::DInit()
 {
-	std::map<eStateType, State*>::iterator it = _stateMap.begin();
-	while(it != _stateMap.end())
+	delete _font;
+
+	for (std::map<eStateType, State*>::iterator it = _stateMap.begin(); it != _stateMap.end(); it++)
 	{
 		State* state = it->second;
 		delete state;
-		it++;
 	}
 	_stateMap.clear();
-	delete _font;
 }
 void Character::Update(float deltaTime)
 {
+	if (false == _isLive)
+		return;
 	UpdateAttackCoolTime(deltaTime);
 	UpdateText();
 	_state->Update(deltaTime);
 }
 void Character::Render()
 {
+	if (false == _isLive)
+		return;
 	_state->Render();
 	_font->SetPosition(_x - 50, _y - 50);
 	_font->Render();

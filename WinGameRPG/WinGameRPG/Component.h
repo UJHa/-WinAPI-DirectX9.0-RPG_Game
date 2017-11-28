@@ -1,6 +1,7 @@
 #pragma once
 #include<Windows.h>
 #include<string>
+using namespace std;
 struct sComponentMsgParam;
 enum eComponentType
 {
@@ -14,7 +15,7 @@ enum eComponentType
 class Component
 {
 protected:
-	LPCWSTR _name;
+	wstring _name;
 	bool _canMove;
 
 	int _tileX;
@@ -27,7 +28,7 @@ protected:
 	bool _isLive;
 public:
 	Component() { _canMove = false; _componentType = eComponentType::CT_NONE; _isLive = true;}
-	Component(LPCWSTR name);
+	Component(wstring name);
 	virtual ~Component();
 
 	virtual void Init() = 0;
