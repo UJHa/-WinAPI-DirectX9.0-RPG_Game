@@ -19,10 +19,10 @@ void ComponentSystem::AddComponent(wstring name, Component* component)
 {
 	if (NULL != component)
 	{
-		map<wstring, Component*>::iterator it = _componentMap.find(name);
+		map<wstring, Component*>::iterator it = _componentMap.find(name.c_str());
 		if (it == _componentMap.end())
 		{
-			_componentMap[name] = component;
+			_componentMap[name.c_str()] = component;
 		}
 	}
 }

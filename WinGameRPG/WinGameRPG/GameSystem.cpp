@@ -175,6 +175,7 @@ int GameSystem::Update()
 				if (IsKeyDown(VK_F1))
 				{
 					ComponentSystem::GetInstance()->ClearMessageQueue();
+					_stage->DInit();
 					delete _stage;
 					_stage = new Stage();
 					_stage->Init(L"Map2");
@@ -182,6 +183,7 @@ int GameSystem::Update()
 				if (IsKeyDown(VK_F2))
 				{
 					ComponentSystem::GetInstance()->ClearMessageQueue();
+					_stage->DInit();
 					delete _stage;
 					_stage = new Stage();
 					_stage->Init(L"Map3");

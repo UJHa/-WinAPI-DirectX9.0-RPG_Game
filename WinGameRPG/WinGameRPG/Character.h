@@ -32,6 +32,7 @@ public:
 	virtual ~Character();
 
 	void Init();
+	void Init(int tileX, int tileY);
 	void DInit();
 	void Update(float deltaTime);
 	void Render();

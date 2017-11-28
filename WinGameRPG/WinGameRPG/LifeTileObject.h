@@ -3,7 +3,7 @@
 class LifeTileObject : public TileObject
 {
 public:
-	LifeTileObject(LPCWSTR name, Sprite* sprite);
+	LifeTileObject(int tileX, int tileY, LPCWSTR name, Sprite* sprite);
 	~LifeTileObject();
 public:
 	void Update(float deltaTime);
