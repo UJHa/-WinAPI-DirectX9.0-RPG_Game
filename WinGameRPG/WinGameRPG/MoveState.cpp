@@ -89,11 +89,7 @@ void MoveState::Start()
 void MoveState::Stop()
 {
 	State::Stop();
-	wchar_t distanceXCheck[256];
-	swprintf(distanceXCheck, L"char Stop GetX %f\n", _character->GetX());
-	OutputDebugString(distanceXCheck);
 	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
-
 	//character->Set_moveDistancePerTimeX = character->_moveDistancePerTimeY = 0.0f;
 	map->ViewerScroll(_character, 0.0f, 0.0f);
 }
