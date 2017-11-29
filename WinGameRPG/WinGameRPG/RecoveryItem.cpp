@@ -5,7 +5,7 @@
 #include"Character.h"
 #include"GameSystem.h"
 #include"Stage.h"
-RecoveryItem::RecoveryItem(LPCWSTR name, LPCWSTR scriptName, LPCWSTR textureFileName) : Component(name)
+RecoveryItem::RecoveryItem(wstring name, wstring scriptName, wstring textureFileName) : Component(name)
 {
 	_componentType = eComponentType::CT_ITEM;
 	_sprite = NULL;

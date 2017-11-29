@@ -22,7 +22,7 @@ private:
 
 	vector<Sprite*> _spriteList;
 public:
-	Map(LPCWSTR name);
+	Map(wstring name);
 	~Map();
 
 	void Init();

@@ -5,7 +5,7 @@ class Sprite;
 class RecoveryItem : public Component
 {
 public:
-	RecoveryItem(LPCWSTR name, LPCWSTR scriptName, LPCWSTR textureFileName);
+	RecoveryItem(wstring name, wstring scriptName, wstring textureFileName);
 	~RecoveryItem();
 
 private:

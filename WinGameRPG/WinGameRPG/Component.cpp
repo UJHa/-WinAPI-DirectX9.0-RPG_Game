@@ -1,7 +1,7 @@
 #include "Component.h"
 #include "ComponentSystem.h"
 #include"sComponentMsgParam.h"
-Component::Component(LPCWSTR name)
+Component::Component(wstring name)
 {
 	_name = name;
 	ComponentSystem::GetInstance()->AddComponent(_name, this);

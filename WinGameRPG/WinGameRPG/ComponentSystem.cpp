@@ -26,6 +26,11 @@ void ComponentSystem::AddComponent(wstring name, Component* component)
 		}
 	}
 }
+void ComponentSystem::RemoveComponent(Component* component)
+{
+	_componentMap.erase(component->GetName());
+	delete component;
+}
 void ComponentSystem::RemoveAllComponents()
 {
 	for (map<wstring, Component*>::iterator it = _componentMap.begin();
@@ -37,7 +42,7 @@ void ComponentSystem::RemoveAllComponents()
 	}
 	_componentMap.clear();
 }
-Component* ComponentSystem::FindComponent(LPCWSTR name)
+Component* ComponentSystem::FindComponent(wstring name)
 {
 	map<wstring, Component*>::iterator it = _componentMap.find(name);
 	if (it != _componentMap.end())

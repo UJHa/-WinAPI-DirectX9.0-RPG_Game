@@ -13,10 +13,6 @@ Stage::Stage()
 Stage::~Stage()
 {
 	ComponentSystem::GetInstance()->RemoveAllComponents();
-	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
-	{
-		(*it)->DInit();
-	}
 }
 void Stage::Init(std::wstring name)
 {
@@ -46,7 +42,7 @@ void Stage::Init(std::wstring name)
 			RecoveryItem* recoveryItem = new RecoveryItem(name, L"recovery_item", L"item_sprites");
 			_componentList.push_back(recoveryItem);
 		}
-		for (int i = 0; i < 0; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			WCHAR name[256];
 			wsprintf(name, L"npc_%d", i);
@@ -117,4 +113,7 @@ void Stage::DestroyLifeNPC(int tileX, int tileY, Component* tileCharacter)
 	_map->ResetTileComponent(tileX, tileY, tileCharacter);
 	tileCharacter->SetCanMove(true);
 	tileCharacter->SetLive(false);
+
+	_componentList.remove(tileCharacter);
+	ComponentSystem::GetInstance()->RemoveComponent(tileCharacter);
 }

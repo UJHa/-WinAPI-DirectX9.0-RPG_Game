@@ -6,7 +6,7 @@ class Monster : public Character
 {
 private:
 public:
-	Monster(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName);
+	Monster(wstring name, wstring scriptName, wstring pngName);
 	~Monster();
 	void UpdateAI();
 	Component* Collision(std::list<Component*>& collisionList);

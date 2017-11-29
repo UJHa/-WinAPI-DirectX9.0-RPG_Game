@@ -5,7 +5,7 @@
 #include"GameSystem.h"
 #include"LifeTileObject.h"
 #include<fstream>
-Map::Map(LPCWSTR name) : Component(name)
+Map::Map(wstring name) : Component(name)
 {
 	_startX = _startY = _deltaX = _deltaY = 0.0f;
 	_tileSize = 32;

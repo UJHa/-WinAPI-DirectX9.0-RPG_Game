@@ -3,7 +3,7 @@
 class LifeNPC : public Character
 {
 public:
-	LifeNPC(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName);
+	LifeNPC(wstring name, wstring scriptName, wstring pngName);
 	~LifeNPC();
 public:
 	void UpdateAI();

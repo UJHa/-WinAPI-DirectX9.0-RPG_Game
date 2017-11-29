@@ -5,7 +5,7 @@
 #include "MoveState.h"
 #include "GameSystem.h"
 #include "Stage.h"
-Monster::Monster(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
+Monster::Monster(wstring name, wstring scriptName, wstring pngName) : Character(name, scriptName, pngName)
 {
 	_componentType = eComponentType::CT_MONSTER;
 	int speed = (rand() % 1500) + 200;

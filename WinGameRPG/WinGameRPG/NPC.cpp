@@ -5,7 +5,7 @@
 #include"MoveState.h"
 #include"GameSystem.h"
 #include"Stage.h"
-NPC::NPC(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Character(name, scriptName, pngName)
+NPC::NPC(wstring name, wstring scriptName, wstring pngName) : Character(name, scriptName, pngName)
 {
 	_componentType = eComponentType::CT_NPC;
 	int speed = (rand() % 1500) + 400;

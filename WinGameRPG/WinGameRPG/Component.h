@@ -2,6 +2,7 @@
 #include<Windows.h>
 #include<string>
 struct sComponentMsgParam;
+using namespace std;
 enum eComponentType
 {
 	CT_PLAYER,
@@ -14,7 +15,10 @@ enum eComponentType
 class Component
 {
 protected:
-	LPCWSTR _name;
+	wstring _name;
+public:
+	wstring GetName() { return _name; }
+protected:
 	bool _canMove;
 
 	int _tileX;
@@ -27,7 +31,7 @@ protected:
 	bool _isLive;
 public:
 	Component() { _canMove = false; _componentType = eComponentType::CT_NONE; _isLive = true;}
-	Component(LPCWSTR name);
+	Component(wstring name);
 	virtual ~Component();
 
 	virtual void Init() = 0;

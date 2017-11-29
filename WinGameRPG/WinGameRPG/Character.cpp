@@ -11,7 +11,7 @@
 #include "Font.h"
 #include "GameSystem.h"
 #include "Stage.h"
-Character::Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName) : Component(name)
+Character::Character(wstring name, wstring scriptName, wstring pngName) : Component(name)
 {
 	_state = NULL;
 	_moveTime = 1.0f;
@@ -56,7 +56,7 @@ void Character::Init()
 		}*/
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
-		map->setTileComponent(_tileX, _tileY, this, true);
+		map->setTileComponent(_tileX, _tileY, this, false);
 	}
 	InitMove();
 	{
@@ -98,14 +98,13 @@ void Character::Init()
 void Character::Init(int tileX, int tileY)
 {
 	{
-		//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 		_tileX = tileX;
 		_tileY = tileY;
 
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
-		map->setTileComponent(_tileX, _tileY, this, true);
+		map->setTileComponent(_tileX, _tileY, this, false);
 	}
 	InitMove();
 	{

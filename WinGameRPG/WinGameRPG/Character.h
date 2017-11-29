@@ -4,6 +4,7 @@
 #include<list>
 #include<string>
 #include"Component.h"
+using namespace std;
 enum eDirection {
 	LEFT, RIGHT, UP, DOWN, NONE,
 };
@@ -19,8 +20,8 @@ class Character : public Component
 protected:
 	float _x;
 	float _y;
-	std::wstring _scrpitName;
-	std::wstring _pngName;
+	wstring _scrpitName;
+	wstring _pngName;
 
 	int _hp;
 private:
@@ -28,7 +29,7 @@ private:
 	float _deltaX;
 	float _deltaY;
 public:
-	Character(LPCWSTR name, LPCWSTR scriptName, LPCWSTR pngName);
+	Character(wstring name, wstring scriptName, wstring pngName);
 	virtual ~Character();
 
 	void Init();
