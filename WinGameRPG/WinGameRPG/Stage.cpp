@@ -23,7 +23,7 @@ void Stage::Init(std::wstring name)
 	if (L"Map3" == name)
 	{
 		_lifeNpcCount = 0;
-		for (int i = 0; i < 30; i++)
+		for (int i = 0; i < 300; i++)
 		{
 			//CreateLifeNPC();
 			WCHAR name[256];
@@ -77,6 +77,8 @@ void Stage::Update(float deltaTime)
 	{
 		(*it)->Update(deltaTime);
 	}
+	UpdateBaseComponentList();
+	UpdateRemoveComponentList();
 }
 void Stage::Render()
 {
@@ -99,21 +101,44 @@ void Stage::Reset()
 		(*it)->Reset();
 	}
 }
-void Stage::CreateLifeNPC(int tileX, int tileY)
+void Stage::CreateLifeNPC(Component* component)
 {
-	WCHAR name[256];
-	wsprintf(name, L"lifeNpc_%d", _lifeNpcCount);
-	_lifeNpcCount++;
-	LifeNPC* npc = new LifeNPC(name, L"npc", L"npc");
-	npc->Init(tileX, tileY);
-	_componentList.push_back(npc);
+	//component->
+	_createBaseComponentList.push_back(component);
 }
-void Stage::DestroyLifeNPC(int tileX, int tileY, Component* tileCharacter)
+void Stage::DestroyLifeNPC(int tileX, int tileY, Component* component)
 {
-	_map->ResetTileComponent(tileX, tileY, tileCharacter);
-	tileCharacter->SetCanMove(true);
-	tileCharacter->SetLive(false);
+	_map->ResetTileComponent(tileX, tileY, component);
+	component->SetCanMove(true);
+	component->SetLive(false);
 
-	_componentList.remove(tileCharacter);
-	ComponentSystem::GetInstance()->RemoveComponent(tileCharacter);
+	_componentList.remove(component);
+	ComponentSystem::GetInstance()->RemoveComponent(component);
+}
+void Stage::CheckDestroyLifeNPC(Component* component)
+{
+	_removeComponentList.push_back(component);
+}
+void Stage::UpdateBaseComponentList()
+{
+	for (std::list<Component*>::iterator it = _createBaseComponentList.begin(); it != _createBaseComponentList.end(); it++)
+	{
+		Component* component = (*it);
+		WCHAR name[256];
+		wsprintf(name, L"lifeNpc_%d", _lifeNpcCount);
+		_lifeNpcCount++;
+		LifeNPC* npc = new LifeNPC(name, L"npc", L"npc");
+		npc->Init(component->GetTileX(), component->GetTileY());
+		_componentList.push_back(npc);
+	}
+	_createBaseComponentList.clear();
+}
+void Stage::UpdateRemoveComponentList()
+{
+	for (std::list<Component*>::iterator it = _removeComponentList.begin(); it != _removeComponentList.end(); it++)
+	{
+		Component* component = (*it);
+		DestroyLifeNPC(component->GetTileX(), component->GetTileY(), component);
+	}
+	_removeComponentList.clear();
 }

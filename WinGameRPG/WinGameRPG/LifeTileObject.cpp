@@ -71,28 +71,28 @@ void LifeTileObject::Update(float deltaTime)
 						}
 					}
 				}
-				else
+			}
+			else
+			{
+				std::list<Component*> collisionList;
+				if (false == map->GetTileCollisionList(x, y, collisionList))
 				{
-					std::list<Component*> collisionList;
-					if (false == map->GetTileCollisionList(x, y, collisionList))
+					//collisionList 순환
+					for (std::list<Component*>::iterator itCollision = collisionList.begin();
+						itCollision != collisionList.end();
+						itCollision++)
 					{
-						//collisionList 순환
-						for (std::list<Component*>::iterator itCollision = collisionList.begin();
-							itCollision != collisionList.end();
-							itCollision++)
+						Component* component = (*itCollision);
+						if (component->IsLive())
 						{
-							Component* component = (*itCollision);
-							if (component->IsLive())
+							switch (component->GetType())
 							{
-								switch (component->GetType())
-								{
-								case eComponentType::CT_NPC:
-								case eComponentType::CT_PLAYER:
-									tileCharacter = component;
-									break;
-								default:
-									break;
-								}
+							case eComponentType::CT_NPC:
+							case eComponentType::CT_PLAYER:
+								tileCharacter = component;
+								break;
+							default:
+								break;
 							}
 						}
 					}
@@ -105,7 +105,8 @@ void LifeTileObject::Update(float deltaTime)
 	{
 		if (NULL == tileCharacter)
 		{
-			GameSystem::GetInstance()->GetStage()->CreateLifeNPC(_tileX, _tileY);
+			//GameSystem::GetInstance()->GetStage()->CreateLifeNPC(_tileX, _tileY);
+			GameSystem::GetInstance()->GetStage()->CreateLifeNPC(this);
 		}
 	}
 	else if (2 == surroundedCharacter)
@@ -119,7 +120,8 @@ void LifeTileObject::Update(float deltaTime)
 		{
 			if (eComponentType::CT_PLAYER != tileCharacter->GetType())
 			{
-				GameSystem::GetInstance()->GetStage()->DestroyLifeNPC(_tileX, _tileY, tileCharacter);
+				//GameSystem::GetInstance()->GetStage()->DestroyLifeNPC(_tileX, _tileY, tileCharacter);
+				GameSystem::GetInstance()->GetStage()->CheckDestroyLifeNPC(tileCharacter);
 				tileCharacter = NULL;
 			}
 		}

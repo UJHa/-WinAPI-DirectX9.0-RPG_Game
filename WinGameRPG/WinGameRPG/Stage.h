@@ -13,6 +13,8 @@ private:
 	std::list<Component*> _componentList;
 	Map* _map;
 	int _lifeNpcCount;
+	std::list<Component*> _createBaseComponentList;
+	std::list<Component*> _removeComponentList;
 public:
 	void Init(std::wstring name);
 	void DInit();
@@ -21,7 +23,9 @@ public:
 	void Release();
 	void Reset();
 	Map* GetMap() { return _map; }
-	void CreateLifeNPC(int tileX, int tileY);
-	void DestroyLifeNPC(int tileX, int tileY, Component* tileCharacter);
-
+	void CreateLifeNPC(Component* component);
+	void DestroyLifeNPC(int tileX, int tileY, Component* component);
+	void CheckDestroyLifeNPC(Component* component);
+	void UpdateBaseComponentList();
+	void UpdateRemoveComponentList();
 };

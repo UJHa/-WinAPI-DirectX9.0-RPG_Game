@@ -49,7 +49,7 @@ void AttackState::Start()
 	OutputDebugString(timeCheck);
 	msgParam.receiver = _character->GetTarget();
 	msgParam.message = L"Attack";
-	ComponentSystem::GetInstance()->SendMsg(msgParam);
+	//ComponentSystem::GetInstance()->SendMsg(msgParam);
 }
 void AttackState::Stop()
 {

@@ -14,7 +14,7 @@
 Character::Character(wstring name, wstring scriptName, wstring pngName) : Component(name)
 {
 	_state = NULL;
-	_moveTime = 1.0f;
+	_moveTime = 0.1f;
 	//_spriteList.clear();
 	_scrpitName = scriptName;
 	_pngName = pngName;
