@@ -6,12 +6,17 @@
 #include "Monster.h"
 #include "RecoveryItem.h"
 #include "LifeNPC.h"
+#include "LifePlayer.h"
 Stage::Stage()
 {
 }
 
 Stage::~Stage()
 {
+	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
+	{
+		(*it)->DInit();
+	}
 	ComponentSystem::GetInstance()->RemoveAllComponents();
 }
 void Stage::Init(std::wstring name)
@@ -19,6 +24,7 @@ void Stage::Init(std::wstring name)
 	_componentList.clear();
 	_map = new Map(name.c_str());
 	_componentList.push_back(_map);
+	Player* player = NULL;
 
 	if (L"Map3" == name)
 	{
@@ -32,6 +38,7 @@ void Stage::Init(std::wstring name)
 			LifeNPC* npc = new LifeNPC(name, L"npc", L"npc");
 			_componentList.push_back(npc);
 		}
+		player = new LifePlayer(L"player", L"player", L"player");
 	}
 	else
 	{
@@ -56,10 +63,8 @@ void Stage::Init(std::wstring name)
 			Monster* monster = new Monster(name, L"monster", L"monster");
 			_componentList.push_back(monster);
 		}
+		player = new Player(L"player", L"player", L"player");
 	}
-	WCHAR playerName[256];
-	wsprintf(playerName, L"player");
-	Player* player = new Player(playerName, L"player", L"player");
 	_componentList.push_back(player);
 	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 	{

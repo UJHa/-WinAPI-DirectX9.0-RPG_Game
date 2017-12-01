@@ -157,11 +157,6 @@ void Map::DInit()
 			delete _tileMap[y][x];
 		}
 	}
-	if (NULL != _viewer)
-	{
-		delete _viewer;
-		_viewer = NULL;
-	}
 }
 void Map::Update(float deltaTime)
 {

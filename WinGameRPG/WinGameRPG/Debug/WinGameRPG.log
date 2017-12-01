@@ -1,3 +1,7 @@
-﻿  TileCell.cpp
+﻿  LifePlayer.cpp
+  AttackState.cpp
+c:\users\atents\documents\visual studio 2017\projects\gitwingame\wingamerpg\wingamerpg\attackstate.cpp(48): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\corecrt_wstdio.h(1822): note: 'swprintf' 선언을 참조하십시오.
+  코드를 생성하고 있습니다...
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.exe
   WinGameRPG.vcxproj -> C:\Users\atents\Documents\Visual Studio 2017\Projects\GitWinGame\WinGameRPG\Debug\WinGameRPG.pdb (Partial PDB)
