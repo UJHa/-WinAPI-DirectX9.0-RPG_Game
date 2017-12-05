@@ -55,17 +55,12 @@ void LifeTileObject::Update(float deltaTime)
 						itCollision++)
 					{
 						Component* component = (*itCollision);
-						if (component->IsLive())
+						switch (component->GetType())
 						{
-							switch (component->GetType())
-							{
-							case CT_PLAYER:
-							case CT_NPC:
-								surroundedCharacter++;
-								break;
-							default:
-								break;
-							}
+						case CT_PLAYER:
+						case CT_NPC:
+							surroundedCharacter++;
+							break;
 						}
 					}
 				}
@@ -81,17 +76,14 @@ void LifeTileObject::Update(float deltaTime)
 						itCollision++)
 					{
 						Component* component = (*itCollision);
-						if (component->IsLive())
+						switch (component->GetType())
 						{
-							switch (component->GetType())
-							{
-							case CT_PLAYER:
-							case CT_NPC:
-								tileCharacter = component;
-								break;
-							default:
-								break;
-							}
+						case CT_PLAYER:
+						case CT_NPC:
+							tileCharacter = component;
+							break;
+						default:
+							break;
 						}
 					}
 				}

@@ -28,7 +28,7 @@ void Stage::Init(wstring name)
 	if (L"Map3" == name)
 	{
 		_lifeNpcCount = 0;
-		for (int i = 0; i < 30; i++)
+		for (int i = 0; i < 1000; i++)
 		{
 			//CreateLifeNPC();
 			WCHAR name[256];

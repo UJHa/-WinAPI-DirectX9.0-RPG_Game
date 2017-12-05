@@ -21,11 +21,13 @@ void TileCell::Update(float deltaTime)
 		it++;
 		if (it == _renderList.end())
 		{
+			it--;
 			component->Update(deltaTime);
 			break;
 		}
 		else
 		{
+			it--;
 			component->Update(deltaTime);
 		}
 	}
