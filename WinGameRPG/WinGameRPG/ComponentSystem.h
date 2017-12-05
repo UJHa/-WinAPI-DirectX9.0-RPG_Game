@@ -22,6 +22,7 @@ private:
 	map<wstring, Component*> _componentMap;
 public:
 	void AddComponent(wstring name, Component* component);
+	void RemoveComponent(Component* component);
 	void RemoveAllComponents();
 	Component* FindComponent(wstring name);
 	Component* FindComponentInRange(Component* map, Component* component, int range, std::vector<eComponentType> compareTypeList);

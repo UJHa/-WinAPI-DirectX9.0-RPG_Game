@@ -2,6 +2,7 @@
 #include"GameSystem.h"
 Texture::Texture()
 {
+	_texture = NULL;
 }
 
 Texture::~Texture()

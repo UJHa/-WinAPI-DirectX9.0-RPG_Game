@@ -55,6 +55,9 @@ public:
 protected:
 	State* _state;
 	std::map<eStateType, State*> _stateMap;
+public:
+	virtual void InitState();
+	void ReplaceState(eStateType changeType, State* replaceState);
 	//Move
 protected:
 	float _moveTime;

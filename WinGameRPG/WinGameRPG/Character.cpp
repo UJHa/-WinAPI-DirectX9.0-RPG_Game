@@ -14,7 +14,7 @@
 Character::Character(wstring name, wstring scriptName, wstring pngName) : Component(name)
 {
 	_state = NULL;
-	_moveTime = 1.0f;
+	_moveTime = 0.1f;
 	//_spriteList.clear();
 	_scrpitName = scriptName;
 	_pngName = pngName;
@@ -56,34 +56,10 @@ void Character::Init()
 		}*/
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
-		map->setTileComponent(_tileX, _tileY, this, true);
+		map->setTileComponent(_tileX, _tileY, this, false);
 	}
 	InitMove();
-	{
-		State* state = new IdleState();
-		state->Init(this);
-		_stateMap[eStateType::ET_IDLE] = state;
-	}
-	{
-		State* state = new MoveState();
-		state->Init(this);
-		_stateMap[eStateType::ET_MOVE] = state;
-	}
-	{
-		State* state = new AttackState();
-		state->Init(this);
-		_stateMap[eStateType::ET_ATTACK] = state;
-	}
-	{
-		State* state = new DefenseState();
-		state->Init(this);
-		_stateMap[eStateType::ET_DEFENSE] = state;
-	}
-	{
-		State* state = new DeadState();
-		state->Init(this);
-		_stateMap[eStateType::ET_DEAD] = state;
-	}
+	InitState();
 	ChangeState(eStateType::ET_IDLE);
 	//_state->NextState(eStateType::ET_IDLE);
 	{
@@ -98,41 +74,16 @@ void Character::Init()
 void Character::Init(int tileX, int tileY)
 {
 	{
-		//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 		_tileX = tileX;
 		_tileY = tileY;
 
 		_x = map->GetPositionX(_tileX, _tileY);
 		_y = map->GetPositionY(_tileX, _tileY);
-		map->setTileComponent(_tileX, _tileY, this, true);
+		map->setTileComponent(_tileX, _tileY, this, false);
 	}
 	InitMove();
-	{
-		State* state = new IdleState();
-		state->Init(this);
-		_stateMap[eStateType::ET_IDLE] = state;
-	}
-	{
-		State* state = new MoveState();
-		state->Init(this);
-		_stateMap[eStateType::ET_MOVE] = state;
-	}
-	{
-		State* state = new AttackState();
-		state->Init(this);
-		_stateMap[eStateType::ET_ATTACK] = state;
-	}
-	{
-		State* state = new DefenseState();
-		state->Init(this);
-		_stateMap[eStateType::ET_DEFENSE] = state;
-	}
-	{
-		State* state = new DeadState();
-		state->Init(this);
-		_stateMap[eStateType::ET_DEAD] = state;
-	}
+	InitState();
 	ChangeState(eStateType::ET_IDLE);
 	//_state->NextState(eStateType::ET_IDLE);
 	{
@@ -202,6 +153,27 @@ void Character::ChangeState(eStateType stateType)
 	}
 	_state = _stateMap[stateType];
 	_state->Start();
+}
+void Character::InitState()
+{
+	ReplaceState(eStateType::ET_IDLE, new IdleState());
+	ReplaceState(eStateType::ET_MOVE, new MoveState());
+	ReplaceState(eStateType::ET_ATTACK, new AttackState());
+	ReplaceState(eStateType::ET_DEFENSE, new DefenseState());
+	ReplaceState(eStateType::ET_DEAD, new DeadState());
+}
+void Character::ReplaceState(eStateType changeType, State* replaceState)
+{
+	map<eStateType, State*>::iterator it
+		= _stateMap.find(changeType);
+	if (it != _stateMap.end())
+	{
+		delete it->second;
+		_stateMap.erase(changeType);
+	}
+	State* state = replaceState;
+	state->Init(this);
+	_stateMap[changeType] = state;
 }
 void Character::InitMove()
 {

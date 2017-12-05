@@ -11,6 +11,13 @@ ResourceManager::ResourceManager()
 }
 ResourceManager::~ResourceManager()
 {
+	for (map<wstring, Texture*>::iterator it = _textureMap.begin(); it != _textureMap.end(); it++)
+	{
+		_textureMap.erase((*it).first);
+		(*it).second->DInit();
+		delete (*it).second;
+	}
+	_textureMap.clear();
 }
 Texture* ResourceManager::LoadTexture(const wstring textureFileName)
 {

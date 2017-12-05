@@ -26,6 +26,11 @@ void ComponentSystem::AddComponent(wstring name, Component* component)
 		}
 	}
 }
+void ComponentSystem::RemoveComponent(Component* component)
+{
+	_componentMap.erase(component->GetName());
+	delete component;
+}
 void ComponentSystem::RemoveAllComponents()
 {
 	for (map<wstring, Component*>::iterator it = _componentMap.begin();

@@ -22,18 +22,27 @@ void MoveState::Update(float deltaTime)
 	State::Update(deltaTime);
 	if (false == _character->IsLive())
 		return;
-	if (false == _character->IsMoving())
-		return;
+	//add code
+	//if (false == _character->IsMoving())
+	//	return;
+	//if (_character->GetMoveTime() <= _movingDuration)
+	//{
+	//	_movingDuration = 0.0f;
+	//	_character->MoveStop();
+	//	_nextState = eStateType::ET_IDLE;
+	//}
+	//else
+	//{
+	//	_movingDuration += deltaTime;
+	//	_character->Moving(deltaTime); 
+	//}
 	if (_character->GetMoveTime() <= _movingDuration)
 	{
-		_movingDuration = 0.0f;
-		_character->MoveStop();
 		_nextState = eStateType::ET_IDLE;
 	}
 	else
 	{
 		_movingDuration += deltaTime;
-		_character->Moving(deltaTime);
 	}
 }
 void MoveState::Start()
@@ -81,6 +90,8 @@ void MoveState::Start()
 	else
 	{
 		_character->MoveStart(newTileX, newTileY);
+		_movingDuration = 0.0f;	//add code
+		_character->MoveStop(); //add code
 	}
 }
 void MoveState::Stop()

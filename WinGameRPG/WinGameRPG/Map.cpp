@@ -76,10 +76,9 @@ void Map::Init()
 						index = atoi(token);
 
 						TileCell* tileCell = new TileCell();
-						WCHAR componetSetName[256];
-						wsprintf(componetSetName, L"map_layer01_%d_%d", line, x);
-						wstring componentName = componetSetName;
-						TileObject* tileObject = new TileObject(componentName, _spriteList[index]);
+						WCHAR componetName[256];
+						wsprintf(componetName, L"map_layer01_%d_%d", line, x);
+						TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
 						tileObject->SetCanMove(true);
 						tileCell->AddComponent(tileObject, true);
 						rowList.push_back(tileCell);
@@ -129,8 +128,8 @@ void Map::Init()
 							if (100100 == index)
 							{
 								LifeTileObject* tileObject = new LifeTileObject(x, row, componetName, _spriteList[17]);
-								tileCell->AddComponent(tileObject, true);
 								tileObject->SetCanMove(true);
+								tileCell->AddComponent(tileObject, true);
 							}
 							else
 							{
@@ -158,21 +157,34 @@ void Map::DInit()
 			delete _tileMap[y][x];
 		}
 	}
-	/*if (NULL != _viewer)
-	{
-		delete _viewer;
-		_viewer = NULL;
-	}*/
 }
 void Map::Update(float deltaTime)
 {
-	for (int y = 0; y < _height; y++)
+	/*for (int y = 0; y < _height; y++)
 	{
 		for (int x = 0; x < _width; x++)
 		{
 			_tileMap[y][x]->MoveDeltaPosition(_deltaX, _deltaY);
 			_tileMap[y][x]->Update(deltaTime);
 		}
+	}*/
+	int midX = GameSystem::GetInstance()->GetWindowWidth() / 2;
+	int midY = GameSystem::GetInstance()->GetWindowHeight() / 2;
+
+	_startX = (-_viewer->GetTileX() * _tileSize) + midX + _tileSize / 2;
+	_startY = (-_viewer->GetTileY() * _tileSize) + midY + _tileSize / 2;
+	float posX = _startX;
+	float posY = _startY;
+	for (int y = 0; y < _height; y++)
+	{
+		for (int x = 0; x < _width; x++)
+		{
+			_tileMap[y][x]->SetPosition(posX, posY);
+			_tileMap[y][x]->Update(deltaTime);
+			posX += _tileSize;
+		}
+		posX = _startX;
+		posY += _tileSize;
 	}
 }
 void Map::Render()
@@ -309,6 +321,9 @@ void Map::ViewerScroll(Component* viewer, float deltaX, float deltaY)
 		if (_viewer->GetType() == viewer->GetType())
 		{
 			Scroll(-deltaX, -deltaY);
+			/*wchar_t distanceXCheck[256];
+			swprintf(distanceXCheck, L"map deltaTime %f\n", deltaX);
+			OutputDebugString(distanceXCheck);*/
 		}
 	}
 }

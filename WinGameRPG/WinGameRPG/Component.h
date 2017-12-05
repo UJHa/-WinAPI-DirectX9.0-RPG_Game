@@ -1,8 +1,8 @@
 #pragma once
 #include<Windows.h>
 #include<string>
-using namespace std;
 struct sComponentMsgParam;
+using namespace std;
 enum eComponentType
 {
 	CT_PLAYER,
@@ -16,6 +16,9 @@ class Component
 {
 protected:
 	wstring _name;
+public:
+	wstring GetName() { return _name; }
+protected:
 	bool _canMove;
 
 	int _tileX;

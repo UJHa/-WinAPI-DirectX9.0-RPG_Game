@@ -8,6 +8,7 @@ LifeTileObject::LifeTileObject(int tileX, int tileY, wstring name, Sprite* sprit
 {
 	_tileX = tileX;
 	_tileY = tileY;
+
 }
 
 LifeTileObject::~LifeTileObject()
@@ -19,8 +20,7 @@ void LifeTileObject::Update(float deltaTime)
 	TileObject::Update(deltaTime);
 	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 	int range = 1;
-	//주변 캐릭터 마리 수를 세기
-	int surroundedCharacter = 0;
+	
 	//FindComponentInRange 내 기능을 통하여 캐릭터 마리 수 가져올 것(자신을 제외한 탐색)
 	Component* tileCharacter = NULL;
 
@@ -40,9 +40,11 @@ void LifeTileObject::Update(float deltaTime)
 	if (map->GetHeight() <= maxY) {
 		maxY = map->GetHeight() - 1;
 	}
-	for (int y = minY; y < maxY; y++)
+	//주변 캐릭터 마리 수를 세기
+	int surroundedCharacter = 0;
+	for (int y = minY; y <= maxY; y++)
 	{
-		for (int x = minX; x < maxX; x++)
+		for (int x = minX; x <= maxX; x++)
 		{
 			if (x != _tileX || y != _tileY)
 			{
@@ -55,12 +57,17 @@ void LifeTileObject::Update(float deltaTime)
 						itCollision++)
 					{
 						Component* component = (*itCollision);
-						switch (component->GetType())
+						if (component->IsLive())
 						{
-						case CT_PLAYER:
-						case CT_NPC:
-							surroundedCharacter++;
-							break;
+							switch (component->GetType())
+							{
+							case eComponentType::CT_PLAYER:
+							case eComponentType::CT_NPC:
+								surroundedCharacter++;
+								break;
+							default:
+								break;
+							}
 						}
 					}
 				}
@@ -76,25 +83,30 @@ void LifeTileObject::Update(float deltaTime)
 						itCollision++)
 					{
 						Component* component = (*itCollision);
-						switch (component->GetType())
+						if (component->IsLive())
 						{
-						case CT_PLAYER:
-						case CT_NPC:
-							tileCharacter = component;
-							break;
-						default:
-							break;
+							switch (component->GetType())
+							{
+							case eComponentType::CT_NPC:
+							case eComponentType::CT_PLAYER:
+								tileCharacter = component;
+								break;
+							default:
+								break;
+							}
 						}
 					}
 				}
 			}
 		}
 	}
+
 	if (3 == surroundedCharacter)
 	{
 		if (NULL == tileCharacter)
 		{
-			GameSystem::GetInstance()->GetStage()->CreateLifeNPC(_tileX, _tileY);
+			//GameSystem::GetInstance()->GetStage()->CreateLifeNPC(_tileX, _tileY);
+			GameSystem::GetInstance()->GetStage()->CreateLifeNPC(this);
 		}
 	}
 	else if (2 == surroundedCharacter)
@@ -108,8 +120,14 @@ void LifeTileObject::Update(float deltaTime)
 		{
 			if (eComponentType::CT_PLAYER != tileCharacter->GetType())
 			{
-				GameSystem::GetInstance()->GetStage()->DestroyLifeNPC(_tileX, _tileY, tileCharacter);
+				//GameSystem::GetInstance()->GetStage()->DestroyLifeNPC(_tileX, _tileY, tileCharacter);
+				GameSystem::GetInstance()->GetStage()->CheckDestroyLifeNPC(tileCharacter);
+				tileCharacter = NULL;
 			}
 		}
 	}
+
+	wchar_t timeCheck[256];
+	swprintf(timeCheck, L"deltaTime %f\n", deltaTime);
+	OutputDebugString(timeCheck);
 }
