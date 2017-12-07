@@ -93,6 +93,9 @@ void MoveState::Start()
 		_movingDuration = 0.0f;	//add code
 		_character->MoveStop(); //add code
 	}
+	wchar_t distanceXCheck[256];
+	swprintf(distanceXCheck, L"char Start GetX %f\n", _character->GetX());
+	OutputDebugString(distanceXCheck);
 }
 void MoveState::Stop()
 {

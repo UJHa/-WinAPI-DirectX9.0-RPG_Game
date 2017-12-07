@@ -29,6 +29,7 @@ Character::Character(wstring name, wstring scriptName, wstring pngName) : Compon
 
 	_attackCoolTimeDuration = 0.0f;
 	_attackCoolTime = 2.0f;
+	_font = NULL;
 }
 
 Character::~Character()
@@ -38,7 +39,6 @@ Character::~Character()
 void Character::Init()
 {
 	{
-		//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 		_tileX = rand() % map->GetWidth();
 		_tileY = rand() % map->GetHeight();
@@ -71,53 +71,41 @@ void Character::Init()
 		UpdateText();
 	}
 }
-void Character::Init(int tileX, int tileY)
+void Character::InitTilePosition(int tileX, int tileY)
 {
-	{
-		Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
-		_tileX = tileX;
-		_tileY = tileY;
+	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
+	map->ResetTileComponent(_tileX, _tileY, this);
+	_tileX = tileX;
+	_tileY = tileY;
 
-		_x = map->GetPositionX(_tileX, _tileY);
-		_y = map->GetPositionY(_tileX, _tileY);
-		map->setTileComponent(_tileX, _tileY, this, false);
-	}
-	InitMove();
-	InitState();
-	ChangeState(eStateType::ET_IDLE);
-	//_state->NextState(eStateType::ET_IDLE);
-	{
-		D3DCOLOR color = D3DCOLOR_ARGB(255, 0, 0, 0);
-		_font = new Font(L"Arial", 15, color);
-
-
-		_font->SetRect(0, 0, 100, 100);
-		UpdateText();
-	}
+	_x = map->GetPositionX(_tileX, _tileY);
+	_y = map->GetPositionY(_tileX, _tileY);
+	map->setTileComponent(_tileX, _tileY, this, false);
 }
 void Character::DInit()
 {
-	delete _font;
-
-	for (std::map<eStateType, State*>::iterator it = _stateMap.begin(); it != _stateMap.end(); it++)
+	std::map<eStateType, State*>::iterator it = _stateMap.begin();
+	while(it != _stateMap.end())
 	{
 		State* state = it->second;
 		delete state;
+		it++;
 	}
 	_stateMap.clear();
+	/*if (NULL != _font)
+	{
+		_font->Dinit();
+		delete _font;
+	}*/
 }
 void Character::Update(float deltaTime)
 {
-	if (false == _isLive)
-		return;
 	UpdateAttackCoolTime(deltaTime);
 	UpdateText();
 	_state->Update(deltaTime);
 }
 void Character::Render()
 {
-	if (false == _isLive)
-		return;
 	_state->Render();
 	_font->SetPosition(_x - 50, _y - 50);
 	_font->Render();

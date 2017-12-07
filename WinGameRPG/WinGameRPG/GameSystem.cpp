@@ -188,7 +188,16 @@ int GameSystem::Update()
 					_stage = new Stage();
 					_stage->Init(L"Map3");
 				}
+				if (IsKeyDown(VK_F3))
+				{
+					ComponentSystem::GetInstance()->ClearMessageQueue();
+					_stage->DInit();
+					delete _stage;
+					_stage = new Stage();
+					_stage->Init(L"Map4");
+				}
 			}
+
 			/*wchar_t timeCheck[256];
 			swprintf(timeCheck,L"deltaTime %f\n",deltaTime);
 			OutputDebugString(timeCheck);*/

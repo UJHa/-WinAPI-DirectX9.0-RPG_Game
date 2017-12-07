@@ -126,6 +126,21 @@
     <ClCompile Include="LifePlayer.cpp">
       <Filter>소스 파일\Game\Character</Filter>
     </ClCompile>
+    <ClCompile Include="Unit.cpp">
+      <Filter>소스 파일\Game\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultUnit.cpp">
+      <Filter>소스 파일\Game\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="LifeUnit.cpp">
+      <Filter>소스 파일\Game\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="PathfinderStageLoader.cpp">
+      <Filter>소스 파일\Game\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="PathfinderPlayer.cpp">
+      <Filter>소스 파일\Game\Character</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -210,6 +225,21 @@
       <Filter>소스 파일\Game\Character</Filter>
     </ClInclude>
     <ClInclude Include="LifePlayer.h">
+      <Filter>소스 파일\Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="Unit.h">
+      <Filter>소스 파일\Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultUnit.h">
+      <Filter>소스 파일\Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeUnit.h">
+      <Filter>소스 파일\Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="PathfinderStageLoader.h">
+      <Filter>소스 파일\Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="PathfinderPlayer.h">
       <Filter>소스 파일\Game\Character</Filter>
     </ClInclude>
   </ItemGroup>

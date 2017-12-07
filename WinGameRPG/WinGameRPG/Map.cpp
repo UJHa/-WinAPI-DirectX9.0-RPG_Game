@@ -46,6 +46,7 @@ void Map::Init()
 	{
 		char record[1024];
 		int line = 0;
+		int row = 0;
 		int index = 0;
 		ifstream infile(layer01Name);
 		while (!infile.eof())
@@ -78,13 +79,14 @@ void Map::Init()
 						TileCell* tileCell = new TileCell();
 						WCHAR componetName[256];
 						wsprintf(componetName, L"map_layer01_%d_%d", line, x);
-						TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
+						TileObject* tileObject = new TileObject(componetName, _spriteList[index], x, line);
 						tileObject->SetCanMove(true);
 						tileCell->AddComponent(tileObject, true);
 						rowList.push_back(tileCell);
 						token = strtok(NULL, ",");
 					}
 					_tileMap.push_back(rowList);
+					row++;
 				}
 				break;
 			}
@@ -133,7 +135,7 @@ void Map::Init()
 							}
 							else
 							{
-								TileObject* tileObject = new TileObject(componetName, _spriteList[index]);
+								TileObject* tileObject = new TileObject(componetName, _spriteList[index], x, row);
 								tileCell->AddComponent(tileObject, true);
 							}
 						}

@@ -1,7 +1,6 @@
 #pragma once
 #include"Component.h"
 #include<string>
-using namespace std;
 class Sprite;
 class RecoveryItem : public Component
 {
@@ -10,8 +9,8 @@ public:
 	~RecoveryItem();
 
 private:
-	wstring _scriptName;
-	wstring _textureFileName;
+	std::wstring _scriptName;
+	std::wstring _textureFileName;
 	Sprite* _sprite;
 	float _posX;
 	float _posY;

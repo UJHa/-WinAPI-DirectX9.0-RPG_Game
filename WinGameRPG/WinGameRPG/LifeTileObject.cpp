@@ -4,11 +4,8 @@
 #include"Stage.h"
 #include"ComponentSystem.h"
 LifeTileObject::LifeTileObject(int tileX, int tileY, wstring name, Sprite* sprite) :
-	TileObject(name, sprite)
+	TileObject(name, sprite,tileX,tileY)
 {
-	_tileX = tileX;
-	_tileY = tileY;
-
 }
 
 LifeTileObject::~LifeTileObject()
@@ -57,7 +54,7 @@ void LifeTileObject::Update(float deltaTime)
 						itCollision++)
 					{
 						Component* component = (*itCollision);
-						if (component->IsLive())
+						//if (component->IsLive())
 						{
 							switch (component->GetType())
 							{
@@ -83,7 +80,7 @@ void LifeTileObject::Update(float deltaTime)
 						itCollision++)
 					{
 						Component* component = (*itCollision);
-						if (component->IsLive())
+						//if (component->IsLive())
 						{
 							switch (component->GetType())
 							{

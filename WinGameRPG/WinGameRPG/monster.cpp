@@ -40,7 +40,6 @@ void Monster::UpdateAI()
 	}
 	else
 	{
-		_currentDirection = (eDirection)(rand() % 4);
 		Character::UpdateAI();
 	}
 }
