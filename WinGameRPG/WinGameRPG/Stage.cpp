@@ -2,20 +2,20 @@
 #include "ComponentSystem.h"
 #include "Map.h"
 #include "LifeNPC.h"
-#include "Unit.h"
-#include "DefaultUnit.h"
-#include "LifeUnit.h"
+#include "StageLoader.h"
+#include "DefaultStageLoader.h"
+#include "LifeStageLoader.h"
 #include "PathfinderStageLoader.h"
 Stage::Stage()
 {
-	_unit = NULL;
+	_stageLoader = NULL;
 }
 
 Stage::~Stage()
 {
-	if (NULL != _unit)
+	if (NULL != _stageLoader)
 	{
-		delete _unit;
+		delete _stageLoader;
 	}
 	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 	{
@@ -27,12 +27,12 @@ void Stage::Init(std::wstring mapName)
 {
 	_componentList.clear();
 
-	_unitMap[L"Default"] = new DefaultUnit(this);
-	_unitMap[L"Map3"] = new LifeUnit(this);
-	_unitMap[L"Map4"] = new PathfinderStageLoader(this);
+	_stageLoaderMap[L"Default"] = new DefaultStageLoader(this);
+	_stageLoaderMap[L"Map3"] = new LifeStageLoader(this);
+	_stageLoaderMap[L"Map4"] = new PathfinderStageLoader(this);
 
-	_unit = GetUnit(mapName);
-	_unit->CreateComponents();
+	_stageLoader = GetUnit(mapName);
+	_stageLoader->CreateComponents();
 
 	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
 	{
@@ -98,7 +98,7 @@ void Stage::UpdateBaseComponentList()
 	{
 		Component* component = (*it);
 		
-		LifeNPC* npc = (LifeNPC*)(_unit->CreateLifeNPC(L"npc", L"npc"));
+		LifeNPC* npc = (LifeNPC*)(_stageLoader->CreateLifeNPC(L"npc", L"npc"));
 		//npc->Init();
 		npc->InitTilePosition(component->GetTileX(), component->GetTileY());
 	}
@@ -118,14 +118,14 @@ void Stage::AddStageComponent(Component* component)
 	_componentList.push_back(component);
 	component->Init();
 }
-Unit* Stage::GetUnit(std::wstring mapName)
+StageLoader* Stage::GetUnit(std::wstring mapName)
 {
 	_map = new Map(mapName.c_str());
 	AddStageComponent(_map);
-	map<wstring, Unit*>::iterator it = _unitMap.find(mapName);
-	if (it != _unitMap.end())
+	map<wstring, StageLoader*>::iterator it = _stageLoaderMap.find(mapName);
+	if (it != _stageLoaderMap.end())
 	{
 		return it->second;
 	}
-	return _unitMap[L"Default"];
+	return _stageLoaderMap[L"Default"];
 }

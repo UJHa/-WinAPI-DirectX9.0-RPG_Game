@@ -13,5 +13,6 @@ void PathfinderPlayer::UpdateAI()
 }
 void PathfinderPlayer::InitState()
 {
+	Player::InitState();
 	ReplaceState(eStateType::ET_ATTACK, new IdleState());
 }

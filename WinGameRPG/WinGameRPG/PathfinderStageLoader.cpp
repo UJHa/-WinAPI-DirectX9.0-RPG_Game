@@ -3,7 +3,7 @@
 #include "Map.h"
 #include<list>
 #include "PathfinderPlayer.h"
-PathfinderStageLoader::PathfinderStageLoader(Stage* stage) : Unit(stage)
+PathfinderStageLoader::PathfinderStageLoader(Stage* stage) : StageLoader(stage)
 {
 }
 
@@ -12,7 +12,7 @@ PathfinderStageLoader::~PathfinderStageLoader()
 }
 void PathfinderStageLoader::CreateComponents()
 {
-	Unit::CreateComponents();
+	StageLoader::CreateComponents();
 	Player* player = new PathfinderPlayer(L"player", L"player", L"player");
 	_stage->AddStageComponent(player);
 	

@@ -4,7 +4,7 @@
 #include<map>
 class Component;
 class Map;
-class Unit;
+class StageLoader;
 class Stage
 {
 public:
@@ -17,8 +17,7 @@ private:
 	//int _lifeNpcCount;
 	std::list<Component*> _createBaseComponentList;
 	std::list<Component*> _removeComponentList;
-	Unit* _bp;
-	std::map<std::wstring, Unit*> _unitMap;
+	std::map<std::wstring, StageLoader*> _stageLoaderMap;
 public:
 	void Init(std::wstring mapName);
 	void DInit();
@@ -35,8 +34,8 @@ public:
 	void UpdateRemoveComponentList();
 	void AddStageComponent(Component* component);
 private:
-	Unit* _unit;
+	StageLoader* _stageLoader;
 public:
 	//Unit setting
-	Unit* GetUnit(std::wstring mapName);
+	StageLoader* GetUnit(std::wstring mapName);
 };

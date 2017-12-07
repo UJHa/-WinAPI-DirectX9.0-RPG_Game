@@ -1,7 +1,7 @@
 #pragma once
-#include "Unit.h"
+#include "StageLoader.h"
 class Stage;
-class PathfinderStageLoader : public Unit
+class PathfinderStageLoader : public StageLoader
 {
 public:
 	PathfinderStageLoader(Stage* stage);

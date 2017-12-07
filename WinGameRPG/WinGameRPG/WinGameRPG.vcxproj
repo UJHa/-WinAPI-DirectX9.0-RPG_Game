@@ -148,7 +148,7 @@
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentSystem.cpp" />
     <ClCompile Include="DeadState.cpp" />
-    <ClCompile Include="DefaultUnit.cpp" />
+    <ClCompile Include="DefaultStageLoader.cpp" />
     <ClCompile Include="DefenseState.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Frame.cpp" />
@@ -157,8 +157,8 @@
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="LifeNPC.cpp" />
     <ClCompile Include="LifePlayer.cpp" />
+    <ClCompile Include="LifeStageLoader.cpp" />
     <ClCompile Include="LifeTileObject.cpp" />
-    <ClCompile Include="LifeUnit.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="monster.cpp" />
@@ -171,11 +171,11 @@
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Stage.cpp" />
+    <ClCompile Include="StageLoader.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TileCell.cpp" />
     <ClCompile Include="TileObject.cpp" />
-    <ClCompile Include="Unit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AttackState.h" />
@@ -183,7 +183,7 @@
     <ClInclude Include="Component.h" />
     <ClInclude Include="ComponentSystem.h" />
     <ClInclude Include="DeadState.h" />
-    <ClInclude Include="DefaultUnit.h" />
+    <ClInclude Include="DefaultStageLoader.h" />
     <ClInclude Include="DefenseState.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Frame.h" />
@@ -192,8 +192,8 @@
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="LifeNPC.h" />
     <ClInclude Include="LifePlayer.h" />
+    <ClInclude Include="LifeStageLoader.h" />
     <ClInclude Include="LifeTileObject.h" />
-    <ClInclude Include="LifeUnit.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MoveState.h" />
@@ -206,11 +206,11 @@
     <ClInclude Include="sComponentMsgParam.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Stage.h" />
+    <ClInclude Include="StageLoader.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TileCell.h" />
     <ClInclude Include="TileObject.h" />
-    <ClInclude Include="Unit.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
