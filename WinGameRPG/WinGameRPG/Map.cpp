@@ -76,7 +76,7 @@ void Map::Init()
 					{
 						index = atoi(token);
 
-						TileCell* tileCell = new TileCell();
+						TileCell* tileCell = new TileCell(x, row);
 						WCHAR componetName[256];
 						wsprintf(componetName, L"map_layer01_%d_%d", line, x);
 						TileObject* tileObject = new TileObject(componetName, _spriteList[index], x, line);
@@ -328,4 +328,8 @@ void Map::ViewerScroll(Component* viewer, float deltaX, float deltaY)
 			OutputDebugString(distanceXCheck);*/
 		}
 	}
+}
+TileCell* Map::GetTileCell(int tileX, int tileY)
+{
+	return _tileMap[tileY][tileX];
 }

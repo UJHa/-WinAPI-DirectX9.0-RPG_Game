@@ -10,11 +10,12 @@ enum eDirection {
 };
 enum eStateType
 {
-	ET_IDLE, ET_MOVE, ET_ATTACK, ET_DEFENSE, ET_DEAD, ET_NONE,
+	ET_IDLE, ET_MOVE, ET_ATTACK, ET_DEFENSE, ET_DEAD, ET_NONE, ET_PATHFINDING
 };
 class Sprite;
 class State;
 class Font;
+class TileCell;
 class Character : public Component
 {
 protected:
@@ -108,4 +109,10 @@ protected:
 	Font* _font;
 public:
 	virtual void UpdateText();
+	//pathFinding
+protected:
+	TileCell* _targetTileCell;
+public:
+	TileCell* GetTargetCell();
+	void SetTargetTileCell(TileCell* tileCell);
 };

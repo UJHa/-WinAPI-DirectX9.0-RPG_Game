@@ -1,6 +1,7 @@
 #include "DefaultStageLoader.h"
 #include "Player.h"
 #include "Stage.h"
+#include "Map.h"
 #include "NPC.h"
 #include "Monster.h"
 DefaultStageLoader::DefaultStageLoader(Stage* stage) : StageLoader(stage)
@@ -23,6 +24,7 @@ void DefaultStageLoader::CreateComponents()
 
 	Player* player = new Player(L"player", L"player", L"player");
 	_stage->AddStageComponent(player);
+	_stage->GetMap()->InitViewer(player);
 }
 Component* DefaultStageLoader::CreateNPC(wstring scriptName, wstring pngName)
 {

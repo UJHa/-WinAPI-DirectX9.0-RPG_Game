@@ -3,6 +3,8 @@
 #include "Map.h"
 #include<list>
 #include "PathfinderPlayer.h"
+#include "Monster.h"
+#include "PathfinderMonster.h"
 PathfinderStageLoader::PathfinderStageLoader(Stage* stage) : StageLoader(stage)
 {
 }
@@ -15,6 +17,8 @@ void PathfinderStageLoader::CreateComponents()
 	StageLoader::CreateComponents();
 	Player* player = new PathfinderPlayer(L"player", L"player", L"player");
 	_stage->AddStageComponent(player);
+	Monster* monster = new PathfinderMonster(L"monster", L"monster", L"monster");
+	_stage->AddStageComponent(monster);
 	
 	int midTileX = _stage->GetMap()->GetWidth() / 2;
 	int midTileY = _stage->GetMap()->GetHeight() / 2;

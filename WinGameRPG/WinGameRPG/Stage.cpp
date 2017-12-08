@@ -33,15 +33,6 @@ void Stage::Init(std::wstring mapName)
 
 	_stageLoader = GetUnit(mapName);
 	_stageLoader->CreateComponents();
-
-	for (std::list<Component*>::iterator it = _componentList.begin(); it != _componentList.end(); it++)
-	{
-		if (0 == (*it)->GetName().compare(L"player") )
-		{
-			_map->InitViewer(*it);
-			break;
-		}
-	}
 }
 void Stage::DInit()
 {

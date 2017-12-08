@@ -141,6 +141,12 @@
     <ClCompile Include="LifeStageLoader.cpp">
       <Filter>소스 파일\Game\Stage</Filter>
     </ClCompile>
+    <ClCompile Include="PathfinderMonster.cpp">
+      <Filter>소스 파일\Game\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="PathfindingState.cpp">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -241,6 +247,12 @@
     </ClInclude>
     <ClInclude Include="LifeStageLoader.h">
       <Filter>소스 파일\Game\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="PathfinderMonster.h">
+      <Filter>소스 파일\Game\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="PathfindingState.h">
+      <Filter>소스 파일\Game\Character\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

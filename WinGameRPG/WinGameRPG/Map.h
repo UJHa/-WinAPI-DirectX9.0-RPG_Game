@@ -48,4 +48,6 @@ private:
 public:
 	void InitViewer(Component* viewer);
 	void ViewerScroll(Component* viewer, float deltaX, float deltaY);
+public:
+	TileCell* GetTileCell(int tileX, int tileY);
 };

@@ -1,6 +1,7 @@
 #include "LifeStageLoader.h"
 #include "LifePlayer.h"
 #include "Stage.h"
+#include "Map.h"
 #include "LifeNPC.h"
 LifeStageLoader::LifeStageLoader(Stage* stage) : StageLoader(stage)
 {
@@ -17,6 +18,7 @@ void LifeStageLoader::CreateComponents()
 	}
 	LifePlayer* player = new LifePlayer(L"player", L"player", L"player");
 	_stage->AddStageComponent(player);
+	_stage->GetMap()->InitViewer(player);
 }
 Component* LifeStageLoader::CreateLifeNPC(wstring scriptName, wstring pngName)
 {

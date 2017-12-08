@@ -1,9 +1,11 @@
 #include "TileCell.h"
 #include "Component.h"
-TileCell::TileCell()
+TileCell::TileCell(int tileX, int tileY)
 {
 	_posX = _posY = 0.0f;
 	_componentList.clear();
+	_tileX = tileX;
+	_tileY = tileY;
 }
 
 TileCell::~TileCell()
@@ -98,4 +100,8 @@ bool TileCell::GetCollisionList(std::list<Component*>& collisionList)
 		return true;
 	else
 		return false;
+}
+void TileCell::InitPathfinding()
+{
+	_isPathfindingMark = false;
 }

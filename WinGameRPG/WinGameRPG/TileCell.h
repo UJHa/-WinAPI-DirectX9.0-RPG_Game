@@ -10,8 +10,11 @@ private:
 	std::list<Component*> _renderList;
 	float _posX;
 	float _posY;
+
+	int _tileX;
+	int _tileY;
 public:
-	TileCell();
+	TileCell(int tileX, int tileY);
 	~TileCell();
 
 	void DInit();
@@ -29,4 +32,14 @@ public:
 	bool CanMove();
 	bool GetCollisionList(std::list<Component*>& collisionList);
 	std::list<Component*> GetComponentList() {	return _componentList; }
+	//path finding
+private:
+	bool _isPathfindingMark;
+	TileCell* _prePathfindingCell;
+public:
+	void InitPathfinding();
+	bool IsPathFindingMark() { return _isPathfindingMark; }
+	void PathFinded() { _isPathfindingMark = true; }
+	int GetTileX() { return _tileX; }
+	int GetTileY() { return _tileY; }
 };

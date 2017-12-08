@@ -301,3 +301,12 @@ void Character::UpdateText()
 	printf("%s", text);
 	_font->SetText(text);
 }
+TileCell* Character::GetTargetCell()
+{
+	return _targetTileCell;
+}
+void Character::SetTargetTileCell(TileCell* tileCell)
+{
+	_targetTileCell = tileCell;
+	_state->NextState(eStateType::ET_PATHFINDING);
+}
