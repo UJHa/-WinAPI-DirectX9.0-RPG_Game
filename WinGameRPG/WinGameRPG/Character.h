@@ -4,10 +4,8 @@
 #include<list>
 #include<string>
 #include"Component.h"
+#include"GlobalType.h"
 using namespace std;
-enum eDirection {
-	LEFT, RIGHT, UP, DOWN, NONE,
-};
 enum eStateType
 {
 	ET_IDLE, ET_MOVE, ET_ATTACK, ET_DEFENSE, ET_DEAD, ET_NONE, ET_PATHFINDING

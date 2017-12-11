@@ -19,6 +19,9 @@ void PathfinderStageLoader::CreateComponents()
 	_stage->AddStageComponent(player);
 	Monster* monster = new PathfinderMonster(L"monster", L"monster", L"monster");
 	_stage->AddStageComponent(monster);
+
+	TileCell* targetCell = _stage->GetMap()->GetTileCell(monster->GetTileX(), monster->GetTileY());
+	player->SetTargetTileCell(targetCell);
 	
 	int midTileX = _stage->GetMap()->GetWidth() / 2;
 	int midTileY = _stage->GetMap()->GetHeight() / 2;

@@ -104,4 +104,5 @@ bool TileCell::GetCollisionList(std::list<Component*>& collisionList)
 void TileCell::InitPathfinding()
 {
 	_isPathfindingMark = false;
+	_prePathfindingCell = NULL;
 }

@@ -154,6 +154,7 @@
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="GameSystem.cpp" />
     <ClCompile Include="GameTimer.cpp" />
+    <ClCompile Include="GlobalType.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="LifeNPC.cpp" />
     <ClCompile Include="LifePlayer.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Frame.h" />
     <ClInclude Include="GameSystem.h" />
     <ClInclude Include="GameTimer.h" />
+    <ClInclude Include="GlobalType.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="LifeNPC.h" />
     <ClInclude Include="LifePlayer.h" />

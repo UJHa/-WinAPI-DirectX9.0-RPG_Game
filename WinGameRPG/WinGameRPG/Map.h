@@ -2,7 +2,8 @@
 #include<Windows.h>
 #include<vector>
 #include<list>
-#include"Component.h"
+#include "Component.h"
+#include "GlobalType.h"
 class Sprite;
 class TileCell;
 using namespace std;
@@ -40,6 +41,7 @@ public:
 	void setTileComponent(int tileX, int tileY, Component* component, bool isRender);
 	void ResetTileComponent(int tileX, int tileY, Component* component);
 	bool CanMoveTileMap(int tileX, int tileY);
+	bool CanMoveTileMap(TilePosition tilePos);
 	int GetWidth();
 	int GetHeight();
 	//Viewer
@@ -50,4 +52,5 @@ public:
 	void ViewerScroll(Component* viewer, float deltaX, float deltaY);
 public:
 	TileCell* GetTileCell(int tileX, int tileY);
+	TileCell* GetTileCell(TilePosition tilePos);
 };

@@ -286,6 +286,10 @@ bool Map::CanMoveTileMap(int tileX, int tileY)
 		return false;
 	return _tileMap[tileY][tileX]->CanMove();
 }
+bool Map::CanMoveTileMap(TilePosition tilePos)
+{
+	return CanMoveTileMap(tilePos.x, tilePos.y);
+}
 int Map::GetWidth()
 {
 	return _width;
@@ -332,4 +336,8 @@ void Map::ViewerScroll(Component* viewer, float deltaX, float deltaY)
 TileCell* Map::GetTileCell(int tileX, int tileY)
 {
 	return _tileMap[tileY][tileX];
+}
+TileCell* Map::GetTileCell(TilePosition tilePos)
+{
+	return GetTileCell(tilePos.x, tilePos.y);
 }

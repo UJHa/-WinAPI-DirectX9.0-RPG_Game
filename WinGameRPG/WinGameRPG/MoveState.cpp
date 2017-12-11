@@ -4,6 +4,7 @@
 #include"ComponentSystem.h"
 #include"GameSystem.h"
 #include"Stage.h"
+#include "GlobalType.h"
 MoveState::MoveState()
 {
 	_nowState = eStateType::ET_MOVE;
@@ -53,9 +54,11 @@ void MoveState::Start()
 	//Map* map = (Map*)ComponentSystem::GetInstance()->FindComponent(L"tileMap");
 	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 
-	int newTileX = _character->GetTileX();
-	int newTileY = _character->GetTileY();
-	switch (_character->GetDirection())
+	TilePosition currentTilePos;
+	currentTilePos.x = _character->GetTileX();
+	currentTilePos.y = _character->GetTileY();
+	TilePosition nextTilePos = GetNextTilePosition(currentTilePos, _character->GetDirection());
+	/*switch (_character->GetDirection())
 	{
 	case eDirection::LEFT:
 		newTileX--;
@@ -69,10 +72,10 @@ void MoveState::Start()
 	case eDirection::DOWN:
 		newTileY++;
 		break;
-	}
+	}*/
 
 	std::list<Component*> collisionList;
-	bool canMove = map->GetTileCollisionList(newTileX, newTileY, collisionList);
+	bool canMove = map->GetTileCollisionList(nextTilePos.x, nextTilePos.y, collisionList);
 	if (false == canMove)
 	{
 		Component* target = _character->Collision(collisionList);
@@ -89,13 +92,13 @@ void MoveState::Start()
 	}
 	else
 	{
-		_character->MoveStart(newTileX, newTileY);
+		_character->MoveStart(nextTilePos.x, nextTilePos.y);
 		_movingDuration = 0.0f;	//add code
 		_character->MoveStop(); //add code
 	}
-	wchar_t distanceXCheck[256];
+	/*wchar_t distanceXCheck[256];
 	swprintf(distanceXCheck, L"char Start GetX %f\n", _character->GetX());
-	OutputDebugString(distanceXCheck);
+	OutputDebugString(distanceXCheck);*/
 }
 void MoveState::Stop()
 {
