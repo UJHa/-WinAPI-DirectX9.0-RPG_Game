@@ -113,4 +113,5 @@ protected:
 public:
 	TileCell* GetTargetCell();
 	void SetTargetTileCell(TileCell* tileCell);
+	void SetDirection(eDirection direction);
 };

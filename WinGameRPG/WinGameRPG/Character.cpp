@@ -310,3 +310,7 @@ void Character::SetTargetTileCell(TileCell* tileCell)
 	_targetTileCell = tileCell;
 	_state->NextState(eStateType::ET_PATHFINDING);
 }
+void Character::SetDirection(eDirection direction)
+{
+	_currentDirection = direction;
+}

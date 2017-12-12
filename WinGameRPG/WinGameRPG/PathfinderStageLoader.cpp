@@ -5,6 +5,7 @@
 #include "PathfinderPlayer.h"
 #include "Monster.h"
 #include "PathfinderMonster.h"
+#include "LifeNPC.h"
 PathfinderStageLoader::PathfinderStageLoader(Stage* stage) : StageLoader(stage)
 {
 }
@@ -27,4 +28,12 @@ void PathfinderStageLoader::CreateComponents()
 	int midTileY = _stage->GetMap()->GetHeight() / 2;
 	std::list<Component*> comList = _stage->GetMap()->GetTileComponentList(midTileX, midTileY);
 	_stage->GetMap()->InitViewer(comList.front());
+}
+Component* PathfinderStageLoader::CreateLifeNPC(wstring scriptName, wstring pngName)
+{
+	SetName(L"lifeNpc_%d");
+	_lifeNpcCount++;
+	Component* component = new LifeNPC(_name, L"npc", L"npc");
+	_stage->AddStageComponent(component);
+	return component;
 }

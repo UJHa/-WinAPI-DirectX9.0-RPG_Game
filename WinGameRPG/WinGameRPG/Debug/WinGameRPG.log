@@ -1,4 +1,64 @@
-﻿json_vc71_libmtd.lib(json_reader.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_reader.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
+﻿  monster.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  State.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\state.cpp(11): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\state.cpp(46): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\state.cpp(53): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Player.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  PathfindingState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\pathfindingstate.cpp(69): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\corecrt_wstdio.h(1822): note: 'swprintf' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\pathfindingstate.cpp(89): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\corecrt_wstdio.h(1822): note: 'swprintf' 선언을 참조하십시오.
+  PathfinderPlayer.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  NPC.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  MoveState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  LifePlayer.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  LifeNPC.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  IdleState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  DefenseState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  DeadState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  Character.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(110): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(301): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'WCHAR *'입니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(301): note: 서식 문자열에서 '%ls'을(를) 사용하는 것이 좋습니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(301): note: 서식 문자열에서 '%lls'을(를) 사용하는 것이 좋습니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(301): note: 서식 문자열에서 '%Ls'을(를) 사용하는 것이 좋습니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(301): note: 서식 문자열에서 '%ws'을(를) 사용하는 것이 좋습니다.
+  AttackState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\attackstate.cpp(48): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\corecrt_wstdio.h(1822): note: 'swprintf' 선언을 참조하십시오.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  StageLoader.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  Stage.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  RecoveryItem.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  PathfinderStageLoader.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  PathfinderMonster.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  LifeStageLoader.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  DefaultStageLoader.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  코드를 생성하고 있습니다...
+json_vc71_libmtd.lib(json_reader.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_reader.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
 json_vc71_libmtd.lib(json_value.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_value.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
 json_vc71_libmtd.lib(json_writer.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_writer.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
   WinGameRPG.vcxproj -> C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\WinGameRPG\Debug\WinGameRPG.exe

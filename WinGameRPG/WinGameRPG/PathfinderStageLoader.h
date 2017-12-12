@@ -9,4 +9,5 @@ public:
 
 public:
 	void CreateComponents();
+	Component* CreateLifeNPC(wstring scriptName, wstring pngName);
 };

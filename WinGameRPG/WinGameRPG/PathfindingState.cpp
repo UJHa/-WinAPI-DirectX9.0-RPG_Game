@@ -24,17 +24,34 @@ void PathfindingState::Update(float deltaTime)
 		TileCell* tileCell = _pathFindingTileQueue.front();
 		_pathFindingTileQueue.pop();
 
-		wchar_t msg[256];
-		swprintf(msg, L"pathFindingState %d %d to %d %d\n", tileCell->GetTileX(), tileCell->GetTileY(),
-			_targetTileCell->GetTileX(), _targetTileCell->GetTileY());
-		OutputDebugString(msg);
-
 		if (false == tileCell->IsPathFindingMark())
 		{
 			tileCell->PathFinded();
 			if (tileCell->GetTileX() == _targetTileCell->GetTileX() &&
 				tileCell->GetTileY() == _targetTileCell->GetTileY())
 			{
+				std::list<Component*> comList = tileCell->GetComponentList();
+				for (std::list<Component*>::iterator it = comList.begin(); it != comList.end(); it++)
+				{
+					Character* monster = (Character*)(*it);
+
+					if (tileCell->GetTileX() < tileCell->GetPrevPathFindingCell()->GetTileX())
+					{
+						monster->SetDirection(eDirection::RIGHT);
+					}
+					else if (tileCell->GetTileX() > tileCell->GetPrevPathFindingCell()->GetTileX())
+					{
+						monster->SetDirection(eDirection::LEFT);
+					}
+					else if (tileCell->GetTileY() < tileCell->GetPrevPathFindingCell()->GetTileY())
+					{
+						monster->SetDirection(eDirection::UP);
+					}
+					else if (tileCell->GetTileY() > tileCell->GetPrevPathFindingCell()->GetTileY())
+					{
+						monster->SetDirection(eDirection::DOWN);
+					}
+				}
 				OutputDebugString(L"Find Goal\n");
 				_nextState = eStateType::ET_IDLE;
 				return;
@@ -48,9 +65,9 @@ void PathfindingState::Update(float deltaTime)
 
 				Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 				TileCell* nextTileCell = map->GetTileCell(nextTilePos);
-				//wchar_t msg[256];
-				//swprintf(msg, L"pathFindingState GetX %d GetY %d\n", nextTilePos.x, nextTilePos.y);
-				//OutputDebugString(msg);
+				wchar_t msg[256];
+				swprintf(msg, L"pathFindingState %d %d\n", nextTileCell->GetTileX(), nextTileCell->GetTileY());
+				OutputDebugString(msg);
 				if ((true == map->CanMoveTileMap(nextTilePos) && false == nextTileCell->IsPathFindingMark())
 					|| (nextTileCell->GetTileX() == _targetTileCell->GetTileX() && nextTileCell->GetTileY() == _targetTileCell->GetTileY()))
 				{
@@ -58,6 +75,20 @@ void PathfindingState::Update(float deltaTime)
 					{
 						nextTileCell->SetPrevPathFindingCell(tileCell);
 						_pathFindingTileQueue.push(nextTileCell);
+						
+						//몬스터 플레이어 제외한 Cell npc 생성
+						if (!((nextTileCell->GetTileX() == _targetTileCell->GetTileX())
+							&& (nextTileCell->GetTileY() == _targetTileCell->GetTileY()))
+							&&
+							!(nextTileCell->GetTileX() == _character->GetTileX()
+								&& nextTileCell->GetTileY() == _character->GetTileY())
+							)
+						{
+							GameSystem::GetInstance()->GetStage()->CreatePathfinderNPC(nextTileCell);
+							wchar_t msg[256];
+							swprintf(msg, L"pathFindingState next %d %d\n", nextTileCell->GetTileX(), nextTileCell->GetTileY());
+							OutputDebugString(msg);
+						}
 					}
 				}
 			}
@@ -88,4 +119,6 @@ void PathfindingState::Start()
 void PathfindingState::Stop()
 {
 	State::Stop();
+	while (0 != _pathFindingTileQueue.size())
+		_pathFindingTileQueue.pop();
 }

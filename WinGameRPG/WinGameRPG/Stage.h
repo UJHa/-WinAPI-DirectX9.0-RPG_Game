@@ -5,6 +5,7 @@
 class Component;
 class Map;
 class StageLoader;
+class TileCell;
 class Stage
 {
 public:
@@ -38,4 +39,6 @@ private:
 public:
 	//Unit setting
 	StageLoader* GetUnit(std::wstring mapName);
+public:
+	void CreatePathfinderNPC(TileCell* tileCell);
 };

@@ -6,6 +6,8 @@
 #include "DefaultStageLoader.h"
 #include "LifeStageLoader.h"
 #include "PathfinderStageLoader.h"
+#include"TileCell.h"
+#include"LifeNPC.h"
 Stage::Stage()
 {
 	_stageLoader = NULL;
@@ -119,4 +121,26 @@ StageLoader* Stage::GetUnit(std::wstring mapName)
 		return it->second;
 	}
 	return _stageLoaderMap[L"Default"];
+}
+void Stage::CreatePathfinderNPC(TileCell* tileCell)
+{
+	LifeNPC* npc = (LifeNPC*)(_stageLoader->CreateLifeNPC(L"npc", L"npc"));
+	npc->InitTilePosition(tileCell->GetTileX(), tileCell->GetTileY());
+
+	if (tileCell->GetTileX() < tileCell->GetPrevPathFindingCell()->GetTileX())
+	{
+		npc->SetDirection(eDirection::RIGHT);
+	}
+	else if (tileCell->GetTileX() > tileCell->GetPrevPathFindingCell()->GetTileX())
+	{
+		npc->SetDirection(eDirection::LEFT);
+	}
+	else if (tileCell->GetTileY() < tileCell->GetPrevPathFindingCell()->GetTileY())
+	{
+		npc->SetDirection(eDirection::UP);
+	}
+	else if (tileCell->GetTileY() > tileCell->GetPrevPathFindingCell()->GetTileY())
+	{
+		npc->SetDirection(eDirection::DOWN);
+	}
 }
