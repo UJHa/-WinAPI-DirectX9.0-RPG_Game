@@ -66,7 +66,6 @@ void Character::Init()
 		D3DCOLOR color = D3DCOLOR_ARGB(255, 0, 0, 0);
 		_font = new Font(L"Arial", 15, color);
 
-
 		_font->SetRect(0, 0, 100, 100);
 		UpdateText();
 	}

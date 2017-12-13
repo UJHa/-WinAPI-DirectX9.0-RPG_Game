@@ -33,7 +33,7 @@ Component* PathfinderStageLoader::CreateLifeNPC(wstring scriptName, wstring pngN
 {
 	SetName(L"lifeNpc_%d");
 	_lifeNpcCount++;
-	Component* component = new LifeNPC(_name, L"npc", L"npc");
+	Component* component = new LifeNPC(_name, scriptName, pngName);
 	_stage->AddStageComponent(component);
 	return component;
 }

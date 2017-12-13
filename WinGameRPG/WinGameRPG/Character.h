@@ -3,6 +3,7 @@
 #include<vector>
 #include<list>
 #include<string>
+#include<stack>
 #include"Component.h"
 #include"GlobalType.h"
 using namespace std;
@@ -110,8 +111,11 @@ public:
 	//pathFinding
 protected:
 	TileCell* _targetTileCell;
+	stack<TileCell*> _pathTileCellStack;
 public:
 	TileCell* GetTargetCell();
 	void SetTargetTileCell(TileCell* tileCell);
 	void SetDirection(eDirection direction);
+	void PushPathTileCellStack(TileCell* tileCell) { _pathTileCellStack.push(tileCell); }
+	stack<TileCell*> GetPathTileCellStack() { return _pathTileCellStack; }
 };

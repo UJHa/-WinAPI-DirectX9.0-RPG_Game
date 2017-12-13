@@ -150,6 +150,9 @@
     <ClCompile Include="GlobalType.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="PathFindingMoveState.cpp">
+      <Filter>소스 파일\Game\Character\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Sprite.h">
@@ -259,6 +262,9 @@
     </ClInclude>
     <ClInclude Include="GlobalType.h">
       <Filter>소스 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PathFindingMoveState.h">
+      <Filter>소스 파일\Game\Character\State</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

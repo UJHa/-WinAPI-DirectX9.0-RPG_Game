@@ -41,4 +41,5 @@ public:
 	StageLoader* GetUnit(std::wstring mapName);
 public:
 	void CreatePathfinderNPC(TileCell* tileCell);
+	void CreatePathfindingMark(TileCell* tileCell);
 };
