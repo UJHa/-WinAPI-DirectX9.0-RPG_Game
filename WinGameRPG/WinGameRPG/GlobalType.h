@@ -8,3 +8,4 @@ typedef struct TilePosition
 	int y;
 };
 TilePosition GetNextTilePosition(TilePosition currentTilePos, eDirection direction);
+eDirection GetDirection(TilePosition to, TilePosition from);

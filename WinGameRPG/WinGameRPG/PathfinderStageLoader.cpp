@@ -21,11 +21,11 @@ void PathfinderStageLoader::CreateComponents()
 	Monster* monster = new PathfinderMonster(L"monster", L"monster", L"monster");
 	_stage->AddStageComponent(monster);
 
-	TileCell* targetCell = _stage->GetMap()->GetTileCell(monster->GetTileX(), monster->GetTileY());
-	player->SetTargetTileCell(targetCell);
+	/*TileCell* targetCell = _stage->GetMap()->GetTileCell(monster->GetTileX(), monster->GetTileY());
+	player->SetTargetTileCell(targetCell);*/
 	
-	int midTileX = _stage->GetMap()->GetWidth() / 2;
-	int midTileY = _stage->GetMap()->GetHeight() / 2;
+	int midTileX = _stage->GetMap()->GetWidth() / 2 - 1;
+	int midTileY = _stage->GetMap()->GetHeight() / 2 - 1;
 	std::list<Component*> comList = _stage->GetMap()->GetTileComponentList(midTileX, midTileY);
 	_stage->GetMap()->InitViewer(comList.front());
 }

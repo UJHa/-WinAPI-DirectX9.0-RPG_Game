@@ -50,8 +50,19 @@ public:
 		KEY_UP,
 	};
 private:
-	eKeyState _keyState[256];
+	bool _isMouseDown;
 public:
+	bool GetMouseDown() { return _isMouseDown; }
+	void MouseDown(int mouseX, int mouseY);
+	void MouseUp() { _isMouseDown = false; }
+private:
+	eKeyState _keyState[256];
+	int _mouseX;
+	int _mouseY;
+public:
+	int GetMouseX() { return _mouseX; }
+	int GetMouseY() { return _mouseY; }
+
 	void InitInput();
 	void KeyDown(unsigned int keyCode);
 	void KeyUp(unsigned int keyCode);

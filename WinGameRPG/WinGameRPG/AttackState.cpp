@@ -44,9 +44,9 @@ void AttackState::Start()
 	sComponentMsgParam msgParam;
 	msgParam.sender = (Component*)_character;
 	msgParam.attackPoint = _character->GetAttackPoint();
-	wchar_t timeCheck[256];
+	/*wchar_t timeCheck[256];
 	swprintf(timeCheck, L"AttackState : GetAttackPoint %d, type : %d\n", _character->GetAttackPoint(), _character->GetType());
-	OutputDebugString(timeCheck);
+	OutputDebugString(timeCheck);*/
 	msgParam.receiver = _character->GetTarget();
 	msgParam.message = L"Attack";
 	ComponentSystem::GetInstance()->SendMsg(msgParam);

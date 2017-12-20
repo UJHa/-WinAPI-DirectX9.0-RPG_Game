@@ -27,21 +27,40 @@ void PathFindingMoveState::Update(float deltaTime)
 		return;
 	if (_character->GetMoveTime() <= _movingDuration)
 	{
+		_movingDuration = 0.0f;
 		if (0 != _pathTileCellStack.size())
 		{
 			TileCell* tileCell = _pathTileCellStack.top();
 			_pathTileCellStack.pop();
 
 			//캐릭터가 방향 바꿔가며 이동, 너무 빠르게 가는것 고치기
-			/*TilePosition to;
-			TilePosition from;
-			eDirection direction = GetDirection(to, from);
-			_character->SetDirection(direction);*/
+			TilePosition to;
+			to.x = tileCell->GetTileX();
+			to.y = tileCell->GetTileY();
 
+			TilePosition from;
+			from.x = _character->GetTileX();
+			from.y = _character->GetTileY();
+			eDirection direction = GetDirection(to, from);
+			if (eDirection::NONE != direction)
+			{
+				_character->SetDirection(direction);
+			}
+			Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
+			std::list<Component*> collisionList;
+			bool canMove = map->GetTileCollisionList(tileCell->GetTileX(), tileCell->GetTileY(), collisionList);
+			if (!canMove)
+			{
+				_nextState = eStateType::ET_IDLE;
+				return;
+			}
 			_character->MoveStart(tileCell->GetTileX(), tileCell->GetTileY());
 			_character->MoveStop();
 		}
-		//_nextState = eStateType::ET_IDLE;
+		else
+		{
+			_nextState = eStateType::ET_IDLE;
+		}
 	}
 	else
 	{
@@ -65,4 +84,5 @@ void PathFindingMoveState::Stop()
 	State::Stop();
 	Map* map = GameSystem::GetInstance()->GetStage()->GetMap();
 	map->ViewerScroll(_character, 0.0f, 0.0f);
+	_character->ClearPathTileCellStack();
 }

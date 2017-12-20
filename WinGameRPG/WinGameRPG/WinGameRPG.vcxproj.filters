@@ -40,6 +40,12 @@
     <Filter Include="소스 파일\Game\Stage">
       <UniqueIdentifier>{86dce03a-d9fa-4e7a-b0c7-3045d672b484}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Game\Character\State\PathFinding">
+      <UniqueIdentifier>{60318fd8-a6a9-44e7-b8ce-c3dbbe8c3de3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Game\Effect">
+      <UniqueIdentifier>{3cfc7a4a-65a5-44f2-8cff-3a1a0415350f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -144,14 +150,23 @@
     <ClCompile Include="PathfinderMonster.cpp">
       <Filter>소스 파일\Game\Character</Filter>
     </ClCompile>
-    <ClCompile Include="PathfindingState.cpp">
-      <Filter>소스 파일\Game\Character\State</Filter>
-    </ClCompile>
     <ClCompile Include="GlobalType.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="PathFindingMoveState.cpp">
+      <Filter>소스 파일\Game\Character\State\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="PathfindingState.cpp">
+      <Filter>소스 파일\Game\Character\State\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="PathfindingImmediateState.cpp">
+      <Filter>소스 파일\Game\Character\State\PathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="RangeAttackState.cpp">
       <Filter>소스 파일\Game\Character\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>소스 파일\Game\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,14 +272,23 @@
     <ClInclude Include="PathfinderMonster.h">
       <Filter>소스 파일\Game\Character</Filter>
     </ClInclude>
-    <ClInclude Include="PathfindingState.h">
-      <Filter>소스 파일\Game\Character\State</Filter>
-    </ClInclude>
     <ClInclude Include="GlobalType.h">
       <Filter>소스 파일</Filter>
     </ClInclude>
     <ClInclude Include="PathFindingMoveState.h">
+      <Filter>소스 파일\Game\Character\State\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="PathfindingState.h">
+      <Filter>소스 파일\Game\Character\State\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="PathfindingImmediateState.h">
+      <Filter>소스 파일\Game\Character\State\PathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="RangeAttackState.h">
       <Filter>소스 파일\Game\Character\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>소스 파일\Game\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

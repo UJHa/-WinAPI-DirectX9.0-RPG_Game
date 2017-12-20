@@ -8,6 +8,7 @@
 #include "PathfinderStageLoader.h"
 #include"TileCell.h"
 #include"LifeNPC.h"
+#include"Effect.h"
 Stage::Stage()
 {
 	_stageLoader = NULL;
@@ -126,6 +127,7 @@ void Stage::CreatePathfinderNPC(TileCell* tileCell)
 {
 	LifeNPC* npc = (LifeNPC*)(_stageLoader->CreateLifeNPC(L"npc", L"npc"));
 	npc->InitTilePosition(tileCell->GetTileX(), tileCell->GetTileY());
+	npc->SetCanMove(true);
 
 	_componentList.remove(npc);
 	tileCell->AddComponent(npc, true);
@@ -149,8 +151,9 @@ void Stage::CreatePathfinderNPC(TileCell* tileCell)
 }
 void Stage::CreatePathfindingMark(TileCell* tileCell)
 {
-	LifeNPC* npc = (LifeNPC*)(_stageLoader->CreateLifeNPC(L"player", L"player"));
+	LifeNPC* npc = (LifeNPC*)(_stageLoader->CreateLifeNPC(L"monster", L"monster"));
 	npc->InitTilePosition(tileCell->GetTileX(), tileCell->GetTileY());
+	npc->SetCanMove(true);
 
 	_componentList.remove(npc);
 	tileCell->AddComponent(npc, true);
@@ -174,4 +177,14 @@ void Stage::CreatePathfindingMark(TileCell* tileCell)
 			npc->SetDirection(eDirection::DOWN);
 		}
 	}
+}
+void Stage::CreateEffect(TileCell* tileCell)
+{
+	Effect* effect = new Effect();
+	AddStageComponent((Component*)effect);
+	effect->InitTilePosition(tileCell->GetTileX(), tileCell->GetTileY());
+	effect->SetCanMove(true);
+
+	_componentList.remove(effect);
+	tileCell->AddComponent(effect, true);
 }

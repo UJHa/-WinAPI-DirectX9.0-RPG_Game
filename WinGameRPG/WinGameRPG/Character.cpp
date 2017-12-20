@@ -273,7 +273,7 @@ void Character::UpdateText()
 {
 	int coolTime = (int)(_attackCoolTimeDuration * 1000.f);
 	
-	WCHAR text[256];
+	WCHAR text[256] = L"";
 	switch (_state->GetState())
 	{
 	case eStateType::ET_IDLE:
@@ -312,4 +312,11 @@ void Character::SetTargetTileCell(TileCell* tileCell)
 void Character::SetDirection(eDirection direction)
 {
 	_currentDirection = direction;
+}
+void Character::ClearPathTileCellStack()
+{
+	while (0 != _pathTileCellStack.size())
+	{
+		_pathTileCellStack.pop();
+	}
 }

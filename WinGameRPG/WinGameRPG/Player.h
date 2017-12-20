@@ -10,5 +10,7 @@ public:
 public:
 	void UpdateAI();
 	Component* Collision(std::list<Component*>& collisionList);
+public:
+	void InitState();
 };
 

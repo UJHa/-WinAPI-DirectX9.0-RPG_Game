@@ -4,6 +4,7 @@
 #include"Map.h"
 #include"MoveState.h"
 #include"Stage.h"
+#include"RangeAttackState.h"
 Player::Player(wstring name, wstring scriptName, wstring pngName) : Character(name, scriptName, pngName)
 {
 	_moveTime = 0.1f;
@@ -48,6 +49,10 @@ void Player::UpdateAI()
 			}
 		}
 	}
+	if (GameSystem::GetInstance()->IsKeyDown(VK_NUMLOCK))
+	{
+		_state->NextState(eStateType::ET_RANGE_ATTACK);
+	}
 }
 Component* Player::Collision(std::list<Component*>& collisionList)
 {
@@ -62,4 +67,9 @@ Component* Player::Collision(std::list<Component*>& collisionList)
 		}
 	}
 	return NULL;
+}
+void Player::InitState()
+{
+	Character::InitState();
+	ReplaceState(eStateType::ET_RANGE_ATTACK, new RangeAttackState());
 }

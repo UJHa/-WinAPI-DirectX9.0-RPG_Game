@@ -150,6 +150,7 @@
     <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="DefaultStageLoader.cpp" />
     <ClCompile Include="DefenseState.cpp" />
+    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Frame.cpp" />
     <ClCompile Include="GameSystem.cpp" />
@@ -168,9 +169,11 @@
     <ClCompile Include="PathfinderMonster.cpp" />
     <ClCompile Include="PathfinderPlayer.cpp" />
     <ClCompile Include="PathfinderStageLoader.cpp" />
+    <ClCompile Include="PathfindingImmediateState.cpp" />
     <ClCompile Include="PathFindingMoveState.cpp" />
     <ClCompile Include="PathfindingState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RangeAttackState.cpp" />
     <ClCompile Include="RecoveryItem.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Sprite.cpp" />
@@ -189,6 +192,7 @@
     <ClInclude Include="DeadState.h" />
     <ClInclude Include="DefaultStageLoader.h" />
     <ClInclude Include="DefenseState.h" />
+    <ClInclude Include="Effect.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="Frame.h" />
     <ClInclude Include="GameSystem.h" />
@@ -206,9 +210,11 @@
     <ClInclude Include="PathfinderMonster.h" />
     <ClInclude Include="PathfinderPlayer.h" />
     <ClInclude Include="PathfinderStageLoader.h" />
+    <ClInclude Include="PathfindingImmediateState.h" />
     <ClInclude Include="PathFindingMoveState.h" />
     <ClInclude Include="PathfindingState.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RangeAttackState.h" />
     <ClInclude Include="RecoveryItem.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="sComponentMsgParam.h" />

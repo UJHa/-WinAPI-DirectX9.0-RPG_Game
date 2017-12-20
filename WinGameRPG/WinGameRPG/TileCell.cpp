@@ -1,11 +1,13 @@
 #include "TileCell.h"
 #include "Component.h"
+#include "TileObject.h"
 TileCell::TileCell(int tileX, int tileY)
 {
 	_posX = _posY = 0.0f;
 	_componentList.clear();
 	_tileX = tileX;
 	_tileY = tileY;
+	_distanceWeight = 1.0f;
 }
 
 TileCell::~TileCell()
@@ -49,6 +51,10 @@ void TileCell::AddComponent(Component* component, bool isRender)
 {
 	_componentList.push_back(component);
 
+	if (eComponentType::CT_TILE_OBJECT == component->GetType())
+	{
+		_distanceWeight = ((TileObject*)component)->GetDistanceWeight();
+	}
 	if (isRender)
 	{
 		_renderList.push_back(component);
@@ -105,4 +111,6 @@ void TileCell::InitPathfinding()
 {
 	_isPathfindingMark = false;
 	_prePathfindingCell = NULL;
+	_distanceFromStart = 0.0f;
+	_heuristic = 0.0f;
 }

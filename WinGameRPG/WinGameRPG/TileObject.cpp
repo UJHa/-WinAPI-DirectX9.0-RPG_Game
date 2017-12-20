@@ -8,6 +8,7 @@ TileObject::TileObject(wstring name, Sprite* sprite, int tileX, int tileY)
 	_componentType = eComponentType::CT_TILE_OBJECT;
 	_tileX = tileX;
 	_tileY = tileY;
+	_distanceWeight = 1.0f;
 }
 
 TileObject::~TileObject()

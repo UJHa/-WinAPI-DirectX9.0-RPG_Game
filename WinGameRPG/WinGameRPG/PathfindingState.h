@@ -1,7 +1,7 @@
 #pragma once
 #include<queue>
 #include "State.h"
-class TileCell;
+#include "TileCell.h"
 class PathfindingState : public State
 {
 public:
@@ -20,12 +20,30 @@ public:
 		PATHFINDING,
 		BUILD_PATH,
 	};
-private:
-	std::queue<TileCell*> _pathFindingTileQueue;
+	typedef struct _sPathCommand
+	{
+		float heuristic;
+		TileCell* tileCell;
+	}sPathCommand;
+
+	struct compare
+	{
+		bool operator()(sPathCommand& a, sPathCommand& b)
+		{
+			return a.heuristic > b.heuristic;
+		}
+
+	};
+protected:
+	std::priority_queue<sPathCommand, std::vector<sPathCommand>, compare> _pathFindingTileQueue;
 	TileCell* _targetTileCell;
 	TileCell* _reverseTileCell;
 	eUpdateState _updateState;
 public:
 	void UpdatePathFinding();
 	void UpdateBuildPath();
+
+	float CalcSimpleHeuristic(TileCell* tileCell, TileCell* nextTileCell,TileCell* targetTileCell);
+	float CalcComplexHeuristic(TileCell* nextTileCell, TileCell* targetTileCell);
+	float CalcAStarHeuristic(float distanceFromStart, TileCell* nextTileCell, TileCell* targetTileCell);
 };

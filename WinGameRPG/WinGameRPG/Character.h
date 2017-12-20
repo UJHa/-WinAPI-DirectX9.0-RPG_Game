@@ -9,7 +9,7 @@
 using namespace std;
 enum eStateType
 {
-	ET_IDLE, ET_MOVE, ET_ATTACK, ET_DEFENSE, ET_DEAD, ET_NONE, ET_PATHFINDING
+	ET_IDLE, ET_MOVE, ET_ATTACK, ET_DEFENSE, ET_DEAD, ET_NONE, ET_PATHFINDING, ET_RANGE_ATTACK
 };
 class Sprite;
 class State;
@@ -118,4 +118,5 @@ public:
 	void SetDirection(eDirection direction);
 	void PushPathTileCellStack(TileCell* tileCell) { _pathTileCellStack.push(tileCell); }
 	stack<TileCell*> GetPathTileCellStack() { return _pathTileCellStack; }
+	void ClearPathTileCellStack();
 };

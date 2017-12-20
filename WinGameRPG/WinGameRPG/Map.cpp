@@ -80,6 +80,20 @@ void Map::Init()
 						WCHAR componetName[256];
 						wsprintf(componetName, L"map_layer01_%d_%d", line, x);
 						TileObject* tileObject = new TileObject(componetName, _spriteList[index], x, line);
+						// for test
+						switch (index)
+						{
+						case 23:
+							tileObject->SetDistanceWeight(1.5f);
+							break;
+						case 69:
+							tileObject->SetDistanceWeight(0.5f);
+							break;
+						default:
+							break;
+						}
+
+
 						tileObject->SetCanMove(true);
 						tileCell->AddComponent(tileObject, true);
 						rowList.push_back(tileCell);
@@ -340,4 +354,41 @@ TileCell* Map::GetTileCell(int tileX, int tileY)
 TileCell* Map::GetTileCell(TilePosition tilePos)
 {
 	return GetTileCell(tilePos.x, tilePos.y);
+}
+TileCell* Map::FindTileCellWithMousePosition(int mouseX, int mouseY)
+{
+	int midX = GameSystem::GetInstance()->GetWindowWidth() / 2;
+	int midY = GameSystem::GetInstance()->GetWindowHeight() / 2;
+
+	int minX = _viewer->GetTileX() - (midX / _tileSize) - 2;
+	int maxX = _viewer->GetTileX() + (midX / _tileSize) + 2;
+	int minY = _viewer->GetTileY() - (midX / _tileSize) - 2;
+	int maxY = _viewer->GetTileY() + (midX / _tileSize) + 2;
+
+	if (minX < 0)
+		minX = 0;
+	if (_width <= maxX)
+		maxX = _width;
+	if (minY < 0)
+		minY = 0;
+	if (_height <= maxY)
+		maxY = _height;
+
+	for (int y = minY; y < maxY; y++)
+	{
+		for (int x = minX; x < maxX; x++)
+		{
+			RECT rect;
+			rect.left = _tileMap[y][x]->GetPositionX() - _tileSize / 2.0f;
+			rect.right = rect.left + _tileSize;
+			rect.top = _tileMap[y][x]->GetPositionY() - _tileSize / 2.0f;
+			rect.bottom = rect.top + _tileSize;
+
+			if (rect.left <= mouseX && mouseX <= rect.right &&rect.top <= mouseY && mouseY <= rect.bottom)
+			{
+				return _tileMap[y][x];
+			}
+		}
+	}
+	return NULL;
 }

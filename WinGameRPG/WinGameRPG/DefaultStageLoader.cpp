@@ -21,6 +21,10 @@ void DefaultStageLoader::CreateComponents()
 	{
 		Component* component = CreateMonster(L"monster", L"monster");
 	}
+	for (int i = 0; i < 1; i++)
+	{
+		Component* component = CreateMonster(L"monster", L"monster");
+	}
 
 	Player* player = new Player(L"player", L"player", L"player");
 	_stage->AddStageComponent(player);

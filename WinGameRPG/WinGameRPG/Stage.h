@@ -42,4 +42,6 @@ public:
 public:
 	void CreatePathfinderNPC(TileCell* tileCell);
 	void CreatePathfindingMark(TileCell* tileCell);
+public:
+	void CreateEffect(TileCell* tileCell);
 };

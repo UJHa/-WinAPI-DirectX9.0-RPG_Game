@@ -5,6 +5,8 @@
 #include "RecoveryItem.h"
 #include "Stage.h"
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
+	int mouseX;
+	int mouseY;
 	switch (msg)
 	{
 	case WM_KEYDOWN:
@@ -22,7 +24,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lparam) {
 		PostQuitMessage(0);
 		return 0;
 	case WM_LBUTTONDOWN:
-		MessageBox(0, L"Hello World", L"Hello", MB_OK);
+		mouseX = LOWORD(lparam);
+		mouseY = HIWORD(lparam);
+		GameSystem::GetInstance()->MouseDown(mouseX, mouseY);
+		return 0;
+	case WM_LBUTTONUP:
+		GameSystem::GetInstance()->MouseUp();
 		return 0;
 	}
 	return DefWindowProc(hWnd, msg, wParam, lparam);
@@ -90,8 +97,8 @@ bool GameSystem::InitSystem(HINSTANCE hInstance, int nCmdShow)
 		style,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
+		_WindowWidth,
+		_WindowHeight,
 		0,
 		0,
 		hInstance,
@@ -303,12 +310,22 @@ LPDIRECT3DDEVICE9 GameSystem::GetDevice3d()
 {
 	return _device3d;
 }
+void GameSystem::MouseDown(int mouseX, int mouseY)
+{
+	_isMouseDown = true;
+
+	_mouseX = mouseX;
+	_mouseY = mouseY;
+}
 void GameSystem::InitInput()
 {
 	for (int i = 0; i < 256; i++)
 	{
 		_keyState[i] = eKeyState::KEY_UP;
 	}
+	_isMouseDown = false;
+	_mouseX = 0;
+	_mouseY = 0;
 }
 void GameSystem::KeyDown(unsigned int keyCode)
 {
