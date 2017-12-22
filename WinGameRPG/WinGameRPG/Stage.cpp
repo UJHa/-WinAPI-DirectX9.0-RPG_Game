@@ -188,3 +188,17 @@ void Stage::CreateEffect(TileCell* tileCell)
 	_componentList.remove(effect);
 	tileCell->AddComponent(effect, true);
 }
+void Stage::RemoveEffect(TileCell* tileCell)
+{
+	tileCell->GetComponentList();
+
+	std::list<Component*> componentList = tileCell->GetComponentList();
+	for (std::list<Component*>::iterator it = componentList.begin(); it != componentList.end(); it++)
+	{
+		if ((*it)->GetType() == eComponentType::CT_EFFECT)
+		{
+			tileCell->RemoveComponent(*it);
+		}
+	}
+	
+}

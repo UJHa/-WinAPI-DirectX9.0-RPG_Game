@@ -44,4 +44,5 @@ public:
 	void CreatePathfindingMark(TileCell* tileCell);
 public:
 	void CreateEffect(TileCell* tileCell);
+	void RemoveEffect(TileCell* tileCell);
 };

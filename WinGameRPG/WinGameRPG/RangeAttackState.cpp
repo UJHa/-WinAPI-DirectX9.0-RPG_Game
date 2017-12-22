@@ -17,25 +17,10 @@ RangeAttackState::~RangeAttackState()
 void RangeAttackState::Update(float deltaTime)
 {
 	State::Update(deltaTime);
-	for (std::vector<TileCell*>::iterator it = _waveTileCellList[_waveIndex].begin();
-		it != _waveTileCellList[_waveIndex].end(); it++)
-	{
-		GameSystem::GetInstance()->GetStage()->CreateEffect(*it);
-		if (false == (*it)->CanMove())
-		{
-			std::list<Component*> collisionList;
-			(*it)->GetCollisionList(collisionList);
-			for (std::list<Component*>::iterator itCollision = collisionList.begin(); itCollision != collisionList.end(); itCollision++)
-			{
-				sComponentMsgParam msgParam;
-				msgParam.sender = (Component*)_character;
-				msgParam.attackPoint = 100;
-				msgParam.receiver = (*itCollision);
-				msgParam.message = L"Attack";
-				ComponentSystem::GetInstance()->SendMsg(msgParam);
-			}
-		}
-	}
+	AttackEffectWave(_waveIndex);
+	AttackEffectWave(_waveIndex + 1);
+	AttackEffectWave(_waveIndex + 2);
+	RemoveEffectWave(_waveIndex - 1);
 	_waveIndex++;
 	if (_waveIndex == _range)
 		_nextState = eStateType::ET_IDLE;
@@ -102,5 +87,39 @@ void RangeAttackState::SetWaveAttack(int range)
 				}
 			}
 		}
+	}
+}
+void RangeAttackState::AttackEffectWave(int waveIndex)
+{
+	if (waveIndex == _range)
+		return;
+	for (std::vector<TileCell*>::iterator it = _waveTileCellList[waveIndex].begin();
+		it != _waveTileCellList[waveIndex].end(); it++)
+	{
+		GameSystem::GetInstance()->GetStage()->CreateEffect(*it);
+		if (false == (*it)->CanMove())
+		{
+			std::list<Component*> collisionList;
+			(*it)->GetCollisionList(collisionList);
+			for (std::list<Component*>::iterator itCollision = collisionList.begin(); itCollision != collisionList.end(); itCollision++)
+			{
+				sComponentMsgParam msgParam;
+				msgParam.sender = (Component*)_character;
+				msgParam.attackPoint = 100;
+				msgParam.receiver = (*itCollision);
+				msgParam.message = L"Attack";
+				ComponentSystem::GetInstance()->SendMsg(msgParam);
+			}
+		}
+	}
+}
+void RangeAttackState::RemoveEffectWave(int waveIndex)
+{
+	if (waveIndex < 1)
+		return;
+	for (std::vector<TileCell*>::iterator it = _waveTileCellList[waveIndex].begin();
+		it != _waveTileCellList[waveIndex].end(); it++)
+	{
+		GameSystem::GetInstance()->GetStage()->RemoveEffect(*it);
 	}
 }

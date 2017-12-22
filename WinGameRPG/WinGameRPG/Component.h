@@ -10,6 +10,7 @@ enum eComponentType
 	CT_NPC,
 	CT_TILE_OBJECT,
 	CT_ITEM,
+	CT_EFFECT,
 	CT_NONE,
 };
 class Component

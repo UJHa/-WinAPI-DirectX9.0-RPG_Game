@@ -46,8 +46,8 @@ void DefenseState::Start()
 	}
 	else
 	{
-		//_nextState = eStateType::ET_IDLE;
-		_nextState = eStateType::ET_MOVE;
+		_nextState = eStateType::ET_IDLE;
+		//_nextState = eStateType::ET_MOVE;
 	}
 }
 void DefenseState::Stop()

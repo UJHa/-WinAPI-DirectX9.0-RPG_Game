@@ -11,6 +11,7 @@
 #include "Font.h"
 #include "GameSystem.h"
 #include "Stage.h"
+#include "PathfindingImmediateState.h"
 Character::Character(wstring name, wstring scriptName, wstring pngName) : Component(name)
 {
 	_state = NULL;
@@ -148,6 +149,7 @@ void Character::InitState()
 	ReplaceState(eStateType::ET_ATTACK, new AttackState());
 	ReplaceState(eStateType::ET_DEFENSE, new DefenseState());
 	ReplaceState(eStateType::ET_DEAD, new DeadState());
+	ReplaceState(eStateType::ET_PATHFINDING, new PathfindingImmediateState());
 }
 void Character::ReplaceState(eStateType changeType, State* replaceState)
 {
@@ -264,6 +266,11 @@ void Character::DecreaseHP(int decreaseHpPoint)
 void Character::ReceiveMessage(const sComponentMsgParam msgParam)
 {
 	if (L"Attack" == msgParam.message)
+	{
+		_attackedPoint = msgParam.attackPoint;
+		_state->NextState(eStateType::ET_DEFENSE);
+	}
+	if (L"WaveAttack" == msgParam.message)
 	{
 		_attackedPoint = msgParam.attackPoint;
 		_state->NextState(eStateType::ET_DEFENSE);

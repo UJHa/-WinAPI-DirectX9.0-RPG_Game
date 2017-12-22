@@ -22,4 +22,6 @@ private:
 	int _range;
 public:
 	void SetWaveAttack(int range);
+	void AttackEffectWave(int waveIndex);
+	void RemoveEffectWave(int waveIndex);
 };

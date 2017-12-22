@@ -24,9 +24,11 @@ void Monster::UpdateAI()
 	Component* findEnemy = ComponentSystem::GetInstance()->FindComponentInRange(map, this, 4, compareTypeList);
 	if (NULL != findEnemy)
 	{
-		//_moveTime = 0.5f;
 		//Ãß°Ý
-		eDirection direction = eDirection::NONE;
+		SetTargetTileCell(map->GetTileCell(findEnemy->GetTileX(), findEnemy->GetTileY()));
+		////_moveTime = 0.5f;
+		// ³Í ¸ÛÃ»ÇÏ´Ï±ñ °øºÎ ¸¹ÀÌ ÇÏ·Å
+		/*eDirection direction = eDirection::NONE;
 		if (findEnemy->GetTileX() < _tileX)
 			direction = eDirection::LEFT;
 		if (findEnemy->GetTileX() > _tileX)
@@ -36,7 +38,7 @@ void Monster::UpdateAI()
 		if (findEnemy->GetTileY() > _tileY)
 			direction = eDirection::DOWN;
 		_currentDirection = direction;
-		_state->NextState(eStateType::ET_MOVE);
+		_state->NextState(eStateType::ET_MOVE);*/
 	}
 	else
 	{

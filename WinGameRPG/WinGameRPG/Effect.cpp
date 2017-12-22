@@ -5,6 +5,8 @@
 #include "Map.h"
 Effect::Effect()
 {
+	_componentType = eComponentType::CT_EFFECT;
+	_sprite = NULL;
 }
 
 Effect::~Effect()

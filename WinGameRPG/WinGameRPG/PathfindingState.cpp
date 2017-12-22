@@ -68,8 +68,9 @@ void PathfindingState::UpdatePathFinding()
 	{
 		//TileCell* tileCell = _pathFindingTileQueue.top();
 		sPathCommand command = _pathFindingTileQueue.top();
-		_pathFindingTileQueue.pop();
 
+		_pathFindingTileQueue.pop();
+			
 		if (false == command.tileCell->IsPathFindingMark())
 		{
 			command.tileCell->PathFinded();
