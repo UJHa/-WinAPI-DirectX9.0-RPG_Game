@@ -1,5 +1,116 @@
 ﻿  monster.cpp
 c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  main.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\main.cpp(5): warning C4244: '인수': 'time_t'에서 'unsigned int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  TileObject.cpp
+  TileCell.cpp
+  Texture.cpp
+  State.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\state.cpp(11): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\state.cpp(46): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\state.cpp(53): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  StageLoader.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  Stage.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  Sprite.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\sprite.cpp(30): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\sprite.cpp(47): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\sprite.cpp(86): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\sprite.cpp(107): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ResourceManager.cpp
+  RecoveryItem.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  RangeAttackState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  Player.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  PathfindingState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\pathfindingstate.cpp(213): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\pathfindingstate.cpp(215): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\pathfindingstate.cpp(234): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  PathfindingImmediateState.cpp
+  PathfinderStageLoader.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  PathfinderPlayer.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  PathfinderMonster.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  PathFindingMoveState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  NPC.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  MoveState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  Map.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(42): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(44): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1772): note: 'sprintf' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(56): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(62): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(64): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(100): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(124): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(156): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\string.h(439): note: 'strtok' 선언을 참조하십시오.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(190): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(191): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(322): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(323): warning C4244: '=': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(382): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\map.cpp(384): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  LifeTileObject.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\lifetileobject.cpp(128): warning C4996: 'swprintf': function has been changed to conform with the ISO C standard, adding an extra character count parameter. To use the traditional Microsoft version, set _CRT_NON_CONFORMING_SWPRINTFS.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\corecrt_wstdio.h(1822): note: 'swprintf' 선언을 참조하십시오.
+  LifeStageLoader.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  LifePlayer.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  LifeNPC.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  IdleState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  GlobalType.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  GameTimer.cpp
+  GameSystem.cpp
+  Frame.cpp
+  Font.cpp
+  Effect.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  DefenseState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  DefaultStageLoader.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  DeadState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  ComponentSystem.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\componentsystem.cpp(89): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Component.cpp
+  Character.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(110): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(307): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'WCHAR *'입니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(307): note: 서식 문자열에서 '%ls'을(를) 사용하는 것이 좋습니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(307): note: 서식 문자열에서 '%lls'을(를) 사용하는 것이 좋습니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(307): note: 서식 문자열에서 '%Ls'을(를) 사용하는 것이 좋습니다.
+  c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\character.cpp(307): note: 서식 문자열에서 '%ws'을(를) 사용하는 것이 좋습니다.
+  AttackState.cpp
+c:\users\mrt\documents\visual studio 2017\projects\gitwingamerpg\wingamerpg\wingamerpg\globaltype.h(9): warning C4091: 'typedef ': 변수를 선언하지 않으면 'TilePosition' 왼쪽은 무시됩니다.
+  코드를 생성하고 있습니다...
 json_vc71_libmtd.lib(json_reader.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_reader.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
 json_vc71_libmtd.lib(json_value.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_value.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
 json_vc71_libmtd.lib(json_writer.obj) : warning LNK4099: 'lib_json.pdb' PDB를 'json_vc71_libmtd.lib(json_writer.obj)' 또는 'C:\Users\MrT\Documents\Visual Studio 2017\Projects\gitWinGameRPG\WinGameRPG\Debug\lib_json.pdb'에서 찾을 수 없습니다. 디버그 정보가 없는 것처럼 개체를 링크합니다.
